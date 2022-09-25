@@ -87,6 +87,17 @@ public class GameObject {
     }
 
     /**
+     * Return all scene objects
+     *
+     * @author Xianghao Wang
+     *
+     * @return a list of all scene objects
+     * */
+    public List<SceneObject> getSceneObjectList() {
+        return this.sceneObjects;
+    }
+
+    /**
      * Return the image for rendering the given cell
      *
      * @author Avani Dhaliwal

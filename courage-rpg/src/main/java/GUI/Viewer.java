@@ -17,10 +17,16 @@ public class Viewer extends Application {
     // Game window is of size 1080p x 720p
     private static final int VIEWER_WIDTH = 1080;
     private static final int VIEWER_HEIGHT = 720;
+    public static final double TILE_FACTOR = 11;
+    public static final double TILE_SIZE = 657/TILE_FACTOR;
 
     private final Group root = new Group();
+    private final Group images = new Group();
+    private final Group gameWrapper = new Group();
+    private final Group board = new Group();
+    private final Group dicePieces = new Group();
 
-//    protected Parent content() {
+//    protected Parent makeContent() {
 //
 //    }
 
@@ -32,6 +38,7 @@ public class Viewer extends Application {
         primaryStage.setTitle("Courage");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
 
+        // Add background image
         ImageView background = new ImageView(new File("courage-rpg/src/main/resources/ui/bg.png").toURI().toString());
         root.getChildren().add(background);
 

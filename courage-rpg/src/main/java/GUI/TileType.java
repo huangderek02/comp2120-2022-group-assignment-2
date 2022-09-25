@@ -1,5 +1,8 @@
 package GUI;
 
+/**
+ * @author Xin Lu
+ */
 public enum TileType {
         GRASS ("grass_1.jpg"),
         GROUND_1("ground_1.jpg"), GROUND_2("ground_2.jpg"), GROUND_3("ground_3.jpg"), GROUND_4("ground_4.jpg"), GROUND_5("ground_5.jpg"), GROUND_6("ground_6.jpg"),

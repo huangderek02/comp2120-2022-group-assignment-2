@@ -1,6 +1,6 @@
 package engine;
 
-import model.GameState;
+//import model.GameState;
 
 import java.util.List;
 
@@ -27,5 +27,5 @@ public abstract class Cell {
      * @param state the whole game state
      * @author Xianghao Wang
      */
-    public abstract void act(GameState state);
+//    public abstract void act(GameState state);
 }

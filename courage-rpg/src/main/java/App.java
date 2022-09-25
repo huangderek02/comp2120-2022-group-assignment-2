@@ -15,10 +15,10 @@ public class App extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) throws IOException, URISyntaxException, ClassNotFoundException {
-        GameEngine.loadGame("templates/template-0/header.json");
-
-        // Launch javafx window
-        launch(App.class, args);
-    }
+//    public static void main(String[] args) throws IOException, URISyntaxException, ClassNotFoundException {
+//        GameEngine.loadGame("templates/template-0/header.json");
+//
+//        // Launch javafx window
+//        launch(App.class, args);
+//    }
 }

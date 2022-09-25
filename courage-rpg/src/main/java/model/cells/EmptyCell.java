@@ -1,8 +1,8 @@
 package model.cells;
 
 import engine.Cell;
-import model.GameState;
-import model.GameURI;
+//import model.GameState;
+//import model.GameURI;
 
 import java.util.List;
 

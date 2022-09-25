@@ -2,7 +2,6 @@ package GUI;
 
 import javafx.application.Application;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -39,8 +38,12 @@ public class Viewer extends Application {
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
 
         // Add background image
-        ImageView background = new ImageView(new File("courage-rpg/src/main/resources/ui/bg.png").toURI().toString());
+        ImageView background = new ImageView(new File("courage-rpg/src/main/resources/textures/bg.png").toURI().toString());
         root.getChildren().add(background);
+
+        // Debug
+        Tile test = new Tile(0, 0, TileType.GRASS);
+        root.getChildren().add(test);
 
         // Start the application
         primaryStage.setScene(scene);

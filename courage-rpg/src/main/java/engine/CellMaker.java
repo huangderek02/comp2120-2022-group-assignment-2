@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * It represents a cell class and the arguments to construct the cell object
  * @author Xianghao Wang
+ * @deprecated
  * */
 public class CellMaker {
     final private Class<Cell> cellClass;

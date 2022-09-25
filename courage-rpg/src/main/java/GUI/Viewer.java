@@ -17,9 +17,9 @@ public class Viewer extends Application {
     public static final int VIEWER_WIDTH = 1080;
     public static final int VIEWER_HEIGHT = 720;
     public static final double TILE_FACTOR = 11;
-    public static final double TILE_SIZE = 657/TILE_FACTOR;
-    public static final int BOARD_X_OFFSET = (int)((VIEWER_WIDTH - TILE_SIZE*TILE_FACTOR) / 2);
-    public static final int BOARD_Y_OFFSET = 58;
+    public static final double TILE_SIZE = 657/TILE_FACTOR + 0.5;
+    public static final int BOARD_X_OFFSET = 58;
+    public static final int BOARD_Y_OFFSET = 59;
     public static final int BOARD_WIDTH = (int)(TILE_SIZE*TILE_FACTOR);
     public static final int BOARD_HEIGHT = (int)(TILE_SIZE*7);
 
@@ -28,10 +28,6 @@ public class Viewer extends Application {
     private final Group gameWrapper = new Group();
     private final Group board = new Group();
     private final Group dicePieces = new Group();
-
-//    protected Parent makeContent() {
-//
-//    }
 
     /**
      * Entry pointer for the game.
@@ -46,14 +42,9 @@ public class Viewer extends Application {
         root.getChildren().add(background);
 
         // Debug
-        Tile test;
-        TileType tileType = TileType.getRandomTileType();
-        if (TileType.isTexture(tileType)) {
-            test = new Tile(0, 0, tileType);
-        } else {
-            test = new Tile(0, 0, tileType, TileType.getRandomBackground());
-        }
-        root.getChildren().add(test);
+        Board b = new Board();
+        board.getChildren().addAll(b.board.getChildren());
+        root.getChildren().add(board);
 
         // Start the application
         primaryStage.setScene(scene);

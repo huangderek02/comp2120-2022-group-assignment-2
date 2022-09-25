@@ -1,6 +1,7 @@
 package GUI;
 
 import javafx.scene.Group;
+import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  * 11 x 7 2d cell matrix.
  * @author Xin Lu
  */
-public class Board {
+public class Board extends StackPane {
 
     List<Tile> cells = new ArrayList<>();
     Group board = new Group();
@@ -18,6 +19,8 @@ public class Board {
      * Generate a random board
      */
     public Board() {
+        setWidth(Viewer.VIEWER_WIDTH);
+        setHeight(Viewer.VIEWER_HEIGHT);
         for (int i = 0; i < 11; i++) {
             for (int j = 0; j < 7; j++) {
                 Tile tile = Tile.getRandomTile(i, j);

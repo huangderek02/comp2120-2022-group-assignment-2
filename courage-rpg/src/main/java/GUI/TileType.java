@@ -48,13 +48,6 @@ public enum TileType {
         }
 
         public static TileType getRandomTileType() {
-//                List<TileType> pool = List.of(GROUND_1, GROUND_2, GROUND_3, GROUND_4, GROUND_5, GROUND_6,
-//                        BRICK_1, BRICK_2, BRICK_3,
-//                        METAL_1, METAL_2, METAL_3,
-//                        SPECIAL_1, SPECIAL_2,
-//                        NPC_2, NPC_3, NPC_4, NPC_5,
-//                        ENEMY_1, ENEMY_2, ENEMY_3, ENEMY_4, ENEMY_5, ENEMY_6, ENEMY_7, ENEMY_8, ENEMY_9, ENEMY_10,
-//                        WATER, KEY, MONEY);
                 return values()[(int) (Math.random() * values().length)];
         }
 

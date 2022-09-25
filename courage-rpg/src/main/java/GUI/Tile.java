@@ -22,7 +22,14 @@ public class Tile extends StackPane {
      * @return a random type of cell at the given location
      */
     static Tile getRandomTile(int x, int y) {
-        return new Tile(x, y, TileType.getRandomTileType());
+        Tile rtn;
+        TileType tileType = TileType.getRandomTileType();
+        if (TileType.isTexture(tileType)) {
+            rtn = new Tile(x, y, tileType);
+        } else {
+            rtn = new Tile(x, y, tileType, TileType.getRandomBackground());
+        }
+        return rtn;
     }
 
     public TileType getType() {
@@ -37,15 +44,8 @@ public class Tile extends StackPane {
         this.board_y = getPixel_y(y);
         this.tileType = tileType;
 
-        System.out.println(new File("courage-rpg/src/main/resources/textures/" + tileType.toString()).toURI());
         ImageView cellBackground = new ImageView(new File("courage-rpg/src/main/resources/textures/" + tileType).toURI().toString());
         getChildren().add(cellBackground);
-//        if (!TileType.isTexture(tileType)) {
-//            ImageView cellForeground = new ImageView(new File("courage-rpg/src/main/resources/textures/" + tileType.toString()).toURI().toString());
-//            getChildren().add(cellForeground);
-//            cellForeground.setFitWidth(Viewer.TILE_SIZE);
-//            cellForeground.setFitHeight(Viewer.TILE_SIZE);
-//        }
         cellBackground.setFitWidth(Viewer.TILE_SIZE);
         cellBackground.setFitHeight(Viewer.TILE_SIZE);
         setLayoutX(board_x);
@@ -56,6 +56,8 @@ public class Tile extends StackPane {
      * For multiple layers tile
      */
     public Tile(int x, int y, TileType tileType, TileType background) {
+        this.board_x = getPixel_x(x);
+        this.board_y = getPixel_y(y);
         this.background = background;
         ImageView stuffBackground = new ImageView(new File("courage-rpg/src/main/resources/textures/" + background.toString()).toURI().toString());
         stuffBackground.setFitWidth(Viewer.TILE_SIZE);

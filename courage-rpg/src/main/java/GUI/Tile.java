@@ -1,9 +1,6 @@
 package GUI;
 
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-
-import java.io.File;
 
 public class Tile extends StackPane {
 
@@ -19,13 +16,5 @@ public class Tile extends StackPane {
         this.board_x = x;
         this.board_y = y;
         this.tileType = tileType;
-
-        this.setWidth(Viewer.TILE_SIZE);
-        this.setHeight(Viewer.TILE_SIZE);
-
-        ImageView cellBackground = new ImageView(new File("courage-rpg/src/main/resources/textures/" + tileType.toString()).toURI().toString());
-        cellBackground.setFitWidth(Viewer.TILE_SIZE);
-        cellBackground.setFitHeight(Viewer.TILE_SIZE);
-        getChildren().add(cellBackground);
     }
 }

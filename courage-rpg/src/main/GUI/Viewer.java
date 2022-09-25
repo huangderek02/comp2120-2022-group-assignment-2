@@ -1,6 +1,7 @@
-package main.GUI;
-
 import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  * @author Xin Lu

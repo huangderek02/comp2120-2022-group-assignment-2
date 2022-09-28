@@ -29,12 +29,12 @@ public class Viewer {
     private final Group board = new Group();
     private final Group dicePieces = new Group();
 
-    public void init() {
-        // Debug
-        Board b = new Board();
-        board.getChildren().addAll(b.board.getChildren());
-        root.getChildren().add(board);
-    }
+//    public void init() {
+//        // Debug
+//        Board b = new Board();
+//        board.getChildren().addAll(b.board.getChildren());
+//        root.getChildren().add(board);
+//    }
 
     /**
      * Entry pointer for the game.
@@ -50,5 +50,25 @@ public class Viewer {
         // Start the application
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    public Group getRoot() {
+        return root;
+    }
+
+    public Group getImages() {
+        return images;
+    }
+
+    public Group getGameWrapper() {
+        return gameWrapper;
+    }
+
+    public Group getBoard() {
+        return board;
+    }
+
+    public Group getDicePieces() {
+        return dicePieces;
     }
 }

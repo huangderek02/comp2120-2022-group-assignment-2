@@ -11,7 +11,7 @@ import java.io.File;
 /**
  * @author Xin Lu
  */
-public class Viewer extends Application {
+public class Viewer {
 
     // Game window is of size 1080p x 720p
     public static final int VIEWER_WIDTH = 1080;
@@ -29,10 +29,16 @@ public class Viewer extends Application {
     private final Group board = new Group();
     private final Group dicePieces = new Group();
 
+    public void init() {
+        // Debug
+        Board b = new Board();
+        board.getChildren().addAll(b.board.getChildren());
+        root.getChildren().add(board);
+    }
+
     /**
      * Entry pointer for the game.
      */
-    @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Courage");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
@@ -40,11 +46,6 @@ public class Viewer extends Application {
         // Add background image
         ImageView background = new ImageView(new File("courage-rpg/src/main/resources/textures/bg.png").toURI().toString());
         root.getChildren().add(background);
-
-        // Debug
-        Board b = new Board();
-        board.getChildren().addAll(b.board.getChildren());
-        root.getChildren().add(board);
 
         // Start the application
         primaryStage.setScene(scene);

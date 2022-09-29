@@ -3,6 +3,8 @@ package GUI;
 import engine.GameEngine;
 import engine.GameObject;
 import javafx.application.Application;
+import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Main extends Application {

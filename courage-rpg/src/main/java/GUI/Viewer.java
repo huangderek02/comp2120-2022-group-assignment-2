@@ -36,7 +36,7 @@ public class Viewer {
     public Font pixelFont = null;
     {
         try {
-//            System.out.println(System.getProperty("user.dir"));
+            System.out.println(System.getProperty("user.dir"));
             pixelFont = Font.loadFont(new FileInputStream(URI_BASE + "Minecraft.ttf"), 25);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -66,8 +66,6 @@ public class Viewer {
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
 
         Text t = new Text("Staffan");
-//        t.setStyle("-fx-font-size: 100");
-//        t.setFont(pixelFont);
         root.getChildren().add(t);
 
         // Add background image

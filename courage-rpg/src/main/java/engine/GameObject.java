@@ -22,7 +22,7 @@ public class GameObject {
 
     /**
      * Construct a game object
-     * @Author Xianghao Wang
+     * @author Xianghao Wang
      * */
     public GameObject() {
         this.sceneObjects = new ArrayList<>();
@@ -87,11 +87,9 @@ public class GameObject {
     }
 
     /**
-     * Return all scene objects
+     * Return all scene objects in a list
      *
-     * @author Xianghao Wang
-     *
-     * @return a list of all scene objects
+     * @return a scene object list
      * */
     public List<SceneObject> getSceneObjectList() {
         return this.sceneObjects;

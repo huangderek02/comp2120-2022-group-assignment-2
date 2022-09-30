@@ -3,6 +3,7 @@ package engine;
 import javafx.scene.image.Image;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +12,15 @@ import java.util.Map;
  * This represents a scene
  *
  * @author Avani Dhaliwal
+ * @author Xianghao Wang
  * */
 public class SceneObject {
     final private GameObject gameObject;
     final private Map<Class<Cell>, Image> cellRendering;
     final private Map<String, String> properties;
     final private Map<Class<Cell>, List<String>> buildingArguments;
+
+    final private List<List<Class<Cell>>> cellClassMatrix;
 
     /**
      * Construct a scene object
@@ -30,6 +34,18 @@ public class SceneObject {
         this.cellRendering = new HashMap<>();
         this.properties = new HashMap<>();
         this.buildingArguments = new HashMap<>();
+        this.cellClassMatrix = new ArrayList<>();
+    }
+
+    /**
+     * Add a row to cell class matrix
+     *
+     * @author Xianghao Wang
+     *
+     * @param rowList is the row to be inserted
+     * */
+    public void addCellClassRow(List<Class<Cell>>rowList) {
+        this.cellClassMatrix.add(rowList);
     }
 
     /**
@@ -131,4 +147,40 @@ public class SceneObject {
         return (Cell) classObj.getConstructor().newInstance().build(getBuildArguments(classObj));
     }
 
+
+    /**
+     * Get the cell class object
+     *
+     * @author Xianghao Wang
+     *
+     * @param row is the row of the cell
+     * @param col is the column of the cell
+     * @return a cell class object at the given location
+     * */
+    public Class<Cell> getCellClassObj(int row, int col) {
+        return cellClassMatrix.get(row).get(col);
+    }
+
+    /**
+     * Get the number of rows of cell matrix
+     *
+     * @author Xianghao Wang
+     *
+     * @return the number of rows
+     * */
+    public int getRows() {
+        return cellClassMatrix.size();
+    }
+
+
+    /**
+     * Get the number of columns of cell matrix
+     *
+     * @author Xianghao Wang
+     *
+     * @return the number of columns
+     * */
+    public int getCols() {
+        return cellClassMatrix.get(0).size();
+    }
 }

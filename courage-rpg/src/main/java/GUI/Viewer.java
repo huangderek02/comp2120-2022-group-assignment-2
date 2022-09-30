@@ -26,7 +26,7 @@ public class Viewer {
     public static final int VIEWER_WIDTH = 1078;
     public static final int VIEWER_HEIGHT = 720;
     public static final double TILE_FACTOR = 11;
-    public static final double TILE_SIZE = Math.ceil(657/TILE_FACTOR + 0.5);
+    public static final double TILE_SIZE = Math.ceil(657/TILE_FACTOR + 0.1);
     public static final int BOARD_X_OFFSET = 58;
     public static final int BOARD_Y_OFFSET = 59;
     public static final int BOARD_WIDTH = (int)(TILE_SIZE*TILE_FACTOR);

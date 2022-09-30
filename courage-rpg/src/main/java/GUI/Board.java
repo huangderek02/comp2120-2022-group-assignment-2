@@ -23,13 +23,13 @@ public class Board extends StackPane {
         setHeight(Viewer.VIEWER_HEIGHT);
         for (int i = 0; i < 11; i++) {
             for (int j = 0; j < 7; j++) {
-                Tile tile = null;
-                if (i == 0 && j == 1) {
-                    tile = new Tile(i, j, TileType.HERO, TileType.GROUND_1);
-                } else {
-                    tile = new Tile(i, j, TileType.GROUND_1);
-                }
-//                Tile tile = Tile.getRandomTile(i, j);
+//                Tile tile = null;
+//                if (i == 0 && j == 1) {
+//                    tile = new Tile(i, j, TileType.HERO, TileType.GROUND_1);
+//                } else {
+//                    tile = new Tile(i, j, TileType.GROUND_1);
+//                }
+                Tile tile = Tile.getRandomTile(i, j);
                 cells.add(tile);
                 board.getChildren().add(tile);
             }
@@ -46,4 +46,9 @@ public class Board extends StackPane {
             board.getChildren().add(tile);
         }
     }
+
+    //TODO add repository update image method
+    // TODO add moeny update image method
+    // TODO add hp, mp update image method
+    // TODO add dialog update image method
 }

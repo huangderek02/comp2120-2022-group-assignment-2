@@ -51,6 +51,31 @@ public class GameState {
     }
 
     /**
+     * Get the current location of the character
+     * @return Location is the current location
+     * */
+    public Location getCurrentLocation() {
+        return this.currentLoc;
+    }
+
+    /**
+     * Get the previous location of the character
+     * @return Location is the previous location
+     * */
+    public Location getPreviousLocation() {
+        return this.previousLoc;
+    }
+
+    /**
+     * Get the map at the specific level
+     * @param level is the current level
+     * @return the map at the given level
+     * */
+    public Cell[][] getMap(int level) {
+        return this.maps.get(this.currentLoc.level);
+    }
+
+    /**
      * Get the overall game state
      * @return a Sign representing the overall game state
      * */

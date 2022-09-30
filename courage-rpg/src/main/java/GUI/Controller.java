@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
+/**
+ * @author Xin Lu
+ */
 public class Controller {
 
     Viewer viewer;

@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * @author Xin Lu
+ */
 public class Main extends Application {
 
     // MVC components

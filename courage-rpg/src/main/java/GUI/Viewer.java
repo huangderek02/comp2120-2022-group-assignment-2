@@ -22,7 +22,7 @@ import java.io.FileNotFoundException;
 public class Viewer {
 
     // Game window is of size 1080p x 720p
-    public static final int VIEWER_WIDTH = 1080;
+    public static final int VIEWER_WIDTH = 1078;
     public static final int VIEWER_HEIGHT = 720;
     public static final double TILE_FACTOR = 11;
     public static final double TILE_SIZE = 657/TILE_FACTOR + 0.5;
@@ -30,12 +30,14 @@ public class Viewer {
     public static final int BOARD_Y_OFFSET = 59;
     public static final int BOARD_WIDTH = (int)(TILE_SIZE*TILE_FACTOR);
     public static final int BOARD_HEIGHT = (int)(TILE_SIZE*7);
+    public static final String URI_BASE = "src/main/resources/";
 
     // Load font
     public Font pixelFont = null;
     {
         try {
-            pixelFont = Font.loadFont(new FileInputStream("courage-rpg/src/main/resources/Minecraft.ttf"), 25);
+//            System.out.println(System.getProperty("user.dir"));
+            pixelFont = Font.loadFont(new FileInputStream(URI_BASE + "Minecraft.ttf"), 25);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -59,6 +61,7 @@ public class Viewer {
      * Entry pointer for the game.
      */
     public void start(Stage primaryStage) {
+        primaryStage.setResizable(false);
         primaryStage.setTitle("Courage");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
 
@@ -68,7 +71,7 @@ public class Viewer {
         root.getChildren().add(t);
 
         // Add background image
-        ImageView background = new ImageView(new File("courage-rpg/src/main/resources/textures/bg.png").toURI().toString());
+        ImageView background = new ImageView(new File(URI_BASE + "textures/bg.png").toURI().toString());
         root.getChildren().add(background);
 
         // Start the application
@@ -78,22 +81,22 @@ public class Viewer {
 
     public void makeText() {
         // text images
-        ImageView text1 = new ImageView(new File("courage-rpg/src/main/resources/text/char_name.png").toURI().toString());
+        ImageView text1 = new ImageView(new File(URI_BASE + "text/char_name.png").toURI().toString());
         text1.setLayoutX(60);
         text1.setLayoutY(480);
         root.getChildren().add(text1);
 
-        ImageView text2 = new ImageView(new File("courage-rpg/src/main/resources/text/repository.png").toURI().toString());
+        ImageView text2 = new ImageView(new File(URI_BASE + "text/repository.png").toURI().toString());
         text2.setLayoutX(300);
         text2.setLayoutY(480);
         root.getChildren().add(text2);
 
-        ImageView text3 = new ImageView(new File("courage-rpg/src/main/resources/text/status.png").toURI().toString());
+        ImageView text3 = new ImageView(new File(URI_BASE + "text/status.png").toURI().toString());
         text3.setLayoutX(720);
         text3.setLayoutY(480);
         root.getChildren().add(text3);
 
-        ImageView text4 = new ImageView(new File("courage-rpg/src/main/resources/text/dialog.png").toURI().toString());
+        ImageView text4 = new ImageView(new File(URI_BASE + "text/dialog.png").toURI().toString());
         text4.setLayoutX(720);
         text4.setLayoutY(60);
         root.getChildren().add(text4);
@@ -109,7 +112,7 @@ public class Viewer {
     }
 
     public void makeIcon() {
-        ImageView money = new ImageView(new File("courage-rpg/src/main/resources/textures/money.png").toURI().toString());
+        ImageView money = new ImageView(new File(URI_BASE + "textures/money.png").toURI().toString());
         money.setLayoutX(590);
         money.setLayoutY(490);
         root.getChildren().add(money);

@@ -44,7 +44,7 @@ public class Tile extends StackPane {
         this.board_y = getPixel_y(y);
         this.tileType = tileType;
 
-        ImageView cellBackground = new ImageView(new File("courage-rpg/src/main/resources/textures/" + tileType).toURI().toString());
+        ImageView cellBackground = new ImageView(new File(Viewer.URI_BASE + "textures/" + tileType).toURI().toString());
         getChildren().add(cellBackground);
         cellBackground.setFitWidth(Viewer.TILE_SIZE);
         cellBackground.setFitHeight(Viewer.TILE_SIZE);
@@ -59,14 +59,14 @@ public class Tile extends StackPane {
         this.board_x = getPixel_x(x);
         this.board_y = getPixel_y(y);
         this.background = background;
-        ImageView stuffBackground = new ImageView(new File("courage-rpg/src/main/resources/textures/" + background.toString()).toURI().toString());
+        ImageView stuffBackground = new ImageView(new File(Viewer.URI_BASE + "textures/" + background.toString()).toURI().toString());
         stuffBackground.setFitWidth(Viewer.TILE_SIZE);
         stuffBackground.setFitHeight(Viewer.TILE_SIZE);
         getChildren().add(stuffBackground);
 
-        ImageView cellBackground = new ImageView(new File("courage-rpg/src/main/resources/textures/" + tileType.toString()).toURI().toString());
+        ImageView cellBackground = new ImageView(new File(Viewer.URI_BASE + "textures/" + tileType.toString()).toURI().toString());
         getChildren().add(cellBackground);
-        ImageView cellForeground = new ImageView(new File("courage-rpg/src/main/resources/textures/" + tileType).toURI().toString());
+        ImageView cellForeground = new ImageView(new File(Viewer.URI_BASE + "textures/" + tileType).toURI().toString());
         getChildren().add(cellForeground);
 
         cellForeground.setFitWidth(Viewer.TILE_SIZE);

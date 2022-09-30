@@ -1,9 +1,13 @@
 package GUI;
 
 import engine.GameObject;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
+import javafx.event.EventHandler;
+import javafx.scene.image.ImageView;
+import javafx.event.Event;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 public class Controller {
 
@@ -20,11 +24,21 @@ public class Controller {
         Board b = new Board();
         viewer.getBoard().getChildren().addAll(b.board.getChildren());
         viewer.getRoot().getChildren().add(viewer.getBoard());
+        // Add background image last so it is on the top of board
+        ImageView background = new ImageView(new File(Viewer.URI_BASE + "textures/bg.png").toURI().toString());
+        viewer.getRoot().getChildren().add(background);
         viewer.makeText();
         viewer.makeIcon();
+        viewer.makeButton();
     }
 
-    public void updateView() {
+    public void handleKeyBoard() {
         // TODO
+        viewer.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                System.out.println(event.toString());
+            }
+        });
     }
 }

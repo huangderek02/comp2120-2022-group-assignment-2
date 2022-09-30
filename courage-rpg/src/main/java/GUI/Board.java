@@ -23,7 +23,13 @@ public class Board extends StackPane {
         setHeight(Viewer.VIEWER_HEIGHT);
         for (int i = 0; i < 11; i++) {
             for (int j = 0; j < 7; j++) {
-                Tile tile = Tile.getRandomTile(i, j);
+                Tile tile = null;
+                if (i == 0 && j == 1) {
+                    tile = new Tile(i, j, TileType.HERO, TileType.GROUND_1);
+                } else {
+                    tile = new Tile(i, j, TileType.GROUND_1);
+                }
+//                Tile tile = Tile.getRandomTile(i, j);
                 cells.add(tile);
                 board.getChildren().add(tile);
             }

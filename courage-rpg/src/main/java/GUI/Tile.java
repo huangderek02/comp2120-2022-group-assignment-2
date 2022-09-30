@@ -37,7 +37,7 @@ public class Tile extends StackPane {
     }
 
     /**
-     * For single background tile
+     * For single background tile only
      */
     public Tile(int x, int y, TileType tileType) {
         this.board_x = getPixel_x(x);
@@ -86,7 +86,7 @@ public class Tile extends StackPane {
      * @return x absolute coordinate in pixels on the board
      */
     static public int getPixel_x(int x_coordinate) {
-        return Viewer.BOARD_X_OFFSET + (int)(x_coordinate * Viewer.TILE_SIZE);
+        return (int) (Viewer.BOARD_X_OFFSET + Math.ceil(x_coordinate * Viewer.TILE_SIZE));
     }
 
     /**
@@ -94,6 +94,6 @@ public class Tile extends StackPane {
      * @return y absolute coordinate in pixels on the board
      */
     static public int getPixel_y(int y_coordinate) {
-        return Viewer.BOARD_Y_OFFSET + (int)(y_coordinate * Viewer.TILE_SIZE);
+        return (int) (Viewer.BOARD_Y_OFFSET + Math.ceil(y_coordinate * Viewer.TILE_SIZE));
     }
 }

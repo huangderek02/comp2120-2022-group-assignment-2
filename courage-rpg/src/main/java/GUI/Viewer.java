@@ -3,6 +3,7 @@ package GUI;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -25,7 +26,7 @@ public class Viewer {
     public static final int VIEWER_WIDTH = 1078;
     public static final int VIEWER_HEIGHT = 720;
     public static final double TILE_FACTOR = 11;
-    public static final double TILE_SIZE = 657/TILE_FACTOR + 0.5;
+    public static final double TILE_SIZE = Math.ceil(657/TILE_FACTOR + 0.5);
     public static final int BOARD_X_OFFSET = 58;
     public static final int BOARD_Y_OFFSET = 59;
     public static final int BOARD_WIDTH = (int)(TILE_SIZE*TILE_FACTOR);
@@ -50,6 +51,8 @@ public class Viewer {
     private final Group dicePieces = new Group();
     private final Group text = new Group();
 
+    private final Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT, Color.BLACK);
+
 //    public void init() {
 //        // Debug
 //        Board b = new Board();
@@ -63,14 +66,10 @@ public class Viewer {
     public void start(Stage primaryStage) {
         primaryStage.setResizable(false);
         primaryStage.setTitle("Courage");
-        Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
+//        Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
 
-        Text t = new Text("Staffan");
-        root.getChildren().add(t);
-
-        // Add background image
-        ImageView background = new ImageView(new File(URI_BASE + "textures/bg.png").toURI().toString());
-        root.getChildren().add(background);
+//        Text t = new Text("Staffan");
+//        root.getChildren().add(t);
 
         // Start the application
         primaryStage.setScene(scene);
@@ -99,6 +98,16 @@ public class Viewer {
         text4.setLayoutY(60);
         root.getChildren().add(text4);
 
+        ImageView text5 = new ImageView(new File(URI_BASE + "text/hp.png").toURI().toString());
+        text5.setLayoutX(61);
+        text5.setLayoutY(540);
+        root.getChildren().add(text5);
+
+        ImageView text6 = new ImageView(new File(URI_BASE + "text/mp.png").toURI().toString());
+        text6.setLayoutX(61);
+        text6.setLayoutY(593);
+        root.getChildren().add(text6);
+
         // text
         Text t = new Text("0");
         t.setFont(pixelFont);
@@ -107,6 +116,28 @@ public class Viewer {
         t.setLayoutY(520);
         t.setTextAlignment(TextAlignment.RIGHT);
         root.getChildren().add(t);
+    }
+
+    public void makeButton() {
+        ImageView save = new ImageView(new File(URI_BASE + "buttons/save.png").toURI().toString());
+        save.setLayoutX(748);
+        save.setLayoutY(540);
+        root.getChildren().add(save);
+
+        ImageView load = new ImageView(new File(URI_BASE + "buttons/load.png").toURI().toString());
+        load.setLayoutX(873);
+        load.setLayoutY(540);
+        root.getChildren().add(load);
+
+        ImageView newBtn = new ImageView(new File(URI_BASE + "buttons/new.png").toURI().toString());
+        newBtn.setLayoutX(745);
+        newBtn.setLayoutY(595);
+        root.getChildren().add(newBtn);
+
+        ImageView exit = new ImageView(new File(URI_BASE + "buttons/exit.png").toURI().toString());
+        exit.setLayoutX(874);
+        exit.setLayoutY(595);
+        root.getChildren().add(exit);
     }
 
     public void makeIcon() {
@@ -134,5 +165,9 @@ public class Viewer {
 
     public Group getDicePieces() {
         return dicePieces;
+    }
+
+    public Scene getScene() {
+        return scene;
     }
 }

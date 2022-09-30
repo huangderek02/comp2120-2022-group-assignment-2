@@ -21,5 +21,6 @@ public class Main extends Application {
         viewer = new Viewer();
         controller = new Controller(viewer, null);
         controller.init();
+        controller.handleKeyBoard();
     }
 }

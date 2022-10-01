@@ -2,6 +2,8 @@ package model;
 
 /**
  * This represents the character's location
+ *
+ * @author Xianghao Wang
  * */
 public class Location {
     /**
@@ -21,6 +23,9 @@ public class Location {
 
     /**
      * Construct a location
+     *
+     * @author Xianghao Wang
+     *
      * @param level is the level of the game
      * @param row is the row in the map
      * @param col is the column in the map

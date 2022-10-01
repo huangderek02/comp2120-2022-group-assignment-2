@@ -1,14 +1,27 @@
 import engine.Cell;
 import engine.GameEngine;
+import engine.GameObject;
+import engine.SceneObject;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
+
+import org.testfx.framework.junit.ApplicationTest;
+
 import static org.junit.Assert.*;
 
-public class GameEngineTest {
+
+public class GameEngineTest extends ApplicationTest {
+    @Override
+    public void start(Stage stage) throws Exception {
+
+    }
+
     @Test
     public void getResourcePathTest() throws URISyntaxException {
     }
@@ -19,6 +32,10 @@ public class GameEngineTest {
 
     }
 
+    /**
+     * @author Rita Zhou
+     * @throws ClassNotFoundException
+     */
     @Test
     public void parseArgumentTest() throws ClassNotFoundException {
         {
@@ -79,6 +96,48 @@ public class GameEngineTest {
         }
 
     }
+
+    /**
+     * @author Rita Zhou
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    @Test (timeout=1000)
+    public void testGameObjectPropertyAccessing() throws URISyntaxException, IOException, ClassNotFoundException {
+        GameObject gameObject = GameEngine.loadGame("template-0/header.json");
+        assertNotNull(gameObject.getProperty("title"));
+        assertNotNull(gameObject.getProperty("camera"));
+        assertEquals("Courage", gameObject.getProperty("title"));
+        assertEquals("0:(1,1)", gameObject.getProperty("camera"));
+        assertNull(gameObject.getProperty("123"));
+    }
+
+    /**
+     * @author Rita Zhou
+     * @throws IOException
+     * @throws URISyntaxException
+     * @throws ClassNotFoundException
+     */
+    @Test (timeout = 1000)
+    public void testSceneObjectPropertyAccessing() throws IOException, URISyntaxException, ClassNotFoundException {
+        GameObject gameObject = GameEngine.loadGame("template-0/header.json");
+        SceneObject sceneObject = gameObject.getSceneObject(0);
+        SceneObject sceneObject1 = gameObject.getSceneObject(1);
+
+        assertNotNull(sceneObject.getProperty("title"));
+        assertNotNull(sceneObject.getProperty("birth-point"));
+        assertEquals("level 1", sceneObject.getProperty("title"));
+        assertEquals("(2,2)", sceneObject.getProperty("birth-point"));
+        assertNull(sceneObject.getProperty("123"));
+
+        assertNotNull(sceneObject1.getProperty("title"));
+        assertNotNull(sceneObject1.getProperty("birth-point"));
+        assertEquals("level 2", sceneObject1.getProperty("title"));
+        assertEquals("(2,2)", sceneObject1.getProperty("birth-point"));
+        assertNull(sceneObject1.getProperty("We"));
+    }
+
 
     public class SampleCell extends Cell {
         @Override

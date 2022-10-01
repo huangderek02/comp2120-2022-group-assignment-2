@@ -23,35 +23,65 @@ public class Tile extends StackPane {
     static List<Tile> convertTiles(Cell[][] board) {
 
         List<Tile> tiles = new ArrayList<>();
-        for (int j = 0; j < Viewer.BOARD_X; j++) {
-            for (int i = 0; i < Viewer.BOARD_Y; i++) {
-                if (board[i][j] instanceof WallCell) {
-                    Tile tile = new Tile(i, j, TileType.BRICK_1);
+
+        for (int row = 0; row < Viewer.BOARD_Y; row ++) {
+            for (int col = 0; col < Viewer.BOARD_X; col ++) {
+                if (board[row][col] instanceof WallCell) {
+                    Tile tile = new Tile(col, row, TileType.BRICK_1);
                     tiles.add(tile);
                     continue;
                 }
-                if (board[i][j] instanceof EmptyCell) {
-                    Tile tile = new Tile(i, j, TileType.GROUND_1);
+                if (board[row][col] instanceof EmptyCell) {
+                    Tile tile = new Tile(col, row, TileType.GROUND_1);
                     tiles.add(tile);
                     continue;
                 }
-                if (board[i][j] instanceof HeroCell) {
-                    Tile tile = new Tile(i, j, TileType.HERO, TileType.GROUND_1);
+                if (board[row][col] instanceof HeroCell) {
+                    Tile tile = new Tile(col, row, TileType.HERO, TileType.GROUND_1);
                     tiles.add(tile);
                     continue;
                 }
-                if (board[i][j] instanceof EnemySpiderCell) {
-                    Tile tile = new Tile(i, j, TileType.ENEMY_1, TileType.GROUND_1);
+                if (board[row][col] instanceof EnemySpiderCell) {
+                    Tile tile = new Tile(col, row, TileType.ENEMY_1, TileType.GROUND_1);
                     tiles.add(tile);
                     continue;
                 }
-                if (board[i][j] instanceof DoorCell) {
-                    Tile tile = new Tile(i, j, TileType.SPECIAL_1, TileType.GROUND_1);
+                if (board[row][col] instanceof DoorCell) {
+                    Tile tile = new Tile(col, row, TileType.SPECIAL_1, TileType.GROUND_1);
                     tiles.add(tile);
                     continue;
                 }
             }
         }
+//        for (int j = 0; j < Viewer.BOARD_X; j++) {
+//            for (int i = 0; i < Viewer.BOARD_Y; i++) {
+//                if (board[i][j] instanceof WallCell) {
+//                    Tile tile = new Tile(i, j, TileType.BRICK_1);
+//                    tiles.add(tile);
+//                    continue;
+//                }
+//                if (board[i][j] instanceof EmptyCell) {
+//                    Tile tile = new Tile(i, j, TileType.GROUND_1);
+//                    tiles.add(tile);
+//                    continue;
+//                }
+//                if (board[i][j] instanceof HeroCell) {
+//                    Tile tile = new Tile(i, j, TileType.HERO, TileType.GROUND_1);
+//                    tiles.add(tile);
+//                    continue;
+//                }
+//                if (board[i][j] instanceof EnemySpiderCell) {
+//                    Tile tile = new Tile(i, j, TileType.ENEMY_1, TileType.GROUND_1);
+//                    tiles.add(tile);
+//                    continue;
+//                }
+//                if (board[i][j] instanceof DoorCell) {
+//                    Tile tile = new Tile(i, j, TileType.SPECIAL_1, TileType.GROUND_1);
+//                    tiles.add(tile);
+//                    continue;
+//                }
+//            }
+//        }
         return tiles;
     }
 

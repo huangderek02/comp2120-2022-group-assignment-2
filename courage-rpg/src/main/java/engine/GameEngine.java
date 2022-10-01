@@ -64,10 +64,10 @@ public class GameEngine {
             gameObject.addProperty(key, propertiesJSON.getString(key));
         }
         // Load all symbols and arguments
-        Map<String, Class<Cell>> symbols = new HashMap<>();
+        Map<String, Class> symbols = new HashMap<>();
         JSONObject argumentsJSON = headerJSON.getJSONObject("symbols");
         for (String symbol : argumentsJSON.keySet()) {
-            Pair<Class<Cell>, List<String>> parsed = parseArgument(argumentsJSON.getString(symbol));
+            Pair<Class, List<String>> parsed = parseArgument(argumentsJSON.getString(symbol));
             symbols.put(symbol, parsed.getKey());
             gameObject.addArgument(parsed.getKey(), parsed.getValue());
         }
@@ -95,9 +95,9 @@ public class GameEngine {
      * @param scenePath is the JSON file path of the scene object
      * @return the SceneObject
      * */
-    public static SceneObject loadScene(GameObject gameObject, Map<String, Class<Cell>> symbols, String scenePath) throws URISyntaxException, IOException, ClassNotFoundException {
+    public static SceneObject loadScene(GameObject gameObject, Map<String, Class> symbols, String scenePath) throws URISyntaxException, IOException, ClassNotFoundException {
         SceneObject sceneObject = new SceneObject(gameObject);
-        Map<String, Class<Cell>> sceneSymbols = new HashMap<>(symbols);
+        Map<String, Class> sceneSymbols = new HashMap<>(symbols);
 
         // Get JSON object
         JSONObject sceneJSON = getJSONObjection(getResourcePath(scenePath).toString());
@@ -111,7 +111,7 @@ public class GameEngine {
         // Read all symbols
         JSONObject symbolsJSON = sceneJSON.getJSONObject("symbols");
         for (String symbol : symbolsJSON.keySet()) {
-            Pair<Class<Cell>, List<String>> parsed = parseArgument(symbolsJSON.getString(symbol));
+            Pair<Class, List<String>> parsed = parseArgument(symbolsJSON.getString(symbol));
             sceneSymbols.put(symbol, parsed.getKey());
             sceneObject.addArgument(parsed.getKey(), parsed.getValue());
         }
@@ -120,10 +120,10 @@ public class GameEngine {
         JSONArray cellJSONArray = sceneJSON.getJSONArray("cells");
         for (Object rowObj : cellJSONArray) {
             String rowStr = (String) rowObj;
-            List<Class<Cell>> row = new ArrayList<>();
+            List<Class> row = new ArrayList<>();
             sceneObject.addCellClassRow(row);
             for (char c : rowStr.toCharArray()) {
-                Class<Cell> cellClass = sceneSymbols.get(c + "");
+                Class cellClass = sceneSymbols.get(c + "");
                 row.add(cellClass);
             }
         }
@@ -144,14 +144,14 @@ public class GameEngine {
      * @param str is the raw argument string
      * @return a pair involving the class object and corresponding argument list
      * */
-    public static Pair<Class<Cell>, List<String>> parseArgument(String str) throws ClassNotFoundException {
+    public static Pair<Class, List<String>> parseArgument(String str) throws ClassNotFoundException {
         String[] tokens = str.split("&");
 
         // Add all arguments
         List<String> arguments = new ArrayList<>(Arrays.asList(tokens).subList(1, tokens.length));
 
         // Get class object
-        Class<Cell> classObj = (Class<Cell>) Class.forName(tokens[0]);
+        Class classObj = (Class) Class.forName(tokens[0]);
 
         return new Pair<>(classObj, arguments);
     }

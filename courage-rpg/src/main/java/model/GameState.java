@@ -34,7 +34,26 @@ public class GameState {
      * @param key is the key listened from keyboard
      * */
     public void handle(KeyCode key) {
+        Location newLoc = switch (key) {
+            case W -> new Location(currentLoc.level, currentLoc.row - 1, currentLoc.col);
+            case S -> new Location(currentLoc.level, currentLoc.row + 1, currentLoc.col);
+            case A -> new Location(currentLoc.level, currentLoc.row, currentLoc.col - 1);
+            case D -> new Location(currentLoc.level, currentLoc.row, currentLoc.col + 1);
+            default -> null;
+        };
 
+        // Invalid key
+        if (newLoc == null) return;
+
+        // Check boundary
+        if (newLoc.row < 0 || newLoc.row >= getMap(newLoc.level).length || newLoc.col < 0 || newLoc.col >= getMap(newLoc.level)[0].length) {
+            return;
+        }
+
+        // Move to new location and act
+        moveTo(newLoc);
+        ActionCell cell = getMap(newLoc.level)[newLoc.row][newLoc.col];
+        cell.act(this);
     }
 
     /**
@@ -93,7 +112,7 @@ public class GameState {
      * @param level is the current level
      * @return the map at the given level
      * */
-    public Cell[][] getMap(int level) {
+    public ActionCell[][] getMap(int level) {
         return this.maps.get(this.currentLoc.level);
     }
 

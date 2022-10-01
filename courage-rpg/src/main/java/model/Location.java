@@ -2,12 +2,12 @@ package model;
 
 public class Location {
     public int level;
-    public int x;
-    public int y;
+    public int row;
+    public int col;
 
-    public Location(int level, int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Location(int level, int row, int col) {
+        this.row = row;
+        this.col = col;
         this.level = level;
     }
 }

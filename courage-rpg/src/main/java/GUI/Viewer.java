@@ -39,6 +39,8 @@ public class Viewer {
     public static final int ITEM_X = 5;
     public static final int BAR_LEN = 150;
     public static final int BAR_HEIGHT = 15;
+    public static final int BOARD_X = 11;
+    public static final int BOARD_Y = 7;
 
     // Load font
     public Font pixelFont = null;

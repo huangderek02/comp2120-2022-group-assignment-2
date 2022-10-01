@@ -1,9 +1,17 @@
 package GUI;
 
+import engine.Cell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import model.cells.DoorCell;
+import model.cells.EnemySpiderCell;
+import model.cells.HeroCell;
+import model.cells.WallCell;
 
+import javax.swing.text.View;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Xin Lu
@@ -14,6 +22,36 @@ public class Tile extends StackPane {
     private int board_y;
     private TileType tileType;
     private TileType background = null;
+
+    static List<Tile> convertTiles(Cell[][] board) {
+
+        List<Tile> tiles = new ArrayList<>();
+        for (int i = 0; i < Viewer.BOARD_X; i++) {
+            for (int j = 0; j < Viewer.BOARD_Y; j++) {
+                if (board[i][j] instanceof WallCell) {
+                    Tile tile = new Tile(i, j, TileType.BRICK_1);
+                    tiles.add(tile);
+                    continue;
+                }
+                if (board[i][j] instanceof HeroCell) {
+                    Tile tile = new Tile(i, j, TileType.HERO, TileType.GROUND_1);
+                    tiles.add(tile);
+                    continue;
+                }
+                if (board[i][j] instanceof EnemySpiderCell) {
+                    Tile tile = new Tile(i, j, TileType.ENEMY_1, TileType.GROUND_1);
+                    tiles.add(tile);
+                    continue;
+                }
+                if (board[i][j] instanceof DoorCell) {
+                    Tile tile = new Tile(i, j, TileType.SPECIAL_1, TileType.GROUND_1);
+                    tiles.add(tile);
+                    continue;
+                }
+            }
+        }
+        return tiles;
+    }
 
     /**
      * Generate a random type of cell at the given location. (0-10, 0-6)

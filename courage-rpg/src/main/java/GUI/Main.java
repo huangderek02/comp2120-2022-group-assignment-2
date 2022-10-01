@@ -8,7 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import model.GameState;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -18,10 +21,16 @@ public class Main extends Application {
 
     // MVC components
     Viewer viewer;
-    GameObject gameObject ;
     Controller controller;
 
-    GameEngine engine = new GameEngine();
+    private GameObject  gameObject;
+    private GameState gameState;
+
+    public void loadGame(String headerPath) throws IOException, URISyntaxException, ClassNotFoundException {
+        gameObject = GameEngine.loadGame(headerPath);
+        gameState =  new GameState(gameObject);
+
+    }
 
     @Override
     public void start(Stage stage) throws ClassNotFoundException {
@@ -30,8 +39,6 @@ public class Main extends Application {
         controller.init();
         controller.handleKeyBoard();
 
-        String str = "model.cells.WallCell&123&hello";
-        Pair<Class<Cell>, List<String>> actual = GameEngine.parseArgument(str);
-        System.out.println(actual);
+
     }
 }

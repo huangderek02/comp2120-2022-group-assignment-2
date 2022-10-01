@@ -5,18 +5,21 @@ import java.util.List;
 
 /**
  * It represents a cell class and the arguments to construct the cell object
+ *
  * @author Xianghao Wang
  * @deprecated
- * */
+ */
 public class CellMaker {
     final private Class<Cell> cellClass;
     final private List<String> arguments;
 
     /**
      * Construct a cell maker
-     * @author Xianghao Wang
+     *
      * @param cellClass indicates the Class object of a Cell
-     * @param arguments gives the cell maker arguments to construct a Cell */
+     * @param arguments gives the cell maker arguments to construct a Cell
+     * @author Xianghao Wang
+     */
     public CellMaker(Class<Cell> cellClass, List<String> arguments) {
         this.cellClass = cellClass;
         this.arguments = arguments;
@@ -24,17 +27,20 @@ public class CellMaker {
 
     /**
      * Make a cell
+     *
+     * @return a cell object made with the arguments
      * @author Xianghao Wang
-     * @return a cell object made with the arguments */
+     */
     public Cell make() throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
-        return  cellClass.getConstructor().newInstance().build(arguments);
+        return cellClass.getConstructor().newInstance().build(arguments);
     }
 
     /**
      * Return the Cell's class object
-     * @author Xianghao Wang
+     *
      * @return the Cell's class
-     * */
+     * @author Xianghao Wang
+     */
     public Class<Cell> getCellClass() {
         return this.cellClass;
     }

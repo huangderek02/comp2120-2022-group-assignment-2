@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import javafx.scene.image.Image;
 import javafx.util.Pair;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;

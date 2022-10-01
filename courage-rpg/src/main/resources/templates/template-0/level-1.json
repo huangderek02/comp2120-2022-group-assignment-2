@@ -1,20 +1,21 @@
 {
   "cells": [
-    "-----",
-    "-***-",
-    "-a**-",
-    "-***-",
-    "-----"
+    "-----------",
+    "-*********-",
+    "-*********-",
+    "-*********-",
+    "-*v*******-",
+    "-*********-",
+    "-----------"
   ],
   "properties": {
     "title": "level 2",
-    "birth-point": "(2,2)"
+    "birth-point": "4&3"
   },
   "rendering": {
-    "a": "assets/2.jpg"
+
   },
   "symbols": {
-    "a": "model.cells.EmptyCell",
-    "b": "model.cells.EmptyCell"
+    "v": "model.cells.PortalCell&0&4&3"
   }
 }

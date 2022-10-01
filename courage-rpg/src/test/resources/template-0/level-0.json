@@ -1,10 +1,10 @@
 {
   "cells": [
-    "--**-",
+    "-=**-",
     "****-",
     "-a**b",
-    "-****",
-    "bb-**"
+    "-*-**",
+    "bbb+*"
   ],
   "properties": {
     "title": "level 1",
@@ -14,7 +14,7 @@
     "a": "assets/2.jpg"
   },
   "symbols": {
-    "a": "sampleCells.EmptyCell",
+    "a": "sampleCells.EmptyCell&1&23&B&AC",
     "b": "sampleCells.WallCell"
   }
 }

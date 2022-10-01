@@ -13,7 +13,9 @@
     "*": "assets/2.jpg"
   },
   "symbols": {
-    "-": "sampleCells.WallCell",
-    "*": "sampleCells.EmptyCell"
+    "*": "sampleCells.EmptyCell",
+    "-": "sampleCells.WallCell&123&9&1",
+    "+": "sampleCells.SampleCell&ABC&def",
+    "=": "sampleCells.NewCell&!&?&.&,&()&~"
   }
 }

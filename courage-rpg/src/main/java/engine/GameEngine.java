@@ -1,5 +1,6 @@
 package engine;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import javafx.scene.image.Image;
 import javafx.util.Pair;
@@ -101,8 +102,6 @@ public class GameEngine {
         // Get JSON object
         JSONObject sceneJSON = getJSONObjection(getResourcePath(scenePath).toString());
 
-        // TODO: read cells
-
         // Read properties
         JSONObject propertiesJSON = sceneJSON.getJSONObject("properties");
         for (String key : propertiesJSON.keySet()) {
@@ -113,8 +112,20 @@ public class GameEngine {
         JSONObject symbolsJSON = sceneJSON.getJSONObject("symbols");
         for (String symbol : symbolsJSON.keySet()) {
             Pair<Class<Cell>, List<String>> parsed = parseArgument(symbolsJSON.getString(symbol));
-            symbolsJSON.put(symbol, parsed.getKey());
+            sceneSymbols.put(symbol, parsed.getKey());
             sceneObject.addArgument(parsed.getKey(), parsed.getValue());
+        }
+
+        // Read cells
+        JSONArray cellJSONArray = sceneJSON.getJSONArray("cells");
+        for (Object rowObj : cellJSONArray) {
+            String rowStr = (String) rowObj;
+            List<Class<Cell>> row = new ArrayList<>();
+            sceneObject.addCellClassRow(row);
+            for (char c : rowStr.toCharArray()) {
+                Class<Cell> cellClass = sceneSymbols.get(c + "");
+                row.add(cellClass);
+            }
         }
 
         // Read all images

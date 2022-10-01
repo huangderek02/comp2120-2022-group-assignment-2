@@ -16,9 +16,9 @@ import java.util.Map;
 public class GameObject {
     final private List<SceneObject> sceneObjects;
 
-    final private Map<Class<Cell>, Image> cellRendering;
+    final private Map<Class, Image> cellRendering;
     final private Map<String, String> properties;
-    final private Map<Class<Cell>, List<String>> arguments;
+    final private Map<Class, List<String>> arguments;
 
     /**
      * Construct a game object
@@ -46,7 +46,7 @@ public class GameObject {
      * @param classObj is the cell's class Object
      * @param image is the image to be added
      * */
-    public void addImage(Class<Cell> classObj, Image image) {
+    public void addImage(Class classObj, Image image) {
         cellRendering.put(classObj, image);
     }
 
@@ -70,7 +70,7 @@ public class GameObject {
      * @param classObj is the cell's class object
      * @param argument is a list of arguments
      * */
-    public void addArgument(Class<Cell> classObj, List<String> argument) {
+    public void addArgument(Class classObj, List<String> argument) {
         arguments.put(classObj, argument);
     }
 
@@ -103,7 +103,7 @@ public class GameObject {
      * @param classObj is the given cell's class object
      * @return the image
      * */
-    public Image getImage(Class<Cell> classObj) {
+    public Image getImage(Class classObj) {
         return cellRendering.get(classObj);
     }
 
@@ -127,7 +127,7 @@ public class GameObject {
      * @param classObj is the given Class object
      * @return the arguments for building Cell with the given class
      * */
-    public List<String> getBuildArguments(Class<Cell> classObj) {
+    public List<String> getBuildArguments(Class classObj) {
         return arguments.get(classObj);
     }
 
@@ -139,7 +139,7 @@ public class GameObject {
      * @param classObj is the Class object of the cell to be built
      * @return a Cell constructed by arguments
      * */
-    public Cell build(Class<Cell> classObj) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        return (Cell) classObj.getConstructor().newInstance().build(getBuildArguments(classObj));
+    public Cell build(Class classObj) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        return ((Cell) (classObj.getConstructor().newInstance())).build(getBuildArguments(classObj));
     }
 }

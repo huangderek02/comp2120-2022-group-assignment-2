@@ -2,8 +2,9 @@
   "scenes": [
     "templates/template-1/level-0.json"
   ],
-  "image-domain": [
-  ],
+  "image-domain": {
+    "wall": "wall.png"
+  },
   "literals": {
     "empty": "model.cells.EmptyCell",
     "wall": "model.cells.WallCell",

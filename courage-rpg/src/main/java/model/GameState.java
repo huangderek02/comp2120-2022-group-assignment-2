@@ -90,6 +90,7 @@ public class GameState {
                     }
                 }
             }
+            this.maps.add(cells);
         }
     }
 

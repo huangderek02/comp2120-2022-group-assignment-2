@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
 public class GameStateTest extends ApplicationTest {
     /**
      * @author Rita Zhou
+     * Test handle
      */
     @Test (timeout = 1000)
     public void testHandle(){
@@ -27,6 +28,7 @@ public class GameStateTest extends ApplicationTest {
 
     /**
      * @author Rita Zhou
+     * Test pollDialog
      */
     @Test (timeout = 1000)
     public void testPollDialog() throws IOException, URISyntaxException, ClassNotFoundException {
@@ -41,12 +43,31 @@ public class GameStateTest extends ApplicationTest {
 
     /**
      * @author Rita Zhou
+     * Test addItem and useItem
      */
     @Test (timeout = 1000)
-    public void testAddItem() throws IOException, URISyntaxException, ClassNotFoundException {
+    public void testItem() throws IOException, URISyntaxException, ClassNotFoundException {
         GameObject gameObject = GameEngine.loadGame("template-1/header.json");
         GameState gameState = new GameState(gameObject);
 
         gameState.addItem(GameState.Item.KEY);
+        assertEquals(1, gameState.get(GameState.Item.KEY));
+
+        gameState.addItem(GameState.Item.KEY);
+        gameState.addItem(GameState.Item.KEY);
+        assertEquals(3, gameState.get(GameState.Item.KEY));
+
+        gameState.addItem(GameState.Item.KEY);
+        gameState.useItem(GameState.Item.KEY);
+        assertEquals(3, gameState.get(GameState.Item.KEY));
+
+        gameState.useItem(GameState.Item.KEY);
+        gameState.useItem(GameState.Item.KEY);
+        assertEquals(1, gameState.get(GameState.Item.KEY));
+
+        gameState.useItem(GameState.Item.KEY);
+        assertEquals(-1, gameState.get(GameState.Item.KEY));
+
+        assertFalse(gameState.useItem(GameState.Item.KEY));
     }
 }

@@ -74,6 +74,7 @@ public class Viewer {
      * Entry pointer for the game.
      */
     public void start(Stage primaryStage) {
+        // Set the window
         primaryStage.setResizable(false);
         primaryStage.setTitle("Courage");
 

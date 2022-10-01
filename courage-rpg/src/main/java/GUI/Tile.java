@@ -3,10 +3,7 @@ package GUI;
 import engine.Cell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import model.cells.DoorCell;
-import model.cells.EnemySpiderCell;
-import model.cells.HeroCell;
-import model.cells.WallCell;
+import model.cells.*;
 
 import javax.swing.text.View;
 import java.io.File;
@@ -30,6 +27,11 @@ public class Tile extends StackPane {
             for (int j = 0; j < Viewer.BOARD_Y; j++) {
                 if (board[i][j] instanceof WallCell) {
                     Tile tile = new Tile(i, j, TileType.BRICK_1);
+                    tiles.add(tile);
+                    continue;
+                }
+                if (board[i][j] instanceof EmptyCell) {
+                    Tile tile = new Tile(i, j, TileType.GROUND_1);
                     tiles.add(tile);
                     continue;
                 }

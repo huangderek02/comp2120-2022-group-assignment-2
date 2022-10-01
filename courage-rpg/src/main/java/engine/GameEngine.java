@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import javafx.scene.image.Image;
 import javafx.util.Pair;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -75,7 +77,9 @@ public class GameEngine {
         JSONObject renderingJSON = headerJSON.getJSONObject("rendering");
         for (String symbol : renderingJSON.keySet()) {
             String imagePath = renderingJSON.getString(symbol);
-            gameObject.addImage(symbols.get(symbol), new Image(getResourcePath(imagePath).toString()));
+            System.out.println(getResourcePath(imagePath).toString());
+            String p = new File(getResourcePath(imagePath).toString()).toURI().toString();
+            gameObject.addImage(symbols.get(symbol), new Image(p));
         }
 
         /* Load all scenes */

@@ -5,7 +5,10 @@ import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import model.GameState;
+
 import java.io.File;
+import java.util.List;
 
 /**
  * @author Xin Lu
@@ -13,17 +16,22 @@ import java.io.File;
 public class Controller {
 
     Viewer viewer;
-    GameObject gameObject;
+    GameState gameState;
 
-    public Controller(Viewer viewer, GameObject gameObject) {
+    public Controller(Viewer viewer, GameState gameState) {
         this.viewer = viewer;
-        this.gameObject = gameObject;
+        this.gameState = gameState;
     }
 
     public void init() {
         viewer.start(new Stage());
-        Board b = new Board();
-        viewer.getBoard().getChildren().addAll(b.board.getChildren());
+        // For random board
+//        Board b = new Board();
+//        viewer.getBoard().getChildren().addAll(b.board.getChildren());
+
+        // Convert the cells to tiles
+        List<Tile> tiles = Tile.convertTiles(gameState.getMap(gameState.getCurrentLocation().level));
+        viewer.getBoard().getChildren().addAll(tiles);
         viewer.getRoot().getChildren().add(viewer.getBoard());
         // Add background image last so it is on the top of board
         ImageView background = new ImageView(new File(Viewer.URI_BASE + "textures/bg.png").toURI().toString());

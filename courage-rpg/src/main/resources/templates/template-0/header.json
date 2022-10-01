@@ -11,7 +11,7 @@
   },
   "rendering": {
     "-": "textures/brick_1.jpg",
-    "*": "textures/groud_1.jpg",
+    "*": "textures/ground_1.jpg",
     "^": "textures/stairs_up.png",
     "v": "textures/stairs_down.png"
   },

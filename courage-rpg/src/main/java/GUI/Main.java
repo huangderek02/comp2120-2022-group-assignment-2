@@ -23,7 +23,7 @@ public class Main extends Application {
     Viewer viewer;
     Controller controller;
 
-    private GameObject  gameObject;
+    private GameObject gameObject;
     private GameState gameState;
 
     public void loadGame(String headerPath) throws IOException, URISyntaxException, ClassNotFoundException {
@@ -34,8 +34,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws ClassNotFoundException {
+        try {
+            loadGame("templates/template-0/header.json");
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
         viewer = new Viewer();
-        controller = new Controller(viewer, null);
+        controller = new Controller(viewer, gameState);
         controller.init();
         controller.handleKeyBoard();
 

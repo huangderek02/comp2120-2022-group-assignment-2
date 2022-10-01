@@ -10,7 +10,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
- * This represents the whole state of the current gaem
+ * This represents the whole state of the current game
+ *
+ * @author Xianghao Wang
  * */
 public class GameState {
     @Deprecated
@@ -25,6 +27,9 @@ public class GameState {
 
     /**
      * Create the gamestate based on game object
+     *
+     * @author Xianghao Wang
+     *
      * @param gameObject is the game object storing some metadata
      * */
     public GameState(GameObject gameObject) {
@@ -37,6 +42,8 @@ public class GameState {
 
     /**
      * Load game state from game object
+     *
+     * @author Xianghao Wang
      * */
     private void load() {
        loadDialogs();
@@ -47,6 +54,8 @@ public class GameState {
 
     /**
      * Load all of dialogs
+     *
+     * @author Xianghao Wang
      * */
     private void loadDialogs() {
         String str = gameObject.getProperty("dialogs");
@@ -60,6 +69,8 @@ public class GameState {
 
     /**
      * Load all of maps
+     *
+     * @author Xianghao Wang
      * */
     private void loadMaps() {
         for (SceneObject sceneObject : gameObject.getSceneObjectList()) {
@@ -85,6 +96,8 @@ public class GameState {
 
     /**
      * Load all items to repository
+     *
+     * @author Xianghao Wang
      * */
     private void loadRepository() {
         String str = gameObject.getProperty("repository");
@@ -107,6 +120,8 @@ public class GameState {
 
     /**
      * Load the current location
+     *
+     * @author Xianghao Wang
      * */
     private void loadLocation() {
         String str = gameObject.getProperty("camera");
@@ -120,6 +135,9 @@ public class GameState {
 
     /**
      * Handle a key and change state
+     *
+     * @author Xianghao Wang
+     *
      * @param key is the key listened from keyboard
      * */
     public void handle(KeyCode key) {
@@ -147,6 +165,9 @@ public class GameState {
 
     /**
      * Add the dialog into dialog queue
+     *
+     * @author Xianghao Wang
+     *
      * @param dialog is the string of the dialog
      * */
     public void offerDialog(String dialog) {
@@ -155,6 +176,9 @@ public class GameState {
 
     /**
      * Get and remove the dialog from the dialog queue
+     *
+     * @author Xianghao Wang
+     *
      * @return a String representing the dialog
      * */
     public String pollDialog() {
@@ -164,6 +188,9 @@ public class GameState {
 
     /**
      * Get the current location of the character
+     *
+     * @author Xianghao Wang
+     *
      * @return Location is the current location
      * */
     public Location getCurrentLocation() {
@@ -173,6 +200,9 @@ public class GameState {
 
     /**
      * Move to a new location
+     *
+     * @author Xianghao Wang
+     *
      * @param location is the destination
      * */
     public void moveTo(Location location) {
@@ -182,6 +212,8 @@ public class GameState {
 
     /**
      * Move back to the previous location
+     *
+     * @author Xianghao Wang
      * */
     public void moveBack() {
         this.currentLoc = this.previousLoc;
@@ -190,6 +222,9 @@ public class GameState {
 
     /**
      * Get the previous location of the character
+     *
+     * @author Xianghao Wang
+     *
      * @return Location is the previous location
      * */
     public Location getPreviousLocation() {
@@ -198,6 +233,9 @@ public class GameState {
 
     /**
      * Get the map at the specific level
+     *
+     * @author Xianghao Wang
+     *
      * @param level is the current level
      * @return the map at the given level
      * */
@@ -207,14 +245,21 @@ public class GameState {
 
     /**
      * Get the overall game state
+     *
+     * @author Xianghao Wang
+     *
      * @return a Sign representing the overall game state
      * */
+    @Deprecated
     public Sign getSign() {
         return this.stateSign;
     }
 
     /**
      * Add an item to repository
+     *
+     * @author Xianghao Wang
+     *
      * @param item is to be added
      * */
     public void addItem(Item item) {
@@ -223,6 +268,9 @@ public class GameState {
 
     /**
      * Use an item
+     *
+     * @author Xianghao Wang
+     *
      * @param item is to be used
      * @return true if it is used; if not found, retutrn false
      * */
@@ -237,6 +285,9 @@ public class GameState {
 
     /**
      * Create a new cell instance based on its current location
+     *
+     * @author Xianghao Wang
+     *
      * @param cellClass is the class object of the cell
      * */
     public ActionCell createCell(Class<Cell> cellClass) {
@@ -254,12 +305,23 @@ public class GameState {
         }
     }
 
+    /**
+     * Represents the game sign
+     *
+     * @author Xianghao Wang
+     * */
+    @Deprecated
     public enum Sign {
         IN_GAME,
         VICTORY,
         PENDING
     }
 
+    /**
+     * Represents item in repository
+     *
+     * @author Xianghao Wang
+     * */
     public enum Item {
         KEY,
         HP_RECOVERY

@@ -14,7 +14,7 @@
     "a": "assets/2.jpg"
   },
   "symbols": {
-    "a": "sampleCells.EmptyCell",
+    "a": "sampleCells.EmptyCell&a&bc&.&?",
     "b": "sampleCells.WallCell"
   }
 }

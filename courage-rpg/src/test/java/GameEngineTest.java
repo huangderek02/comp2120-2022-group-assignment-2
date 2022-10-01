@@ -12,85 +12,92 @@ import java.util.List;
 
 
 import org.testfx.framework.junit.ApplicationTest;
+import sampleCells.EmptyCell;
+import sampleCells.NewCell;
+import sampleCells.WallCell;
 
 import static org.junit.Assert.*;
 
-
+/**
+ * @author Rita Zhou
+ * This is the test for the GameEngine
+ * We are mainly test three method in the GameEngine: parseArgument,
+ * getProperty, and getBuildArguments.
+ * As long as we can run these three method, then we can say that
+ * we build the game engine correctly. Because these three method
+ * used all functions in the GameEngine and return the current
+ * arguments we required.
+ */
 public class GameEngineTest extends ApplicationTest {
+    /**
+     * boot javafx
+     * @author Rita
+     * @param stage
+     */
     @Override
     public void start(Stage stage) throws Exception {
 
     }
 
-    @Test
-    public void getResourcePathTest() throws URISyntaxException {
-    }
-
-
-    @Test
-    public void getJSONObjectTest() {
-
-    }
 
     /**
      * @author Rita Zhou
-     * @throws ClassNotFoundException
      */
-    @Test
+    @Test (timeout = 1000)
     public void parseArgumentTest() throws ClassNotFoundException {
         {
             // Test non-parameter cell
             String str = "GameEngineTest$SampleCell";
-            Pair<Class<Cell>, List<String>> actual = GameEngine.parseArgument(str);
+            Pair<Class, List<String>> actual = GameEngine.parseArgument(str);
             assertEquals(SampleCell.class, actual.getKey());
             assertEquals(List.of(), actual.getValue());
         }
         {
             // Test parameter cell 1
             String str = "GameEngineTest$SampleCell&ABC&123";
-            Pair<Class<Cell>, List<String>> actual = GameEngine.parseArgument(str);
+            Pair<Class, List<String>> actual = GameEngine.parseArgument(str);
             assertEquals(SampleCell.class, actual.getKey());
             assertEquals(List.of("ABC", "123"), actual.getValue());
         }
         {
             // Test parameter cell 2
             String str = "GameEngineTest$SampleCell&ABC&abc";
-            Pair<Class<Cell>, List<String>> actual = GameEngine.parseArgument(str);
+            Pair<Class, List<String>> actual = GameEngine.parseArgument(str);
             assertEquals(SampleCell.class, actual.getKey());
             assertEquals(List.of("ABC", "abc"), actual.getValue());
         }
         {
             // Test parameter cell 3
             String str = "GameEngineTest$SampleCell&X and Y";
-            Pair<Class<Cell>, List<String>> actual = GameEngine.parseArgument(str);
+            Pair<Class, List<String>> actual = GameEngine.parseArgument(str);
             assertEquals(SampleCell.class, actual.getKey());
             assertEquals(List.of("X and Y"), actual.getValue());
         }
         {
             // Test parameter cell 4
             String str = "GameEngineTest$SampleCell&.&,&?&!&()&~";
-            Pair<Class<Cell>, List<String>> actual = GameEngine.parseArgument(str);
+            Pair<Class, List<String>> actual = GameEngine.parseArgument(str);
             assertEquals(SampleCell.class, actual.getKey());
             assertEquals(List.of(".", ",", "?", "!","()", "~"), actual.getValue());
         }
         {
             // Test parameter cell 5
             String str = "GameEngineTest$SampleCell&123&789&1&5";
-            Pair<Class<Cell>, List<String>> actual = GameEngine.parseArgument(str);
+            Pair<Class, List<String>> actual = GameEngine.parseArgument(str);
             assertEquals(SampleCell.class, actual.getKey());
             assertEquals(List.of("123", "789", "1", "5"), actual.getValue());
         }
         {
             // Test for cell in a module with non-parameter
             String str = "sampleCells.SampleCell";
-            Pair<Class<Cell>, List<String>> actual = GameEngine.parseArgument(str);
+            Pair<Class, List<String>> actual = GameEngine.parseArgument(str);
             assertEquals(sampleCells.SampleCell.class, actual.getKey());
             assertEquals(List.of(), actual.getValue());
         }
         {
             // Test for cell in a module with parameter
             String str = "sampleCells.SampleCell&ABC&123";
-            Pair<Class<Cell>, List<String>> actual = GameEngine.parseArgument(str);
+            Pair<Class, List<String>> actual = GameEngine.parseArgument(str);
             assertEquals(sampleCells.SampleCell.class, actual.getKey());
             assertEquals(List.of("ABC", "123"), actual.getValue());
         }
@@ -99,9 +106,6 @@ public class GameEngineTest extends ApplicationTest {
 
     /**
      * @author Rita Zhou
-     * @throws URISyntaxException
-     * @throws IOException
-     * @throws ClassNotFoundException
      */
     @Test (timeout=1000)
     public void testGameObjectPropertyAccessing() throws URISyntaxException, IOException, ClassNotFoundException {
@@ -115,9 +119,6 @@ public class GameEngineTest extends ApplicationTest {
 
     /**
      * @author Rita Zhou
-     * @throws IOException
-     * @throws URISyntaxException
-     * @throws ClassNotFoundException
      */
     @Test (timeout = 1000)
     public void testSceneObjectPropertyAccessing() throws IOException, URISyntaxException, ClassNotFoundException {
@@ -138,8 +139,56 @@ public class GameEngineTest extends ApplicationTest {
         assertNull(sceneObject1.getProperty("We"));
     }
 
+    /**
+     * @author Rita Zhou
+     */
+    @Test (timeout = 1000)
+    public void testGameObjectArgumentsAccessing() throws IOException, URISyntaxException, ClassNotFoundException {
+        GameObject gameObject = GameEngine.loadGame("template-0/header.json");
 
-    public class SampleCell extends Cell {
+        assertEquals(List.of(), gameObject.getBuildArguments(EmptyCell.class));
+        assertEquals(List.of("123", "9", "1"), gameObject.getBuildArguments(WallCell.class));
+        assertEquals(List.of("ABC", "def"), gameObject.getBuildArguments(sampleCells.SampleCell.class));
+        assertEquals(List.of("!", "?", ".", ",", "()", "~"), gameObject.getBuildArguments(NewCell.class));
+
+        assertNull(gameObject.getBuildArguments(SampleCell.class));
+    }
+
+    /**
+     * @author Rita Zhou
+     */
+    @Test (timeout = 1000)
+    public void testSceneObjectArgumentAccessing() throws IOException, URISyntaxException, ClassNotFoundException {
+        GameObject gameObject = GameEngine.loadGame("template-0/header.json");
+
+        SceneObject sceneObject1 = gameObject.getSceneObject(0);
+        SceneObject sceneObject2 = gameObject.getSceneObject(1);
+
+        assertNotNull(sceneObject1.getBuildArguments(EmptyCell.class));
+        assertNotNull(sceneObject1.getBuildArguments(WallCell.class));
+        assertNotNull(sceneObject1.getBuildArguments(sampleCells.SampleCell.class));
+        assertNotNull(sceneObject1.getBuildArguments(NewCell.class));
+
+        assertEquals(List.of("1", "23", "B", "AC"), sceneObject1.getBuildArguments(EmptyCell.class));
+        assertEquals(List.of(), sceneObject1.getBuildArguments(WallCell.class));
+        assertEquals(List.of("ABC", "def"), sceneObject1.getBuildArguments(sampleCells.SampleCell.class));
+        assertEquals(List.of("!", "?", ".", ",", "()", "~"), sceneObject1.getBuildArguments(NewCell.class));
+
+        assertNotNull(sceneObject2.getBuildArguments(EmptyCell.class));
+        assertNotNull(sceneObject2.getBuildArguments(WallCell.class));
+        assertNotNull(sceneObject2.getBuildArguments(sampleCells.SampleCell.class));
+        assertNotNull(sceneObject2.getBuildArguments(NewCell.class));
+
+        assertEquals(List.of("a", "bc", ".", "?"), sceneObject2.getBuildArguments(EmptyCell.class));
+        assertEquals(List.of(), sceneObject2.getBuildArguments(WallCell.class));
+        assertEquals(List.of("ABC", "def"), sceneObject2.getBuildArguments(sampleCells.SampleCell.class));
+        assertEquals(List.of("!", "?", ".", ",", "()", "~"), sceneObject2.getBuildArguments(NewCell.class));
+
+        assertNull(sceneObject1.getBuildArguments(SampleCell.class));
+        assertNull(sceneObject2.getBuildArguments(SampleCell.class));
+    }
+
+    public static class SampleCell extends Cell {
         @Override
         public Cell build(List<String> arguments) {
             return null;

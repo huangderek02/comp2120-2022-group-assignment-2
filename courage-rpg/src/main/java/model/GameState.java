@@ -3,15 +3,18 @@ package model;
 import engine.Cell;
 import engine.GameObject;
 import javafx.scene.input.KeyCode;
+import model.cells.ActionCell;
 
 import java.util.*;
 
+/**
+ * This represents the whole state of the current gaem
+ * */
 public class GameState {
     private Sign stateSign;
     final private Queue<String> dialogs;
-    final private List<Cell[][]> maps;
-
-
+    final private List<ActionCell[][]> maps;
+    final private Map<Item, Integer> repository;
     Location previousLoc = null;
     Location currentLoc = null;
 
@@ -23,6 +26,7 @@ public class GameState {
     public GameState(GameObject gameObject) {
         this.dialogs = new LinkedList<>();
         this.maps = new ArrayList<>();
+        this.repository = new HashMap<>();
     }
 
     /**
@@ -58,6 +62,24 @@ public class GameState {
         return this.currentLoc;
     }
 
+
+    /**
+     * Move to a new location
+     * @param location is the destination
+     * */
+    public void moveTo(Location location) {
+        this.previousLoc = this.currentLoc;
+        this.currentLoc = location;
+    }
+
+    /**
+     * Move back to the previous location
+     * */
+    public void moveBack() {
+        this.currentLoc = this.previousLoc;
+        this.previousLoc = null;
+    }
+
     /**
      * Get the previous location of the character
      * @return Location is the previous location
@@ -83,9 +105,36 @@ public class GameState {
         return this.stateSign;
     }
 
+    /**
+     * Add an item to repository
+     * @param item is to be added
+     * */
+    public void addItem(Item item) {
+        this.repository.put(item, this.repository.getOrDefault(item, 0) + 1);
+    }
+
+    /**
+     * Use an item
+     * @param item is to be used
+     * @return true if it is used; if not found, retutrn false
+     * */
+    public boolean useItem(Item item) {
+        if (this.repository.containsKey(item)) {
+            this.repository.put(item, this.repository.get(item) - 1);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public enum Sign {
         IN_GAME,
         VICTORY,
         PENDING
+    }
+
+    public enum Item {
+        KEY,
+        HP_RECOVERY
     }
 }

@@ -9,12 +9,25 @@ import java.net.URISyntaxException;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Rita Zhou
+ * This is the test case for the GameState
+ * It will test the method of handle, pollDialog, addItem
+ * and useItem. If we can pass all test, then we can say that
+ * our GameState.java is working correctly
+ */
 public class GameStateTest extends ApplicationTest {
+    /**
+     * @author Rita Zhou
+     */
     @Test (timeout = 1000)
     public void testHandle(){
 
     }
 
+    /**
+     * @author Rita Zhou
+     */
     @Test (timeout = 1000)
     public void testPollDialog() throws IOException, URISyntaxException, ClassNotFoundException {
         GameObject gameObject = GameEngine.loadGame("template-1/header.json");
@@ -26,6 +39,9 @@ public class GameStateTest extends ApplicationTest {
         assertNull(gameState.pollDialog());
     }
 
+    /**
+     * @author Rita Zhou
+     */
     @Test (timeout = 1000)
     public void testAddItem() throws IOException, URISyntaxException, ClassNotFoundException {
         GameObject gameObject = GameEngine.loadGame("template-1/header.json");

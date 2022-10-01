@@ -13,6 +13,7 @@ import java.util.*;
  * This represents the whole state of the current gaem
  * */
 public class GameState {
+    @Deprecated
     private Sign stateSign;
     final private Queue<String> dialogs;
     final private List<ActionCell[][]> maps;
@@ -31,6 +32,90 @@ public class GameState {
         this.maps = new ArrayList<>();
         this.repository = new HashMap<>();
         this.gameObject = gameObject;
+        load();
+    }
+
+    /**
+     * Load game state from game object
+     * */
+    private void load() {
+       loadDialogs();
+       loadMaps();
+       loadRepository();
+       loadLocation();
+    }
+
+    /**
+     * Load all of dialogs
+     * */
+    private void loadDialogs() {
+        String str = gameObject.getProperty("dialogs");
+        if (str == null) return;
+
+        String[] tokens = str.split("&");
+        for (String token : tokens) {
+            offerDialog(token);
+        }
+    }
+
+    /**
+     * Load all of maps
+     * */
+    private void loadMaps() {
+        for (SceneObject sceneObject : gameObject.getSceneObjectList()) {
+            ActionCell[][] cells = new ActionCell[sceneObject.getRows()][sceneObject.getCols()];
+            for (int row = 0; row < cells.length; row ++) {
+                for (int col = 0; col < cells[0].length; col ++) {
+                    try {
+                        cells[row][col] = (ActionCell) sceneObject.build(sceneObject.getCellClassObj(row, col));
+                    } catch (NoSuchMethodException e) {
+                        throw new RuntimeException(e);
+                    } catch (InvocationTargetException e) {
+                        throw new RuntimeException(e);
+                    } catch (InstantiationException e) {
+                        throw new RuntimeException(e);
+                    } catch (IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Load all items to repository
+     * */
+    private void loadRepository() {
+        String str = gameObject.getProperty("repository");
+        if (str == null) return;
+        String[] tokens = str.split("&");
+        for (String token : tokens) {
+            String[] pieces = token.split("x");
+            String itemName = pieces[0];
+            String number = pieces[1];
+            Item item = switch (itemName) {
+                case "KEY" -> Item.KEY;
+                case "HP_RECOVERY" -> Item.HP_RECOVERY;
+                default -> null;
+            };
+            if (item == null) continue;
+            int n = Integer.parseInt(number);
+            repository.put(item, n);
+        }
+    }
+
+    /**
+     * Load the current location
+     * */
+    private void loadLocation() {
+        String str = gameObject.getProperty("camera");
+        if (str == null) return;
+        String[] tokens = str.split("&");
+        int level = Integer.parseInt(tokens[0]);
+        int row = Integer.parseInt(tokens[1]);
+        int col = Integer.parseInt(tokens[2]);
+        this.currentLoc = new Location(level, row, col);
     }
 
     /**

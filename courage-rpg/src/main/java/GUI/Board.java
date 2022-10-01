@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 11 x 7 2d cell matrix.
+ * 11 x 7 2d cell matrix. Used to render the GUI board.
+ * A board corresponds to a map, i.e. a 2d array of cells in
+ * the game engine.
  * @author Xin Lu
  */
 public class Board extends StackPane {
@@ -23,12 +25,6 @@ public class Board extends StackPane {
         setHeight(Viewer.VIEWER_HEIGHT);
         for (int i = 0; i < 11; i++) {
             for (int j = 0; j < 7; j++) {
-//                Tile tile = null;
-//                if (i == 0 && j == 1) {
-//                    tile = new Tile(i, j, TileType.HERO, TileType.GROUND_1);
-//                } else {
-//                    tile = new Tile(i, j, TileType.GROUND_1);
-//                }
                 Tile tile = Tile.getRandomTile(i, j);
                 cells.add(tile);
                 board.getChildren().add(tile);

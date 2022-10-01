@@ -4,13 +4,14 @@ import engine.Cell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import model.cells.*;
-
-import javax.swing.text.View;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Represents a tile in the GUI board, which corresponds to a cell
+ * in the game engine. Cells should be converted to tiles before
+ * being used in the GUI.
  * @author Xin Lu
  */
 public class Tile extends StackPane {
@@ -20,41 +21,34 @@ public class Tile extends StackPane {
     private TileType tileType;
     private TileType background = null;
 
+    /**
+     * Create a list of tiles by the given cell matrix.
+     * @param board the given cell matrix
+     * @return a list of tiles
+     */
     static List<Tile> convertTiles(Cell[][] board) {
 
         List<Tile> tiles = new ArrayList<>();
-
         for (int row = 0; row < Viewer.BOARD_Y; row ++) {
             for (int col = 0; col < Viewer.BOARD_X; col ++) {
                 if (board[row][col] instanceof WallCell) {
                     Tile tile = new Tile(col, row, TileType.BRICK_1);
                     tiles.add(tile);
-                    continue;
-                }
-                if (board[row][col] instanceof EmptyCell) {
+                } else if (board[row][col] instanceof EmptyCell) {
                     Tile tile = new Tile(col, row, TileType.GROUND_1);
                     tiles.add(tile);
-                    continue;
-                }
-                if (board[row][col] instanceof HeroCell) {
+                } else if (board[row][col] instanceof HeroCell) {
                     Tile tile = new Tile(col, row, TileType.HERO, TileType.GROUND_1);
                     tiles.add(tile);
-                    continue;
-                }
-                if (board[row][col] instanceof EnemySpiderCell) {
+                } else if (board[row][col] instanceof EnemySpiderCell) {
                     Tile tile = new Tile(col, row, TileType.ENEMY_1, TileType.GROUND_1);
                     tiles.add(tile);
-                    continue;
-                }
-                if (board[row][col] instanceof DoorCell) {
+                } else if (board[row][col] instanceof DoorCell) {
                     Tile tile = new Tile(col, row, TileType.SPECIAL_1, TileType.GROUND_1);
                     tiles.add(tile);
-                    continue;
-                }
-                if (board[row][col] instanceof PortalCell) {
+                } else if (board[row][col] instanceof PortalCell) {
                     Tile tile = new Tile(col, row, TileType.STAIR_UP, TileType.GROUND_1);
                     tiles.add(tile);
-                    continue;
                 }
             }
         }

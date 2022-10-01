@@ -211,34 +211,26 @@ public class Viewer {
         // hp
         if (hp < 80 && hp >= 60) {
             HPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_2.png").toURI().toString()));
-        }
-        if (hp > 40 && hp < 60) {
+        } else if (hp > 40 && hp < 60) {
             HPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_3.png").toURI().toString()));
-        }
-        if (hp > 20 && hp <= 40) {
+        } else if (hp > 20 && hp <= 40) {
             HPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_4.png").toURI().toString()));
-        }
-        if (hp >= 10 && hp <= 20) {
+        } else if (hp >= 10 && hp <= 20) {
             HPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_5.png").toURI().toString()));
-        }
-        if (hp < 10 && hp >= 0) {
+        } else if (hp < 10 && hp >= 0) {
             HPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_6.png").toURI().toString()));
         }
 
         // mp
         if (mp < 80 && mp >= 60) {
             MPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_2.png").toURI().toString()));
-        }
-        if (mp > 40 && mp < 60) {
+        } else if (mp > 40 && mp < 60) {
             MPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_3.png").toURI().toString()));
-        }
-        if (mp > 20 && mp <= 40) {
+        } else if (mp > 20 && mp <= 40) {
             MPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_4.png").toURI().toString()));
-        }
-        if (mp >= 10 && mp <= 20) {
+        } else if (mp >= 10 && mp <= 20) {
             MPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_5.png").toURI().toString()));
-        }
-        if (mp < 10 && mp >= 0) {
+        } else if (mp < 10 && mp >= 0) {
             MPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_6.png").toURI().toString()));
         }
     }

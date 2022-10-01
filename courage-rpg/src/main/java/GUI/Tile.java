@@ -23,8 +23,8 @@ public class Tile extends StackPane {
     static List<Tile> convertTiles(Cell[][] board) {
 
         List<Tile> tiles = new ArrayList<>();
-        for (int i = 0; i < Viewer.BOARD_X; i++) {
-            for (int j = 0; j < Viewer.BOARD_Y; j++) {
+        for (int j = 0; j < Viewer.BOARD_X; j++) {
+            for (int i = 0; i < Viewer.BOARD_Y; i++) {
                 if (board[i][j] instanceof WallCell) {
                     Tile tile = new Tile(i, j, TileType.BRICK_1);
                     tiles.add(tile);

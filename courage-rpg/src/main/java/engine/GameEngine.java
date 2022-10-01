@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import javafx.scene.image.Image;
 import javafx.util.Pair;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -42,6 +44,17 @@ public class GameEngine {
         return JSONObject.parseObject(content);
     }
 
+
+    /**
+     * Get image object from its path
+     * @param path is the path of the image
+     * @return an image object read from the path
+     * */
+    public static Image getImage(String path) throws URISyntaxException {
+        String resourcePath = getResourcePath(path).toString();
+        return new Image(new File(resourcePath).toURI().toString());
+    }
+
     /**
      * Load and return the game object
      * @author Xianghao Wang
@@ -74,8 +87,7 @@ public class GameEngine {
         // Load all images
         JSONObject renderingJSON = headerJSON.getJSONObject("rendering");
         for (String symbol : renderingJSON.keySet()) {
-            String imagePath = renderingJSON.getString(symbol);
-            gameObject.addImage(symbols.get(symbol), new Image(getResourcePath(imagePath).toString()));
+            gameObject.addImage(symbols.get(symbol), getImage(renderingJSON.getString(symbol)));
         }
 
         /* Load all scenes */
@@ -131,8 +143,7 @@ public class GameEngine {
         // Read all images
         JSONObject renderingJSON = sceneJSON.getJSONObject("rendering");
         for (String symbol : renderingJSON.keySet()) {
-            String imagePath = getResourcePath(renderingJSON.getString(symbol)).toString();
-            sceneObject.addImage(sceneSymbols.get(symbol), new Image(imagePath));
+            sceneObject.addImage(sceneSymbols.get(symbol), getImage(renderingJSON.getString(symbol)));
         }
 
         return sceneObject;

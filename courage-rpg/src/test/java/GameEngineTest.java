@@ -1,14 +1,11 @@
 import engine.Cell;
 import engine.GameEngine;
 import javafx.util.Pair;
-import model.cells.EmptyCell;
 import org.junit.Test;
-import javafx.util.Pair;
 
 import java.net.URISyntaxException;
 import java.util.List;
 
-import static engine.GameEngine.parseArgument;
 import static org.junit.Assert.*;
 
 public class GameEngineTest {

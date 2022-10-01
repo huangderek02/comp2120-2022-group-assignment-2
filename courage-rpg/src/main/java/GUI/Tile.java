@@ -51,37 +51,13 @@ public class Tile extends StackPane {
                     tiles.add(tile);
                     continue;
                 }
+                if (board[row][col] instanceof PortalCell) {
+                    Tile tile = new Tile(col, row, TileType.STAIR_UP, TileType.GROUND_1);
+                    tiles.add(tile);
+                    continue;
+                }
             }
         }
-//        for (int j = 0; j < Viewer.BOARD_X; j++) {
-//            for (int i = 0; i < Viewer.BOARD_Y; i++) {
-//                if (board[i][j] instanceof WallCell) {
-//                    Tile tile = new Tile(i, j, TileType.BRICK_1);
-//                    tiles.add(tile);
-//                    continue;
-//                }
-//                if (board[i][j] instanceof EmptyCell) {
-//                    Tile tile = new Tile(i, j, TileType.GROUND_1);
-//                    tiles.add(tile);
-//                    continue;
-//                }
-//                if (board[i][j] instanceof HeroCell) {
-//                    Tile tile = new Tile(i, j, TileType.HERO, TileType.GROUND_1);
-//                    tiles.add(tile);
-//                    continue;
-//                }
-//                if (board[i][j] instanceof EnemySpiderCell) {
-//                    Tile tile = new Tile(i, j, TileType.ENEMY_1, TileType.GROUND_1);
-//                    tiles.add(tile);
-//                    continue;
-//                }
-//                if (board[i][j] instanceof DoorCell) {
-//                    Tile tile = new Tile(i, j, TileType.SPECIAL_1, TileType.GROUND_1);
-//                    tiles.add(tile);
-//                    continue;
-//                }
-//            }
-//        }
         return tiles;
     }
 

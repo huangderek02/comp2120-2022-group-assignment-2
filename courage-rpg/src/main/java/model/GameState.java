@@ -90,6 +90,7 @@ public class GameState {
                     }
                 }
             }
+            this.maps.add(cells);
         }
     }
 
@@ -277,10 +278,38 @@ public class GameState {
     public boolean useItem(Item item) {
         if (this.repository.containsKey(item)) {
             this.repository.put(item, this.repository.get(item) - 1);
+            if (this.repository.get(item).equals(0)) {
+                this.repository.remove(item);
+            }
             return true;
         } else {
             return false;
         }
+    }
+
+    /**
+     * Get the number of the given item
+     *
+     * @author Xianghao Wang
+     *
+     * @param item is the given item
+     * @return the number of the given item
+     * */
+    public int get(Item item) {
+        Integer count = this.repository.get(item);
+        return count == null ? -1 : count;
+    }
+
+    /**
+     * List all the items contained
+     *
+     * @author Xianghao Wang
+     *
+     * @return a list of all items contained
+     *
+     * */
+    public List<Item> listItems() {
+        return new LinkedList<>(this.repository.keySet());
     }
 
     /**

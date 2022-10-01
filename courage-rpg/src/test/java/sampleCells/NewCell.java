@@ -4,6 +4,10 @@ import engine.Cell;
 
 import java.util.List;
 
+/**
+ * Testing Class
+ * @author Rita Zhou
+ */
 public class NewCell extends Cell {
 
     @Override

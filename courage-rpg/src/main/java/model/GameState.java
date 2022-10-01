@@ -2,9 +2,11 @@ package model;
 
 import engine.Cell;
 import engine.GameObject;
+import engine.SceneObject;
 import javafx.scene.input.KeyCode;
 import model.cells.ActionCell;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -15,6 +17,7 @@ public class GameState {
     final private Queue<String> dialogs;
     final private List<ActionCell[][]> maps;
     final private Map<Item, Integer> repository;
+    final private GameObject gameObject;
     Location previousLoc = null;
     Location currentLoc = null;
 
@@ -27,6 +30,7 @@ public class GameState {
         this.dialogs = new LinkedList<>();
         this.maps = new ArrayList<>();
         this.repository = new HashMap<>();
+        this.gameObject = gameObject;
     }
 
     /**
@@ -143,6 +147,25 @@ public class GameState {
             return true;
         } else {
             return false;
+        }
+    }
+
+    /**
+     * Create a new cell instance based on its current location
+     * @param cellClass is the class object of the cell
+     * */
+    public ActionCell createCell(Class<Cell> cellClass) {
+        SceneObject sceneObject = gameObject.getSceneObject(currentLoc.level);
+        try {
+            return (ActionCell) sceneObject.build(cellClass);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
 

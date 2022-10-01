@@ -3,10 +3,8 @@ package GUI;
 import engine.GameObject;
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
-import javafx.event.Event;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-
 import java.io.File;
 
 /**
@@ -33,15 +31,12 @@ public class Controller {
         viewer.makeText();
         viewer.makeIcon();
         viewer.makeButton();
+        viewer.makeHPBar();
+        viewer.makeDialog();
+//        viewer.initDialog();
     }
 
     public void handleKeyBoard() {
-        // TODO
-        viewer.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                System.out.println(event.toString());
-            }
-        });
+        viewer.getScene().setOnKeyPressed(event -> System.out.println(event.toString()));
     }
 }

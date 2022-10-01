@@ -46,9 +46,4 @@ public class Board extends StackPane {
             board.getChildren().add(tile);
         }
     }
-
-    //TODO add repository update image method
-    // TODO add moeny update image method
-    // TODO add hp, mp update image method
-    // TODO add dialog update image method
 }

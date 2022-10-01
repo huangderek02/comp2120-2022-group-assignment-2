@@ -1,23 +1,23 @@
 package GUI;
 
-import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 /**
+ * Make methods are the initialization methods and should be called in the
+ * init stage of controller only. Update methods are the methods that update
+ * the GUI components and should be called in the update stage of controller.
  * @author Xin Lu
  */
 public class Viewer {
@@ -32,6 +32,13 @@ public class Viewer {
     public static final int BOARD_WIDTH = (int)(TILE_SIZE*TILE_FACTOR);
     public static final int BOARD_HEIGHT = (int)(TILE_SIZE*7);
     public static final String URI_BASE = "src/main/resources/";
+    public static final int ITEM_X_BASE = 310;
+    public static final int ITEM_Y_BASE = 540;
+    public static final int ITEM_X_SIZE = 85;
+    public static final int ITEM_Y_SIZE = 58;
+    public static final int ITEM_X = 5;
+    public static final int BAR_LEN = 150;
+    public static final int BAR_HEIGHT = 15;
 
     // Load font
     public Font pixelFont = null;
@@ -49,16 +56,17 @@ public class Viewer {
     private final Group gameWrapper = new Group();
     private final Group board = new Group();
     private final Group dicePieces = new Group();
-    private final Group text = new Group();
-
     private final Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT, Color.BLACK);
+    private final Text moneyText = new Text("0");
+    private final ImageView HPImage = new ImageView(new File(URI_BASE + "ui/hpbar_1.png").toURI().toString());
+    private final ImageView MPImage = new ImageView(new File(URI_BASE + "ui/hpbar_1.png").toURI().toString());
+    private final TextArea dialogText = new TextArea();
 
-//    public void init() {
-//        // Debug
-//        Board b = new Board();
-//        board.getChildren().addAll(b.board.getChildren());
-//        root.getChildren().add(board);
-//    }
+    private int itemIndex = 0;
+    private int money = 0;
+    private int hp = 100; // Initialized
+    private int mp = 100; // Initialized
+
 
     /**
      * Entry pointer for the game.
@@ -66,16 +74,14 @@ public class Viewer {
     public void start(Stage primaryStage) {
         primaryStage.setResizable(false);
         primaryStage.setTitle("Courage");
-//        Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
 
-//        Text t = new Text("Staffan");
-//        root.getChildren().add(t);
-
-        // Start the application
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
+    /**
+     * Create the static UI texts.
+     */
     public void makeText() {
         // text images
         ImageView text1 = new ImageView(new File(URI_BASE + "text/char_name.png").toURI().toString());
@@ -108,14 +114,14 @@ public class Viewer {
         text6.setLayoutY(593);
         root.getChildren().add(text6);
 
-        // text
-        Text t = new Text("0");
-        t.setFont(pixelFont);
-        t.setFill(Color.WHITE);
-        t.setLayoutX(635);
-        t.setLayoutY(520);
-        t.setTextAlignment(TextAlignment.RIGHT);
-        root.getChildren().add(t);
+        // money text
+        moneyText.setText(money + "");
+        moneyText.setFont(pixelFont);
+        moneyText.setFill(Color.WHITE);
+        moneyText.setLayoutX(635);
+        moneyText.setLayoutY(520);
+        moneyText.setTextAlignment(TextAlignment.RIGHT);
+        root.getChildren().add(moneyText);
     }
 
     public void makeButton() {
@@ -147,6 +153,120 @@ public class Viewer {
         root.getChildren().add(money);
     }
 
+    public void makeHPBar() {
+        HPImage.setLayoutX(130);
+        HPImage.setLayoutY(562);
+        HPImage.setFitWidth(BAR_LEN);
+        HPImage.setFitHeight(BAR_HEIGHT);
+        root.getChildren().add(HPImage);
+
+        MPImage.setLayoutX(130);
+        MPImage.setLayoutY(615);
+        MPImage.setFitWidth(BAR_LEN);
+        MPImage.setFitHeight(BAR_HEIGHT);
+        root.getChildren().add(MPImage);
+    }
+
+    /**
+     * Create the dialog box and set the style properties.
+     */
+    public void makeDialog() {
+        dialogText.setLayoutX(732);
+        dialogText.setLayoutY(120);
+        dialogText.setPrefWidth(270);
+        dialogText.setPrefHeight(340);
+        dialogText.setFont(pixelFont);
+        dialogText.setEditable(false);
+        dialogText.setWrapText(true);
+        dialogText.setText("");
+
+        dialogText.setStyle("-fx-text-fill: #ffffff; -fx-font-size: 20px;");
+        dialogText.getStylesheets().add(getClass().getResource("/dialog.css").toExternalForm());
+        root.getChildren().add(dialogText);
+    }
+
+    /**
+     * Create a new dialog with the given text.
+     * @param text The text to display in the dialog.
+     */
+    public void initDialog(String text) {
+        dialogText.setText(text);
+    }
+
+    /**
+     * Add a new line to the current dialog.
+     * @param text The text to add to the dialog.
+     */
+    public void appendDialog(String text) {
+        dialogText.appendText("\n" + text);
+    }
+
+    /**
+     * Set the HP and MP bars according to current HP and MP.
+     */
+    public void updateHPMPBar() {
+        // hp
+        if (hp < 80 && hp >= 60) {
+            HPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_2.png").toURI().toString()));
+        }
+        if (hp > 40 && hp < 60) {
+            HPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_3.png").toURI().toString()));
+        }
+        if (hp > 20 && hp <= 40) {
+            HPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_4.png").toURI().toString()));
+        }
+        if (hp >= 10 && hp <= 20) {
+            HPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_5.png").toURI().toString()));
+        }
+        if (hp < 10 && hp >= 0) {
+            HPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_6.png").toURI().toString()));
+        }
+
+        // mp
+        if (mp < 80 && mp >= 60) {
+            MPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_2.png").toURI().toString()));
+        }
+        if (mp > 40 && mp < 60) {
+            MPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_3.png").toURI().toString()));
+        }
+        if (mp > 20 && mp <= 40) {
+            MPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_4.png").toURI().toString()));
+        }
+        if (mp >= 10 && mp <= 20) {
+            MPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_5.png").toURI().toString()));
+        }
+        if (mp < 10 && mp >= 0) {
+            MPImage.setImage(new Image(new File(URI_BASE + "ui/hpbar_6.png").toURI().toString()));
+        }
+    }
+
+    /**
+     * Update the repository with the given item.
+     * @param item The item to be added to the repository.
+     */
+    public void addItem(Item item) {
+        if (itemIndex < 10) {
+            ImageView itemImage = new ImageView(new File(URI_BASE + "textures/" + item.toString()).toURI().toString());
+            itemImage.setLayoutX(Item.getItemX(itemIndex));
+            itemImage.setLayoutY(Item.getItemY(itemIndex));
+            root.getChildren().add(itemImage);
+            itemIndex++;
+        }
+    }
+
+    /**
+     * Update the money text. Maximum money is 99999.
+     * @param amount The amount to be added to the money.
+     */
+    public void addMoney(int amount) {
+        if (money + amount <= 99999) {
+            money += amount;
+            moneyText.setText(money + "");
+        } else {
+            moneyText.setText("99999");
+        }
+    }
+
     public Group getRoot() {
         return root;
     }
@@ -169,5 +289,21 @@ public class Viewer {
 
     public Scene getScene() {
         return scene;
+    }
+
+    public void setItemIndex(int itemIndex) {
+        this.itemIndex = itemIndex;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setMp(int mp) {
+        this.mp = mp;
     }
 }

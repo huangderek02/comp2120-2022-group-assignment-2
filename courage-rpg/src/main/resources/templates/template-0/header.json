@@ -6,14 +6,19 @@
 
   "properties": {
     "title": "Courage",
-    "camera": "0:(1,1)"
+    "camera": "0&1&1",
+    "repository": "KEYx3"
   },
   "rendering": {
-    "-": "assets/1.jpg",
-    "*": "assets/2.jpg"
+    "-": "textures/brick_1.jpg",
+    "*": "textures/groud_1.jpg",
+    "^": "textures/stairs_up.png",
+    "v": "textures/stairs_down.png"
   },
   "symbols": {
     "-": "model.cells.WallCell",
-    "*": "model.cells.EmptyCell"
+    "*": "model.cells.EmptyCell",
+    "^": "model.cells.PlaceHolder",
+    "v": "model.cells.PlaceHolder"
   }
 }

@@ -5,15 +5,14 @@ import model.GameState;
 
 import java.util.List;
 
-public class WallCell extends ActionCell {
+public class EmptyCell extends ActionCell {
     @Override
     public Cell build(List<String> arguments) {
-        return new WallCell();
+        return new EmptyCell();
     }
-
 
     @Override
     public void act(GameState state) {
-        state.moveBack();
+
     }
 }

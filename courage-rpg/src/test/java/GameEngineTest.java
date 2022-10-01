@@ -22,11 +22,11 @@ import static org.junit.Assert.*;
  * @author Rita Zhou
  * This is the test for the GameEngine
  * We are mainly test three method in the GameEngine: parseArgument,
- * getProperty, and getBuildArguments.
- * As long as we can run these three method, then we can say that
- * we build the game engine correctly. Because these three method
- * used all functions in the GameEngine and return the current
- * arguments we required.
+ * getProperty, and getBuildArguments, getCellClassObj.
+ * As long as we can run these methods, then we can say that we
+ * build the game engine correctly. Because these methods used
+ * all functions in the GameEngine and return the current arguments
+ * we required.
  */
 public class GameEngineTest extends ApplicationTest {
     /**
@@ -186,6 +186,31 @@ public class GameEngineTest extends ApplicationTest {
 
         assertNull(sceneObject1.getBuildArguments(SampleCell.class));
         assertNull(sceneObject2.getBuildArguments(SampleCell.class));
+    }
+
+    /**
+     * @author Rita Zhou
+     */
+    @Test (timeout = 1000)
+    public void testGetCellClassObj() throws IOException, URISyntaxException, ClassNotFoundException {
+        GameObject gameObject = GameEngine.loadGame("template-0/header.json");
+
+        SceneObject sceneObject1 = gameObject.getSceneObject(0);
+        SceneObject sceneObject2 = gameObject.getSceneObject(1);
+
+        assertEquals(EmptyCell.class, sceneObject1.getCellClassObj(2, 1));
+        assertEquals(WallCell.class, sceneObject1.getCellClassObj(4, 2));
+        assertEquals(EmptyCell.class, sceneObject1.getCellClassObj(3, 3));
+        assertEquals(WallCell.class, sceneObject1.getCellClassObj(0, 0));
+        assertEquals(sampleCells.SampleCell.class, sceneObject1.getCellClassObj(4, 3));
+        assertEquals(NewCell.class, sceneObject1.getCellClassObj(0, 1));
+
+        assertEquals(EmptyCell.class, sceneObject2.getCellClassObj(1, 3));
+        assertEquals(WallCell.class, sceneObject2.getCellClassObj(0, 4));
+        assertEquals(EmptyCell.class, sceneObject2.getCellClassObj(0, 0));
+        assertEquals(WallCell.class, sceneObject2.getCellClassObj(4, 4));
+        assertEquals(sampleCells.SampleCell.class, sceneObject2.getCellClassObj(3, 2));
+        assertEquals(NewCell.class, sceneObject2.getCellClassObj(2, 1));
     }
 
     public static class SampleCell extends Cell {

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This is the game object for the game engine called engineV2
+ * This is the game object for game engine V2
  *
  * @author Xianghao Wang
  * */
@@ -59,7 +59,7 @@ public class GameObject {
      *
      * @author Xianghao Wang
      *
-     * @param idx is the index of the map
+     * @param idx is the index of a map
      * @return the game map
      * */
     public Cell[][] getMap(int idx) {

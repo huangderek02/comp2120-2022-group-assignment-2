@@ -2,13 +2,14 @@ package model.cells;
 
 import engineV2.Cell;
 import model.GameState;
+import model.Location;
 
 import java.util.List;
 
-public class WallCell extends ActionCell {
+public class KeyCell extends ActionCell {
     @Override
     public Cell build(List<String> arguments) {
-        return new WallCell();
+        return this;
     }
 
     @Override
@@ -16,9 +17,10 @@ public class WallCell extends ActionCell {
         return null;
     }
 
-
     @Override
     public void act(GameState state) {
-        state.moveBack();
+        state.addItem(GameState.Item.KEY);
+        Location loc = state.getCurrentLocation();
+        state.getMap(loc.level)[loc.row][loc.col] = new EmptyCell();
     }
 }

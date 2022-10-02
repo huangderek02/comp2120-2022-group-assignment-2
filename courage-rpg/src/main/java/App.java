@@ -1,4 +1,4 @@
-import GUI.Main;
+import GUIv2.Main;
 import engine.GameEngine;
 import javafx.application.Application;
 import javafx.scene.Group;

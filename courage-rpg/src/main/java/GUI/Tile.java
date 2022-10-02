@@ -1,9 +1,12 @@
 package GUI;
 
-import engine.Cell;
+import GUIv2.Layout;
+import GUIv2.TileType;
+import engineV2.Cell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import model.cells.*;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,16 +32,13 @@ public class Tile extends StackPane {
     static List<Tile> convertTiles(Cell[][] board) {
 
         List<Tile> tiles = new ArrayList<>();
-        for (int row = 0; row < Viewer.BOARD_Y; row ++) {
-            for (int col = 0; col < Viewer.BOARD_X; col ++) {
+        for (int row = 0; row < GUI.Viewer.BOARD_Y; row ++) {
+            for (int col = 0; col < GUI.Viewer.BOARD_X; col ++) {
                 if (board[row][col] instanceof WallCell) {
                     Tile tile = new Tile(col, row, TileType.BRICK_1);
                     tiles.add(tile);
                 } else if (board[row][col] instanceof EmptyCell) {
                     Tile tile = new Tile(col, row, TileType.GROUND_1);
-                    tiles.add(tile);
-                }else if (board[row][col] instanceof EnemySpiderCell) {
-                    Tile tile = new Tile(col, row, TileType.ENEMY_1, TileType.GROUND_1);
                     tiles.add(tile);
                 } else if (board[row][col] instanceof DoorCell) {
                     Tile tile = new Tile(col, row, TileType.SPECIAL_1, TileType.GROUND_1);
@@ -81,10 +81,10 @@ public class Tile extends StackPane {
         this.board_y = getPixel_y(y);
         this.tileType = tileType;
 
-        ImageView cellBackground = new ImageView(new File(Viewer.URI_BASE + "textures/" + tileType).toURI().toString());
+        ImageView cellBackground = new ImageView(new File(GUI.Viewer.URI_BASE + "textures/" + tileType).toURI().toString());
         getChildren().add(cellBackground);
-        cellBackground.setFitWidth(Viewer.TILE_SIZE);
-        cellBackground.setFitHeight(Viewer.TILE_SIZE);
+        cellBackground.setFitWidth(GUI.Viewer.TILE_SIZE);
+        cellBackground.setFitHeight(GUI.Viewer.TILE_SIZE);
         setLayoutX(board_x);
         setLayoutY(board_y);
     }
@@ -96,20 +96,20 @@ public class Tile extends StackPane {
         this.board_x = getPixel_x(x);
         this.board_y = getPixel_y(y);
         this.background = background;
-        ImageView stuffBackground = new ImageView(new File(Viewer.URI_BASE + "textures/" + background.toString()).toURI().toString());
-        stuffBackground.setFitWidth(Viewer.TILE_SIZE);
-        stuffBackground.setFitHeight(Viewer.TILE_SIZE);
+        ImageView stuffBackground = new ImageView(new File(GUI.Viewer.URI_BASE + "textures/" + background.toString()).toURI().toString());
+        stuffBackground.setFitWidth(GUI.Viewer.TILE_SIZE);
+        stuffBackground.setFitHeight(GUI.Viewer.TILE_SIZE);
         getChildren().add(stuffBackground);
 
-        ImageView cellBackground = new ImageView(new File(Viewer.URI_BASE + "textures/" + tileType.toString()).toURI().toString());
+        ImageView cellBackground = new ImageView(new File(GUI.Viewer.URI_BASE + "textures/" + tileType.toString()).toURI().toString());
         getChildren().add(cellBackground);
-        ImageView cellForeground = new ImageView(new File(Viewer.URI_BASE + "textures/" + tileType).toURI().toString());
+        ImageView cellForeground = new ImageView(new File(GUI.Viewer.URI_BASE + "textures/" + tileType).toURI().toString());
         getChildren().add(cellForeground);
 
-        cellForeground.setFitWidth(Viewer.TILE_SIZE);
-        cellForeground.setFitHeight(Viewer.TILE_SIZE);
-        cellBackground.setFitWidth(Viewer.TILE_SIZE);
-        cellBackground.setFitHeight(Viewer.TILE_SIZE);
+        cellForeground.setFitWidth(GUI.Viewer.TILE_SIZE);
+        cellForeground.setFitHeight(GUI.Viewer.TILE_SIZE);
+        cellBackground.setFitWidth(GUI.Viewer.TILE_SIZE);
+        cellBackground.setFitHeight(GUI.Viewer.TILE_SIZE);
         setLayoutX(board_x);
         setLayoutY(board_y);
     }
@@ -123,7 +123,7 @@ public class Tile extends StackPane {
      * @return x absolute coordinate in pixels on the board
      */
     static public int getPixel_x(int x_coordinate) {
-        return (int) (Viewer.BOARD_X_OFFSET + Math.ceil(x_coordinate * Viewer.TILE_SIZE));
+        return (int) (GUI.Viewer.BOARD_X_OFFSET + Math.ceil(x_coordinate * GUI.Viewer.TILE_SIZE));
     }
 
     /**
@@ -131,6 +131,6 @@ public class Tile extends StackPane {
      * @return y absolute coordinate in pixels on the board
      */
     static public int getPixel_y(int y_coordinate) {
-        return (int) (Viewer.BOARD_Y_OFFSET + Math.ceil(y_coordinate * Viewer.TILE_SIZE));
+        return (int) (GUI.Viewer.BOARD_Y_OFFSET + Math.ceil(y_coordinate * Layout.TILE_SIZE));
     }
 }

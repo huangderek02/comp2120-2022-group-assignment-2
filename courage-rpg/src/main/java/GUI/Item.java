@@ -5,8 +5,8 @@ package GUI;
  * @author Xin Lu
  */
 public enum Item {
-    WATER("water.png"),
-    KEY("key.png");
+    WATER("water"),
+    KEY("key");
 
     private final String fileName;
 

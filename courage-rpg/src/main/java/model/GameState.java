@@ -1,12 +1,10 @@
 package model;
 
-import engine.Cell;
-import engine.GameObject;
-import engine.SceneObject;
+import engineV2.Cell;
+import engineV2.GameObject;
 import javafx.scene.input.KeyCode;
 import model.cells.ActionCell;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -23,6 +21,10 @@ public class GameState {
     final private GameObject gameObject;
     Location previousLoc = null;
     Location currentLoc = null;
+    public int hp;
+    public int money;
+
+    public boolean isVictory = false;
 
 
     /**
@@ -50,6 +52,7 @@ public class GameState {
        loadMaps();
        loadRepository();
        loadLocation();
+       loadNumericalStates();
     }
 
     /**
@@ -58,7 +61,7 @@ public class GameState {
      * @author Xianghao Wang
      * */
     private void loadDialogs() {
-        String str = gameObject.getProperty("dialogs");
+        String str = gameObject.getState("dialogs");
         if (str == null) return;
 
         String[] tokens = str.split("&");
@@ -73,24 +76,15 @@ public class GameState {
      * @author Xianghao Wang
      * */
     private void loadMaps() {
-        for (SceneObject sceneObject : gameObject.getSceneObjectList()) {
-            ActionCell[][] cells = new ActionCell[sceneObject.getRows()][sceneObject.getCols()];
-            for (int row = 0; row < cells.length; row ++) {
-                for (int col = 0; col < cells[0].length; col ++) {
-                    try {
-                        cells[row][col] = (ActionCell) sceneObject.build(sceneObject.getCellClassObj(row, col));
-                    } catch (NoSuchMethodException e) {
-                        throw new RuntimeException(e);
-                    } catch (InvocationTargetException e) {
-                        throw new RuntimeException(e);
-                    } catch (InstantiationException e) {
-                        throw new RuntimeException(e);
-                    } catch (IllegalAccessException e) {
-                        throw new RuntimeException(e);
-                    }
+        for (int i = 0; i < gameObject.getMapCount(); i ++) {
+            Cell[][] rawMap = gameObject.getMap(i);
+            ActionCell[][] map = new ActionCell[rawMap.length][rawMap[0].length];
+            for (int row = 0; row < map.length; row ++) {
+                for (int col = 0; col < map[0].length; col ++) {
+                    map[row][col] = (ActionCell) rawMap[row][col];
                 }
             }
-            this.maps.add(cells);
+            this.maps.add(map);
         }
     }
 
@@ -101,11 +95,11 @@ public class GameState {
      * @author Xianghao Wang
      * */
     private void loadRepository() {
-        String str = gameObject.getProperty("repository");
+        String str = gameObject.getState("repository");
         if (str == null) return;
         String[] tokens = str.split("&");
         for (String token : tokens) {
-            String[] pieces = token.split("x");
+            String[] pieces = token.split("\\*");
             String itemName = pieces[0];
             String number = pieces[1];
             Item item = switch (itemName) {
@@ -125,7 +119,7 @@ public class GameState {
      * @author Xianghao Wang
      * */
     private void loadLocation() {
-        String str = gameObject.getProperty("camera");
+        String str = gameObject.getState("location");
         if (str == null) return;
         String[] tokens = str.split("&");
         int level = Integer.parseInt(tokens[0]);
@@ -135,12 +129,46 @@ public class GameState {
     }
 
     /**
+     * Load numerical states
+     *
+     * @author Xianghao Wang
+     * */
+    private void loadNumericalStates() {
+        this.hp = Integer.parseInt(gameObject.getState("hp"));
+        this.money = Integer.parseInt(gameObject.getState("money"));
+    }
+
+
+    /**
+     * Get HP value
+     *
+     * @author Xianghao Wang
+     *
+     * @return the HP value
+     * */
+    public int getHP() {
+        return this.hp;
+    }
+
+    /**
+     * Get money value
+     *
+     * @author Xianghao Wang
+     *
+     * @return the money value
+     * */
+    public int getMoney() {
+        return this.money;
+    }
+
+    /**
      * Handle a key and change state
      *
      * @author Xianghao Wang
      *
      * @param key is the key listened from keyboard
      * */
+    @Deprecated
     public void handle(KeyCode key) {
         Location newLoc = switch (key) {
             case W -> new Location(currentLoc.level, currentLoc.row - 1, currentLoc.col);
@@ -162,6 +190,95 @@ public class GameState {
         moveTo(newLoc);
         ActionCell cell = getMap(newLoc.level)[newLoc.row][newLoc.col];
         cell.act(this);
+    }
+
+    /**
+     * Handle the up movement
+     *
+     * @author Xianghao Wang
+     * */
+    public void handleMoveUp() {
+        Location newLocation = new Location(currentLoc.level, currentLoc.row - 1, currentLoc.col);
+        if (!checkBoundary(newLocation)) return;
+
+        // Change location
+        moveTo(newLocation);
+
+        // Trigger cell's action
+        getCell(newLocation).act(this);
+    }
+
+    /**
+     * Handle the down movement
+     *
+     * @author Xianghao Wang
+     * */
+    public void handleMoveDown() {
+        Location newLocation = new Location(currentLoc.level, currentLoc.row + 1, currentLoc.col);
+        if (!checkBoundary(newLocation)) return;
+
+        // Change location
+        moveTo(newLocation);
+
+        // Trigger cell's action
+        getCell(newLocation).act(this);
+    }
+
+    /**
+     * Handle the left movement
+     *
+     * @author Xianghao Wang
+     * */
+    public void handleMoveLeft() {
+        Location newLocation = new Location(currentLoc.level, currentLoc.row, currentLoc.col - 1);
+        if (!checkBoundary(newLocation)) return;
+
+        // Change location
+        moveTo(newLocation);
+
+        // Trigger cell's action
+        getCell(newLocation).act(this);
+    }
+
+    /**
+     * Handle the right movement
+     *
+     * @author Xianghao Wang
+     * */
+    public void handleMoveRight() {
+        Location newLocation = new Location(currentLoc.level, currentLoc.row, currentLoc.col + 1);
+        if (!checkBoundary(newLocation)) return;
+
+        // Change location
+        moveTo(newLocation);
+
+        // Trigger cell's action
+        getCell(newLocation).act(this);
+    }
+
+    /**
+     * Get the cell at the given location
+     *
+     * @author Xianghao Wang
+     *
+     * @param location is the given location
+     * @return is the cell at the location
+     * */
+    public ActionCell getCell(Location location) {
+        return this.getMap(location.level)[location.row][location.col];
+    }
+
+    /**
+     * Check whether a location is out of map
+     *
+     * @author Xianghao Wang
+     *
+     * @param location is to be checked
+     * @return true if it is in the map; otherwise false
+     * */
+    public boolean checkBoundary(Location location) {
+        return location.row >= 0 && location.row < getMap(location.level).length
+                && location.col >= 0 && location.col < getMap(location.level)[0].length;
     }
 
     /**
@@ -244,6 +361,10 @@ public class GameState {
         return this.maps.get(this.currentLoc.level);
     }
 
+    public int getMapCount() {
+        return this.maps.size();
+    }
+
     /**
      * Get the overall game state
      *
@@ -309,30 +430,15 @@ public class GameState {
      *
      * */
     public List<Item> listItems() {
-        return new LinkedList<>(this.repository.keySet());
+        List<Item> ret = new ArrayList<>();
+        for (Item item : this.repository.keySet()) {
+            for (int i = 0; i < this.repository.get(item); i ++) {
+                ret.add(item);
+            }
+        }
+        return ret;
     }
 
-    /**
-     * Create a new cell instance based on its current location
-     *
-     * @author Xianghao Wang
-     *
-     * @param cellClass is the class object of the cell
-     * */
-    public ActionCell createCell(Class cellClass) {
-        SceneObject sceneObject = gameObject.getSceneObject(currentLoc.level);
-        try {
-            return (ActionCell) sceneObject.build(cellClass);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     /**
      * Represents the game sign

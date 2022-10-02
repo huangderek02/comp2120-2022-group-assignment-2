@@ -6,6 +6,8 @@ import model.Location;
 
 import java.util.List;
 
+
+//AKA stairs
 public class PortalCell extends ActionCell {
     private Location destination;
     public boolean isUp;

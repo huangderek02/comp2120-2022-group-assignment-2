@@ -19,7 +19,7 @@ public class EnemyCell extends ActionCell {
 
     @Override
     public List<String> export() {
-        return null;
+        return List.of(String.valueOf(hp));
     }
 
     @Override

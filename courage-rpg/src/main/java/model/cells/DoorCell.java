@@ -15,7 +15,7 @@ public class DoorCell extends ActionCell {
 
     @Override
     public List<String> export() {
-        return null;
+        return List.of();
     }
 
     @Override

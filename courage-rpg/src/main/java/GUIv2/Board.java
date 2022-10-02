@@ -47,6 +47,8 @@ public class Board extends Group {
         } else if (cell instanceof NPCCell npcCell) {
             String name = "npc" + npcCell.id;
             ret = new Tile(col, row, gameObject.getImage(name), gameObject.getImage("ground"));
+        } else if (cell instanceof MerchantCell merchantCell) {
+            ret = new Tile(col, row, gameObject.getImage("merchant"), gameObject.getImage("ground"));
         }
 
         return ret;

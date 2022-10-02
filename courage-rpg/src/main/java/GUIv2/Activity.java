@@ -1,5 +1,6 @@
 package GUIv2;
 
+import engineV2.GameEngine;
 import engineV2.GameObject;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
@@ -8,6 +9,9 @@ import javafx.stage.Stage;
 import model.GameState;
 import model.Location;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +31,8 @@ public class Activity {
         this.viewer = new Viewer(scene.getRoot(), gameObject, this);
     }
 
-    public void start() {
+    public void start() throws IOException, URISyntaxException {
+//        GameEngine.saveGameObject("save1", gameState.saveGameObject());
         viewer.init();
         updateView();
         this.scene.setOnKeyPressed(this::handleKeyboard);

@@ -2,6 +2,7 @@ package engineV2;
 
 import javafx.scene.image.Image;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,9 +12,11 @@ import java.util.Map;
  * @author Xianghao Wang
  * */
 public class GameObject {
-    final private Map<String, Image> imageDomain;
-    final private Map<String, String> states;
-    final private List<Cell[][]> maps;
+    final public Map<String, Image> imageDomain;
+    final public Map<String, String> states;
+    final public List<Cell[][]> maps;
+
+    final public Map<String, String> rawImageDomain;
 
     /**
      * Construct a game object
@@ -28,6 +31,7 @@ public class GameObject {
         this.imageDomain = imageDomain;
         this.states = states;
         this.maps = maps;
+        this.rawImageDomain = new HashMap<>();
     }
 
     /**

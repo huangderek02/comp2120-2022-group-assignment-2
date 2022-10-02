@@ -49,7 +49,6 @@ public class GameEngine {
         Map<String, String> states = loadStates(headerJSON.getJSONObject("states"));
         Map<String, Image> imageDomain = loadImageDomain(headerJSON.getJSONObject("image-domain"));
         List<Cell[][]> maps = new ArrayList<>();
-        List<Pair<Integer, Integer>> dimensions = new ArrayList<>();
 
         // Iterate on each scene and create scene
         for (Object sceneNameObj : headerJSON.getJSONArray("scenes")) {
@@ -57,10 +56,9 @@ public class GameEngine {
             JSONObject sceneJSON = getJSONObjection(getResourcePath(sceneName).toString());
             Map<String, String> sceneLiterals = loadLiterals(sceneJSON.getJSONObject("literals"));
             maps.add(compileScene(sceneJSON.getJSONObject("build-script"), overrideLiterals(sceneLiterals, literals)));
-            dimensions.add(loadDimension(sceneJSON.getJSONObject("dimension")));
         }
 
-        return null;
+        return new GameObject(imageDomain, states, maps);
     }
 
     public static Map<String, String> loadLiterals(JSONObject json) {

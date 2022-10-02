@@ -34,14 +34,19 @@
     "wall": "model.cells.WallCell",
     "portal-up": "model.cells.PortalCell&up",
     "portal-down": "model.cells.PortalCell&down",
+    "enemy": "model.cells.EnemyCell",
+    "water": "model.cells.WaterCell",
+    "key": "model.cells.KeyCell",
+    "door": "model.cells.DoorCell",
+    "npc": "model.cells.NPCCell",
     "birth-0": "5&5",
-    "birth-1": "5&5"
+    "birth-1": "6&5"
   },
   "states": {
     "title": "Courage",
-    "location": "0&2&2",
+    "location": "0&6&0",
     "dialogs": "[System] Game Started",
-    "hp": "50",
+    "hp": "100",
     "attack": "5",
     "money": "15",
     "repository": "KEY*1"

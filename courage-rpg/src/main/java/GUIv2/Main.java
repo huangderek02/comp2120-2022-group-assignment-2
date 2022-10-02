@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Group rootView = new Group();
         Scene scene = new Scene(rootView, Layout.VIEWER_WIDTH, Layout.VIEWER_HEIGHT, Color.BLACK);
-        GameObject gameObject = GameEngine.loadGameObject("templates/template-1/header.json");
+        GameObject gameObject = GameEngine.loadGameObject("templates/game-template/header.json");
 
         stage.setScene(scene);
         stage.setTitle(gameObject.getState("title"));

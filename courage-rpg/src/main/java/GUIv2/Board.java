@@ -36,8 +36,17 @@ public class Board extends Group {
         } else if (cell instanceof PortalCell portalCell) {
             ret = new Tile(col, row, gameObject.getImage((portalCell.isUp ? "stairs_up" : "stairs_down")), gameObject.getImage("ground"));
         } else if (cell instanceof EnemyCell enemyCell) {
-            int hp = Math.max(10, enemyCell.hp / 10);
+            int hp = Math.min(10, enemyCell.hp / 10 + 1);
             ret = new Tile(col, row, gameObject.getImage("enemy" + hp), gameObject.getImage("ground"));
+        } else if (cell instanceof WaterCell) {
+            ret = new Tile(col, row, gameObject.getImage("water"), gameObject.getImage("ground"));
+        } else if (cell instanceof KeyCell) {
+            ret = new Tile(col, row, gameObject.getImage("key"), gameObject.getImage("ground"));
+        } else if (cell instanceof DoorCell) {
+            ret = new Tile(col, row, gameObject.getImage("door"), gameObject.getImage("ground"));
+        } else if (cell instanceof NPCCell npcCell) {
+            String name = "npc" + npcCell.id;
+            ret = new Tile(col, row, gameObject.getImage(name), gameObject.getImage("ground"));
         }
 
         return ret;

@@ -6,8 +6,7 @@ import model.Location;
 
 import java.util.List;
 
-public class DoorCell extends ActionCell {
-
+public class KeyCell extends ActionCell {
     @Override
     public Cell build(List<String> arguments) {
         return this;
@@ -20,11 +19,8 @@ public class DoorCell extends ActionCell {
 
     @Override
     public void act(GameState state) {
-        if (state.useItem(GameState.Item.KEY)) {
-            Location loc = state.getCurrentLocation();
-            state.getMap(loc.level)[loc.row][loc.col] = new EmptyCell();
-        } else {
-            state.moveBack();
-        }
+        state.addItem(GameState.Item.KEY);
+        Location loc = state.getCurrentLocation();
+        state.getMap(loc.level)[loc.row][loc.col] = new EmptyCell();
     }
 }

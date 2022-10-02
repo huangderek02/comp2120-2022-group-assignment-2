@@ -62,6 +62,11 @@ public class Activity {
         viewer.updateHero(location.row, location.col);
         viewer.updateItems(getItemList());
         stage.setTitle(gameObject.getState("title") + " - level " + (location.level + 1));
+
+        String s = null;
+        while ((s = gameState.pollDialog()) != null) {
+            viewer.appendDialog(s);
+        }
     }
 
     public List<ItemGUI> getItemList() {

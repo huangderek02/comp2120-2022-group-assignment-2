@@ -43,7 +43,7 @@ public class Viewer {
     {
         try {
             System.out.println(System.getProperty("user.dir"));
-            pixelFont = Font.loadFont(new FileInputStream(Layout.URI_BASE + "Minecraft.ttf"), 25);
+            pixelFont = Font.loadFont(new FileInputStream(Layout.URI_BASE + "Minecraft.ttf"), 13);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -142,6 +142,14 @@ public class Viewer {
         HPImage.setFitWidth(Layout.BAR_LEN);
         HPImage.setFitHeight(Layout.BAR_HEIGHT);
         rootView.getChildren().add(HPImage);
+    }
+
+    /**
+     * Add a new line to the current dialog.
+     * @param text The text to add to the dialog.
+     */
+    public void appendDialog(String text) {
+        dialogText.appendText("\n" + text);
     }
 
     public void makeDialog() {

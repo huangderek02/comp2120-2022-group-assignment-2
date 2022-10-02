@@ -1,6 +1,7 @@
 package GUIv2;
 
 import GUI.Controller;
+import GUI.Item;
 import engineV2.GameObject;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -19,6 +20,8 @@ import model.cells.ActionCell;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.Map;
 
 public class Viewer {
     private Group rootView;
@@ -32,6 +35,8 @@ public class Viewer {
     private final Text moneyText = new Text("0");
     private final ImageView HPImage = new ImageView(new File(Layout.URI_BASE + "ui/hpbar_1.png").toURI().toString());
     private final TextArea dialogText = new TextArea();
+    private final Group itemsView = new Group();
+    int itemIndex = 0;
     private Tile hero;
 
     public Font pixelFont = null;
@@ -60,8 +65,9 @@ public class Viewer {
         this.makeHPBar();
         this.makeDialog();
         this.makeIcon();
-//
+
         rootView.getChildren().add(board);
+        rootView.getChildren().add(itemsView);
     }
 
     public void makeButton() {
@@ -189,5 +195,27 @@ public class Viewer {
         rootView.getChildren().remove(hero);
         this.hero = new Tile(col, row, gameObject.getImage("hero"));
         rootView.getChildren().add(hero);
+    }/**
+     * Update the repository with the given item.
+     * @param item The item to be added to the repository.
+     */
+    public void addItem(ItemGUI item) {
+        if (itemIndex < 10) {
+            ImageView itemImage = new ImageView(gameObject.getImage(item.toString()));
+            itemImage.setLayoutX(Item.getItemX(itemIndex));
+            itemImage.setLayoutY(Item.getItemY(itemIndex));
+            itemsView.getChildren().add(itemImage);
+            itemIndex++;
+        }
     }
+
+    public void updateItems(List<ItemGUI> items) {
+        itemsView.getChildren().clear();
+        itemIndex = 0;
+        for (ItemGUI item: items) {
+            addItem(item);
+        }
+    }
+
+
 }

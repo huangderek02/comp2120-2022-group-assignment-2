@@ -36,8 +36,7 @@ public class Board extends Group {
             ret = new Tile(col, row, gameObject.getImage("wall"));
         } else if (cell instanceof EmptyCell) {
             ret = new Tile(col, row, gameObject.getImage("ground"));
-        } else if (cell instanceof PortalCell) {
-            PortalCell portalCell = (PortalCell) cell;
+        } else if (cell instanceof PortalCell portalCell) {
             System.out.println(portalCell.isUp ? "stairs_up" : "stairs_down");
             ret = new Tile(col, row, gameObject.getImage((portalCell.isUp ? "stairs_up" : "stairs_down")), gameObject.getImage("ground"));
         }

@@ -40,12 +40,6 @@ public class Tile extends StackPane {
                 } else if (board[row][col] instanceof EmptyCell) {
                     Tile tile = new Tile(col, row, TileType.GROUND_1);
                     tiles.add(tile);
-                } else if (board[row][col] instanceof HeroCell) {
-                    Tile tile = new Tile(col, row, TileType.HERO, TileType.GROUND_1);
-                    tiles.add(tile);
-                } else if (board[row][col] instanceof EnemySpiderCell) {
-                    Tile tile = new Tile(col, row, TileType.ENEMY_1, TileType.GROUND_1);
-                    tiles.add(tile);
                 } else if (board[row][col] instanceof DoorCell) {
                     Tile tile = new Tile(col, row, TileType.SPECIAL_1, TileType.GROUND_1);
                     tiles.add(tile);

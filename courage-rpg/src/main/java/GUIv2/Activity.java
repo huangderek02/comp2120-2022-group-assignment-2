@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 import model.GameState;
 import model.Location;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Activity {
     private GameObject gameObject;
@@ -52,9 +55,17 @@ public class Activity {
         viewer.updateBoard(gameState.getMap(gameState.getCurrentLocation().level));
         Location location = gameState.getCurrentLocation();
         viewer.updateHero(location.row, location.col);
+        viewer.updateItems(getItemList());
         stage.setTitle(gameObject.getState("title") + " - level " + (location.level + 1));
-
     }
 
-
+    public List<ItemGUI> getItemList() {
+        List<ItemGUI> ret = new ArrayList<>();
+        for (GameState.Item item : gameState.listItems()) {
+            for (int i = 0; i < gameState.get(item); i ++) {
+                ret.add(ItemGUI.convert(item));
+            }
+        }
+        return ret;
+    }
 }

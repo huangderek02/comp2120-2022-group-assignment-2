@@ -6,9 +6,10 @@ import model.GameState;
 import java.util.List;
 
 public class DoorCell extends ActionCell {
+
     @Override
     public Cell build(List<String> arguments) {
-        return new DoorCell();
+        return this;
     }
 
     @Override
@@ -18,7 +19,10 @@ public class DoorCell extends ActionCell {
 
     @Override
     public void act(GameState state) {
-//        state.getMap(state.getCurrentLocation().level)
-//                [state.getCurrentLocation().row][state.getCurrentLocation().col] = state.createCell(EmptyCell.class);
+        if (state.useItem(GameState.Item.KEY)) {
+
+        } else {
+
+        }
     }
 }

@@ -9,8 +9,8 @@ import javafx.stage.Stage;
 import model.GameState;
 import model.Location;
 
+import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +23,6 @@ public class Activity {
     private Scene scene;
     private Stage stage;
 
-    String GAME_TEMPLATE = "templates/template-1/header.json";
-
     public Activity(GameObject gameObject, Scene scene, Stage stage) {
         this.stage = stage;
         this.gameObject = gameObject;
@@ -33,7 +31,8 @@ public class Activity {
         this.viewer = new Viewer(scene.getRoot(), gameObject, this);
     }
 
-    public void start() {
+    public void start() throws IOException, URISyntaxException {
+//        GameEngine.saveGameObject("save1", gameState.saveGameObject());
         viewer.init();
         updateView();
         this.scene.setOnKeyPressed(this::handleKeyboard);
@@ -41,6 +40,7 @@ public class Activity {
     }
 
     public void handleKeyboard(KeyEvent keyEvent) {
+        System.out.println("key triggerd" + " " + keyEvent.getCode());
         switch (keyEvent.getCode()) {
             case W -> gameState.handleMoveUp();
             case S -> gameState.handleMoveDown();
@@ -51,17 +51,9 @@ public class Activity {
     }
 
     public void handleMouse(String buttonId, MouseEvent mouseEvent) {
-        if (buttonId.equals("new")) {
-            try {
-                loadGame(GAME_TEMPLATE);
-            } catch (Exception e) {
-                throw new RuntimeException();
-            }
-        }
         if (buttonId.equals("water")) {
             gameState.useItem(GameState.Item.HP_RECOVERY);
             gameState.hp += 10;
-            gameState.offerDialog("10 HP recoverd");
             if (gameState.hp > 100) gameState.hp = 100;
         }
         updateView();
@@ -74,14 +66,12 @@ public class Activity {
         Location location = gameState.getCurrentLocation();
         viewer.updateHero(location.row, location.col);
         viewer.updateItems(getItemList());
+        stage.setTitle(gameObject.getState("title") + " - level " + (location.level + 1));
 
-        // dialogs
-        String s;
+        String s = null;
         while ((s = gameState.pollDialog()) != null) {
             viewer.appendDialog(s);
         }
-
-        stage.setTitle(gameObject.getState("title") + " - level " + (location.level + 1));
     }
 
     public List<ItemGUI> getItemList() {
@@ -90,11 +80,5 @@ public class Activity {
                 ret.add(ItemGUI.convert(item));
         }
         return ret;
-    }
-
-    public void loadGame(String gameHeaderPath) throws URISyntaxException, IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        this.gameObject = GameEngine.loadGameObject(gameHeaderPath);
-        this.gameState = new GameState(gameObject);
-        this.updateView();
     }
 }

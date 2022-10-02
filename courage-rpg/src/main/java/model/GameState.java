@@ -8,7 +8,7 @@ import model.cells.ActionCell;
 import java.util.*;
 
 /**
- * This represents the whole state of the current game
+ * This represents the entire state of the current game
  *
  * @author Xianghao Wang
  * */
@@ -24,9 +24,11 @@ public class GameState {
     public int hp;
     public int money;
 
+    public boolean isVictory = false;
+
 
     /**
-     * Create the gamestate based on game object
+     * Create the gamestate based the game object passed into the gameObject argument
      *
      * @author Xianghao Wang
      *
@@ -435,6 +437,38 @@ public class GameState {
             }
         }
         return ret;
+    }
+
+    public GameObject saveGameObject() {
+        String locationStr = getCurrentLocation().level + "&" +
+                getCurrentLocation().row + "&" +
+                getCurrentLocation().col;
+        String hpStr = String.valueOf(getHP());
+        String moneyStr = String.valueOf(money);
+        String repoStr = "";
+        for (Item item : repository.keySet()) {
+            if (repoStr.length() != 0) {
+                repoStr += "&";
+            }
+            repoStr += item.toString() + "*" + repository.get(item);
+        }
+
+        // Save states
+        gameObject.states.put("location", locationStr);
+        gameObject.states.put("hp", hpStr);
+        gameObject.states.put("money", moneyStr);
+        gameObject.states.put("repository", repoStr);
+
+        // Save cells
+        for (int i = 0; i < getMapCount(); i ++) {
+            for (int row = 0; row < maps.get(i).length; row ++) {
+                for (int col = 0; col < maps.get(i)[row].length; col ++) {
+                    gameObject.maps.get(i)[row][col] = this.maps.get(i)[row][col];
+                }
+            }
+        }
+
+        return this.gameObject;
     }
 
 

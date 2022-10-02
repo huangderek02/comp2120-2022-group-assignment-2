@@ -1,11 +1,8 @@
 package GUIv2;
 
-import GUI.Viewer;
+import model.cells.EnemyCell;
 import engineV2.GameObject;
-import engineV2.Cell;
 import javafx.scene.Group;
-import javafx.scene.layout.StackPane;
-import model.GameState;
 import model.cells.*;
 
 import java.util.ArrayList;
@@ -37,8 +34,21 @@ public class Board extends Group {
         } else if (cell instanceof EmptyCell) {
             ret = new Tile(col, row, gameObject.getImage("ground"));
         } else if (cell instanceof PortalCell portalCell) {
-            System.out.println(portalCell.isUp ? "stairs_up" : "stairs_down");
             ret = new Tile(col, row, gameObject.getImage((portalCell.isUp ? "stairs_up" : "stairs_down")), gameObject.getImage("ground"));
+        } else if (cell instanceof EnemyCell enemyCell) {
+            int hp = Math.min(10, enemyCell.hp / 10 + 1);
+            ret = new Tile(col, row, gameObject.getImage("enemy" + hp), gameObject.getImage("ground"));
+        } else if (cell instanceof WaterCell) {
+            ret = new Tile(col, row, gameObject.getImage("water"), gameObject.getImage("ground"));
+        } else if (cell instanceof KeyCell) {
+            ret = new Tile(col, row, gameObject.getImage("key"), gameObject.getImage("ground"));
+        } else if (cell instanceof DoorCell) {
+            ret = new Tile(col, row, gameObject.getImage("door"), gameObject.getImage("ground"));
+        } else if (cell instanceof NPCCell npcCell) {
+            String name = "npc" + npcCell.id;
+            ret = new Tile(col, row, gameObject.getImage(name), gameObject.getImage("ground"));
+        } else if (cell instanceof MerchantCell merchantCell) {
+            ret = new Tile(col, row, gameObject.getImage("merchant"), gameObject.getImage("ground"));
         }
 
         return ret;

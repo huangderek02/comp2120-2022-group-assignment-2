@@ -1,0 +1,56 @@
+{
+  "scenes": [
+    "templates/game-template/level-0.json",
+    "templates/template-1/level-1.json"
+  ],
+  "image-domain": {
+    "grass": "textures/grass_1.jpg",
+    "wall": "textures/brick_1.jpg",
+    "ground": "textures/ground_1.jpg",
+    "stairs_up": "textures/stairs_up.png",
+    "stairs_down": "textures/stairs_down.png",
+    "metal": "textures/metal_1.jpg",
+    "door": "textures/door.png",
+    "hero": "textures/hero.png",
+    "npc2": "textures/npc_2.png",
+    "npc3": "textures/npc_3.png",
+    "npc4": "textures/npc_4.png",
+    "npc5": "textures/npc_5.png",
+    "enemy1": "textures/enemy_1.png",
+    "enemy2": "textures/enemy_2.png",
+    "enemy3": "textures/enemy_3.png",
+    "enemy4": "textures/enemy_4.png",
+    "enemy5": "textures/enemy_5.png",
+    "enemy6": "textures/enemy_6.png",
+    "enemy7": "textures/enemy_7.png",
+    "enemy9": "textures/enemy_9.png",
+    "enemy10": "textures/enemy_10.png",
+    "water": "textures/water.png",
+    "key": "textures/key.png",
+    "money": "textures/money.png",
+    "merchant": "textures/merchant.jpg"
+  },
+  "literals": {
+    "empty": "model.cells.EmptyCell",
+    "wall": "model.cells.WallCell",
+    "portal-up": "model.cells.PortalCell&up",
+    "portal-down": "model.cells.PortalCell&down",
+    "enemy": "model.cells.EnemyCell",
+    "water": "model.cells.WaterCell",
+    "key": "model.cells.KeyCell",
+    "door": "model.cells.DoorCell",
+    "npc": "model.cells.NPCCell",
+    "merchant": "model.cells.MerchantCell",
+    "birth-0": "5&5",
+    "birth-1": "6&5"
+  },
+  "states": {
+    "title": "Courage",
+    "location": "0&6&0",
+    "dialogs": "[System] Game Started",
+    "hp": "100",
+    "attack": "5",
+    "money": "15",
+    "repository": "KEY*1"
+  }
+}

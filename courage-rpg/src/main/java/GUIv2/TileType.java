@@ -1,6 +1,7 @@
 package GUIv2;
 
 /**
+ * All kinds of tiles. Each tile corresponds to a cell in the game engine.
  * @author Xin Lu
  */
 public enum TileType {

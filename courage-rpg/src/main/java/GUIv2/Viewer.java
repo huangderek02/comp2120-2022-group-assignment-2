@@ -1,28 +1,27 @@
 package GUIv2;
 
-import GUI.Controller;
 import GUI.Item;
 import engineV2.GameObject;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.cells.ActionCell;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * The viewer of the GUI. It will render the game on the screen.
+ * Also contains update viewer images methods.
+ * @author Xin Lu
+ */
 public class Viewer {
     private Group rootView;
     private GameObject gameObject;
@@ -39,6 +38,9 @@ public class Viewer {
     int itemIndex = 0;
     private Tile hero;
 
+    /**
+     * Load font from file.
+     */
     public Font pixelFont = null;
     {
         try {
@@ -49,12 +51,21 @@ public class Viewer {
         }
     }
 
+    /**
+     * Construct a viewer based on the root view, game object and the controller.
+     * @param rootViiew the root view of the viewer
+     * @param gameObject the game object that represents the whole game
+     * @param userInputDelegator the controller of the viewer
+     */
     public Viewer(Parent rootViiew, GameObject gameObject, Activity userInputDelegator) {
         this.rootView = (Group) rootViiew;
         this.gameObject = gameObject;
         this.userInputDelegator = userInputDelegator;
     }
 
+    /**
+     * Initialize the viewer.
+     */
     public void init() {
         // Make background
         ImageView background = new ImageView(new File(GUI.Viewer.URI_BASE + "textures/bg.png").toURI().toString());
@@ -70,6 +81,9 @@ public class Viewer {
         rootView.getChildren().add(itemsView);
     }
 
+    /**
+     * Initialize the buttons.
+     */
     public void makeButton() {
         ImageView save = new ImageView(new File(Layout.URI_BASE + "buttons/save.png").toURI().toString());
         save.setLayoutX(748);
@@ -97,7 +111,7 @@ public class Viewer {
     }
 
     /**
-     * Create the static UI texts.
+     * Initialize the static UI texts.
      */
     public void makeText() {
         // text images
@@ -136,6 +150,9 @@ public class Viewer {
         rootView.getChildren().add(moneyText);
     }
 
+    /**
+     * Initialize the HP bar.
+     */
     public void makeHPBar() {
         HPImage.setLayoutX(130);
         HPImage.setLayoutY(562);
@@ -144,7 +161,9 @@ public class Viewer {
         rootView.getChildren().add(HPImage);
     }
 
-
+    /**
+     * Initialize the dialog box.
+     */
     public void makeDialog() {
         dialogText.setLayoutX(732);
         dialogText.setLayoutY(120);
@@ -162,6 +181,9 @@ public class Viewer {
         rootView.getChildren().add(dialogText);
     }
 
+    /**
+     * Initialize the icons.
+     */
     public void makeIcon() {
         ImageView money = new ImageView(new File(Layout.URI_BASE + "textures/money.png").toURI().toString());
         money.setLayoutX(590);
@@ -169,10 +191,17 @@ public class Viewer {
         rootView.getChildren().add(money);
     }
 
+    /**
+     * Update the user money.
+     */
     public void updateMoney(int money) {
         moneyText.setText(money + "");
     }
 
+    /**
+     * Update the HP bar based on the input hp value.
+     * @param hp the current hp value
+     */
     public void updateHP(int hp) {
         // hp
         if (hp == 100) {
@@ -190,15 +219,26 @@ public class Viewer {
         }
     }
 
+    /**
+     * Update the current board.
+     * @param map the 2d matrix of cells that represent the new board
+     */
     public void updateBoard(ActionCell[][] map) {
         this.board.updateBoard(map, gameObject);
     }
 
+    /**
+     * Update the hero to new position.
+     * @param row the new x position
+     * @param col the new y position
+     */
     public void updateHero(int row, int col) {
         rootView.getChildren().remove(hero);
         this.hero = new Tile(col, row, gameObject.getImage("hero"));
         rootView.getChildren().add(hero);
-    }/**
+    }
+
+    /**
      * Update the repository with the given item.
      * @param item The item to be added to the repository.
      */
@@ -223,7 +263,10 @@ public class Viewer {
         dialogText.appendText("\n" + text);
     }
 
-
+    /**
+     * Update the inventory with the given list of items.
+     * @param items The list of items to be added to the inventory.
+     */
     public void updateItems(List<ItemGUI> items) {
         itemsView.getChildren().clear();
         itemIndex = 0;
@@ -231,6 +274,4 @@ public class Viewer {
             addItem(item);
         }
     }
-
-
 }

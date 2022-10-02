@@ -3,18 +3,14 @@ package GUI;
 import engineV2.GameEngine;
 import engineV2.GameObject;
 import javafx.application.Application;
-import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 import model.GameState;
-
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
-import java.util.List;
 
 /**
+ * Entry point of the GUI.
  * @author Xin Lu
  */
 public class Main extends Application {

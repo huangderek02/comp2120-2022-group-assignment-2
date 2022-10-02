@@ -1,11 +1,8 @@
 package GUI;
 
 import GUIv2.Tile;
-import engineV2.Cell;
 import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
-import model.cells.ActionCell;
-
 import java.util.ArrayList;
 import java.util.List;
 

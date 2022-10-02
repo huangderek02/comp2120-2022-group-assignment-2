@@ -1,11 +1,9 @@
 package GUI;
 
-import GUI.Tile;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.GameState;
-
 import java.io.File;
 import java.util.List;
 

@@ -1,11 +1,8 @@
 package GUIv2;
 
-import GUI.Viewer;
+import model.cells.EnemyCell;
 import engineV2.GameObject;
-import engineV2.Cell;
 import javafx.scene.Group;
-import javafx.scene.layout.StackPane;
-import model.GameState;
 import model.cells.*;
 
 import java.util.ArrayList;
@@ -37,8 +34,10 @@ public class Board extends Group {
         } else if (cell instanceof EmptyCell) {
             ret = new Tile(col, row, gameObject.getImage("ground"));
         } else if (cell instanceof PortalCell portalCell) {
-            System.out.println(portalCell.isUp ? "stairs_up" : "stairs_down");
             ret = new Tile(col, row, gameObject.getImage((portalCell.isUp ? "stairs_up" : "stairs_down")), gameObject.getImage("ground"));
+        } else if (cell instanceof EnemyCell enemyCell) {
+            int hp = Math.max(10, enemyCell.hp / 10);
+            ret = new Tile(col, row, gameObject.getImage("enemy" + hp), gameObject.getImage("ground"));
         }
 
         return ret;

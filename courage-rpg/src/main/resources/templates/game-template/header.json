@@ -1,6 +1,6 @@
 {
   "scenes": [
-    "templates/template-1/level-0.json",
+    "templates/game-template/level-0.json",
     "templates/template-1/level-1.json"
   ],
   "image-domain": {

@@ -24,6 +24,8 @@ public class GameState {
     public int hp;
     public int money;
 
+    public boolean isVictory = false;
+
 
     /**
      * Create the gamestate based on game object

@@ -29,14 +29,12 @@ public class Main extends Application {
     public void loadGame(String headerPath) throws IOException, URISyntaxException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         gameObject = GameEngine.loadGameObject(headerPath);
         gameState =  new GameState(gameObject);
-
     }
 
     @Override
     public void start(Stage stage) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         try {
-            gameObject = GameEngine.loadGameObject("templates/template-1/header.json");
-            gameState = new GameState(gameObject);
+            loadGame("templates/template-1/header.json");
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }

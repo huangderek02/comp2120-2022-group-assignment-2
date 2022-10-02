@@ -428,7 +428,13 @@ public class GameState {
      *
      * */
     public List<Item> listItems() {
-        return new LinkedList<>(this.repository.keySet());
+        List<Item> ret = new ArrayList<>();
+        for (Item item : this.repository.keySet()) {
+            for (int i = 0; i < this.repository.get(item); i ++) {
+                ret.add(item);
+            }
+        }
+        return ret;
     }
 
 

@@ -62,9 +62,7 @@ public class Activity {
     public List<ItemGUI> getItemList() {
         List<ItemGUI> ret = new ArrayList<>();
         for (GameState.Item item : gameState.listItems()) {
-            for (int i = 0; i < gameState.get(item); i ++) {
                 ret.add(ItemGUI.convert(item));
-            }
         }
         return ret;
     }

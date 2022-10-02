@@ -16,8 +16,9 @@ public class Main extends Application {
         GameObject gameObject = GameEngine.loadGameObject("templates/template-1/header.json");
 
         stage.setScene(scene);
+        stage.setTitle(gameObject.getState("title"));
         stage.show();
 
-        new Activity(gameObject, scene).start();
+        new Activity(gameObject, scene, stage).start();
     }
 }

@@ -4,6 +4,7 @@ import engineV2.GameObject;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import model.GameState;
 import model.Location;
 
@@ -13,8 +14,10 @@ public class Activity {
     private GameState gameState;
     private Viewer viewer;
     private Scene scene;
+    private Stage stage;
 
-    public Activity(GameObject gameObject, Scene scene) {
+    public Activity(GameObject gameObject, Scene scene, Stage stage) {
+        this.stage = stage;
         this.gameObject = gameObject;
         this.gameState = new GameState(gameObject);
         this.scene = scene;
@@ -49,6 +52,8 @@ public class Activity {
         viewer.updateBoard(gameState.getMap(gameState.getCurrentLocation().level));
         Location location = gameState.getCurrentLocation();
         viewer.updateHero(location.row, location.col);
+        stage.setTitle(gameObject.getState("title") + " - level " + (location.level + 1));
+
     }
 
 

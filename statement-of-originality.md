@@ -26,5 +26,17 @@ member_declaration:
 
 # list numbered references below (replace the example with your own references) 
 ---
+# External Images
+
+"merchant": https://www.reddit.com/r/godot/comments/w9d8mb/wolf_npc_attack_animation/
+
+"princess": https://www.pinterest.com.au/pin/489977634435313321/
+
+UI icons: https://www.shutterstock.com/image-vector/pixel-art-bright-icons-vector-assets-1227631393
+
+NPCs: https://www.reddit.com/r/PixelArt/comments/71bi02/ocheres_some_npcs_i_created_for_my_game/
+
+Enemies: https://www.gamedevmarket.net/asset/pixel-art-enemy-pack-5190/
+
 # References
 - [1] Example Author. 2022. p5.js example code video. Retrieved from https://example.com/video

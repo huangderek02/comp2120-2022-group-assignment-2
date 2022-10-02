@@ -13,7 +13,7 @@ public class DoorCell extends ActionCell {
 
     @Override
     public void act(GameState state) {
-//        state.getMap(state.getCurrentLocation().level)
-//                [state.getCurrentLocation().row][state.getCurrentLocation().col] = state.createCell(EmptyCell.class);
+        state.getMap(state.getCurrentLocation().level)
+                [state.getCurrentLocation().row][state.getCurrentLocation().col] = state.createCell(EmptyCell.class);
     }
 }

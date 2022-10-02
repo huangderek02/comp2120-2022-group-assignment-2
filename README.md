@@ -2,7 +2,7 @@
 
 Our project consists of the RPG game **Courage** and a customizable game engine **DungeonMaker**.
 
-For more information on our product, please refer to https://avanidhaliwal.atlassian.net/l/cp/0Wa1vV1W.
+For more information on our product, please refer to our Confluence file: https://avanidhaliwal.atlassian.net/l/cp/0Wa1vV1W.
 
 #### Courage
 

@@ -165,6 +165,7 @@ public class GameState {
      *
      * @param key is the key listened from keyboard
      * */
+    @Deprecated
     public void handle(KeyCode key) {
         Location newLoc = switch (key) {
             case W -> new Location(currentLoc.level, currentLoc.row - 1, currentLoc.col);
@@ -186,6 +187,19 @@ public class GameState {
         moveTo(newLoc);
         ActionCell cell = getMap(newLoc.level)[newLoc.row][newLoc.col];
         cell.act(this);
+    }
+
+    /**
+     * Check whether a location is out of map
+     *
+     * @author Xianghao Wang
+     *
+     * @param location is to be checked
+     * @return true if it is in the map; otherwise false
+     * */
+    public boolean checkBoundary(Location location) {
+        return location.row >= 0 && location.row < getMap(location.level).length
+                && location.col >= 0 && location.col < getMap(location.level)[0].length;
     }
 
     /**

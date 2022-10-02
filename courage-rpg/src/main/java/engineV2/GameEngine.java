@@ -132,19 +132,19 @@ public class GameEngine {
             Pair<Class, List<String>> cellMaking = parseArgument(tokens[1]);
             int row = Integer.parseInt(tokens[2]);
             for (int col = 0; col < map[row].length; col ++) {
-                map[row][col] = ((Cell) cellMaking.getKey().getConstructor().newInstance()).build(cellMaking.getValue());
+                map[row][col] = createCell(cellMaking.getKey(), cellMaking.getValue());
             }
         } else if (op.equals("fillCol")) {
             Pair<Class, List<String>> cellMaking = parseArgument(tokens[1]);
             int col = Integer.parseInt(tokens[2]);
             for (int row = 0; row < map.length; row ++) {
-                map[row][col] = ((Cell) cellMaking.getKey().getConstructor().newInstance()).build(cellMaking.getValue());
+                map[row][col] = createCell(cellMaking.getKey(), cellMaking.getValue());
             }
         } else if (op.equals("fill")) {
             Pair<Class, List<String>> cellMaking = parseArgument(tokens[1]);
             for (int row = 0; row < map.length; row ++) {
                 for (int col = 0; col < map[col].length; col ++) {
-                    map[row][col] = ((Cell) cellMaking.getKey().getConstructor().newInstance()).build(cellMaking.getValue());;
+                    map[row][col] = createCell(cellMaking.getKey(), cellMaking.getValue());
                 }
             }
         }
@@ -177,5 +177,10 @@ public class GameEngine {
     public static Pair<Integer, Integer> parseLocation(String str) {
         String[] tokens = str.split("&");
         return new Pair<>(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]));
+    }
+
+    public static Cell createCell(Class cellClass, List<String> arguments) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        Cell cell = (Cell) cellClass.getConstructor().newInstance();
+        return cell.build(arguments);
     }
 }

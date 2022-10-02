@@ -21,8 +21,8 @@ member_declaration:
     name: Rita Zhou
     uid: u7326123
 
-    name: 
-    uid:
+    name: Xin Lu
+    uid: u7165475
 
 # list numbered references below (replace the example with your own references) 
 ---

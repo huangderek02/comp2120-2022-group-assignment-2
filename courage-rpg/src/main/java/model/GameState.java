@@ -10,7 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
- * This represents the whole state of the current game
+ * This represents the entire state of the current game
  *
  * @author Xianghao Wang
  * */
@@ -26,7 +26,7 @@ public class GameState {
 
 
     /**
-     * Create the gamestate based on game object
+     * Create the gamestate based the game object passed into the gameObject argument
      *
      * @author Xianghao Wang
      *

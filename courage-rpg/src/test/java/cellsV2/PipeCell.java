@@ -1,6 +1,8 @@
 package cellsV2;
 
 import engineV2.Cell;
+import model.GameState;
+import model.cells.ActionCell;
 
 import java.util.List;
 
@@ -9,7 +11,7 @@ import java.util.List;
  * A case with other information
  * @author Rita Zhou
  */
-public class PipeCell extends Cell {
+public class PipeCell extends ActionCell {
     private List<String> arguments;
 
     @Override
@@ -22,5 +24,10 @@ public class PipeCell extends Cell {
     @Override
     public List<String> export() {
         return this.arguments;
+    }
+
+    @Override
+    public void act(GameState state) {
+
     }
 }

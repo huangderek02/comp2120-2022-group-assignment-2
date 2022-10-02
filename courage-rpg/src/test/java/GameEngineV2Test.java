@@ -173,24 +173,6 @@ public class GameEngineV2Test extends ApplicationTest {
         {
             Cell[][] map = new Cell[5][5];
             Map<String, String> literals = new HashMap<>();
-            literals.put("loc_cell", "cellsV2.PipeCell");
-
-            String cmd2 = GameEngine.precompile("fillRow ${loc_cell}&Hey A! 2", literals);
-            GameEngine.compile(cmd2, map);
-            assertEquals(cellsV2.PipeCell.class, map[2][3].getClass());
-            assertEquals(List.of("Hey A!"), map[2][3].export());
-            assertEquals(cellsV2.PipeCell.class, map[2][2].getClass());
-            assertEquals(List.of("Hey A!"), map[2][2].export());
-
-
-            assertNull(map[0][0]);
-            assertNull(map[1][4]);
-            assertNull(map[3][3]);
-            assertNull(map[4][2]);
-        }
-        {
-            Cell[][] map = new Cell[5][5];
-            Map<String, String> literals = new HashMap<>();
             literals.put("loc_cell", "cellsV2.Cell2");
             literals.put("loc", "3&3");
 
@@ -206,7 +188,7 @@ public class GameEngineV2Test extends ApplicationTest {
             assertNull(map[3][3]);
             assertNull(map[4][2]);
         }
-        // TODO: fillCol
+        // Testing FillCol
         {
             Cell[][] map = new Cell[5][5];
             Map<String, String> literals = new HashMap<>();
@@ -249,26 +231,8 @@ public class GameEngineV2Test extends ApplicationTest {
             assertNull(map[3][3]);
             assertNull(map[4][2]);
         }
-        {
-            Cell[][] map = new Cell[5][5];
-            Map<String, String> literals = new HashMap<>();
-            literals.put("loc_cell", "cellsV2.PipeCell");
-            literals.put("name", "Var&List& ! ? . ");
 
-            String cmd2 = GameEngine.precompile("fillCol ${loc_cell}&${name} 1", literals);
-            GameEngine.compile(cmd2, map);
-            assertEquals(cellsV2.PipeCell.class, map[0][1].getClass());
-            assertEquals(List.of("Var", "List", " ! ? . "), map[0][1].export());
-            assertEquals(cellsV2.PipeCell.class, map[4][1].getClass());
-            assertEquals(List.of("Var", "List", " ! ? . "), map[0][4].export());
-
-            assertNull(map[0][0]);
-            assertNull(map[2][4]);
-            assertNull(map[3][3]);
-            assertNull(map[4][2]);
-        }
-
-        // TODO: fill
+        // Testing Fill
         {
             Cell[][] map = new Cell[5][5];
             Map<String, String> literals = new HashMap<>();
@@ -287,31 +251,6 @@ public class GameEngineV2Test extends ApplicationTest {
             String cmd2 = GameEngine.precompile("fill ${loc_cell}", literals);
             GameEngine.compile(cmd2, map);
             assertEquals(cellsV2.Cell1.class, map[0][0].getClass());
-        }
-        {
-            Cell[][] map = new Cell[5][5];
-            Map<String, String> literals = new HashMap<>();
-            literals.put("loc_cell", "cellsV2.PipeCell");
-            literals.put("name", "Var&List& ! ? . ");
-
-            String cmd = GameEngine.precompile("fill ${loc_cell}&${name}", literals);
-            GameEngine.compile(cmd, map);
-            assertEquals(cellsV2.PipeCell.class, map[0][0].getClass());
-            assertEquals(List.of("Var", "List", " ! ? . "), map[0][1].export());
-            assertEquals(cellsV2.PipeCell.class, map[4][4].getClass());
-            assertEquals(List.of("Var", "List", " ! ? . "), map[0][4].export());
-        }
-        {
-            Cell[][] map = new Cell[5][5];
-            Map<String, String> literals = new HashMap<>();
-            literals.put("loc_cell", "cellsV2.PipeCell");
-
-            String cmd = GameEngine.precompile("fill ${loc_cell}&Hello A!&Hello B!", literals);
-            GameEngine.compile(cmd, map);
-            assertEquals(cellsV2.PipeCell.class, map[2][3].getClass());
-            assertEquals(List.of("Hello A!", "Hello B!"), map[0][1].export());
-            assertEquals(cellsV2.PipeCell.class, map[3][4].getClass());
-            assertEquals(List.of("Hello A!", "Hello B!"), map[1][4].export());
         }
     }
 }

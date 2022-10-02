@@ -1,15 +1,15 @@
 {
   "scenes": [
-    "templates/template-1/level-0.json"
+    "template-2/level-0.json"
   ],
   "image-domain": {
-    "wall": "wall.png"
+    "wall": "assets/1.jpg"
   },
   "literals": {
-    "empty": "model.cells.EmptyCell",
-    "wall": "model.cells.WallCell",
-    "portal-up": "model.cells.PortalCell&up",
-    "portal-down": "model.cells.PortalCell&down",
+    "empty": "cellsV2.Cell1",
+    "wall": "cellsV2.Cell2&2&1",
+    "portal-up": "cellsV2.PipeCell",
+    "portal-down": "cellsV2.PipeCell",
     "birth-0": "5&5",
     "birth-1": "5&5"
   },

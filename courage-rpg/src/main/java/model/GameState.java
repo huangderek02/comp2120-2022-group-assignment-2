@@ -319,7 +319,7 @@ public class GameState {
      *
      * @param cellClass is the class object of the cell
      * */
-    public ActionCell createCell(Class<Cell> cellClass) {
+    public ActionCell createCell(Class cellClass) {
         SceneObject sceneObject = gameObject.getSceneObject(currentLoc.level);
         try {
             return (ActionCell) sceneObject.build(cellClass);

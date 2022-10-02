@@ -43,9 +43,10 @@
     "add ${key} 6&7",
     "add ${water} 6&8",
     "add ${water} 6&9",
-    "add ${portal-up}&1&${birth-1} 6&10"
+    "add ${portal-up}&1&${birth-1} 6&10",
+    "add ${money} 1&1"
   ],
   "literals": {
-    "m1": "Good^morning"
+    "m1": "[NPC]Sir,^the^dear^Princess^is^stuck^on^the^very^top^of^the^tower,^you’re^the^only^one^capable^of^saving^her!\n[Soldiier]^Very^well!^I^shall^rescue^the^princess^and^bring^back^to^the^kingdom"
   }
 }

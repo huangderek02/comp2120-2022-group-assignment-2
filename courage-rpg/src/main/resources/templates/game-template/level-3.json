@@ -32,7 +32,7 @@
     "add ${empty} 0&4",
     "add ${empty} 0&5",
     "add ${empty} 0&6",
-    "add ${empty} 0&7",
+    "add ${money} 0&7",
     "add ${empty} 4&6",
     "add ${empty} 6&6",
     "add ${empty} 6&7",
@@ -41,6 +41,6 @@
     "add ${portal-down}&2&${birth-5} 6&5"
   ],
   "literals": {
-    "m1": "Good^morning"
+    "m1": "[NPC]^Come^on!^Save^the^princess!"
   }
 }

@@ -10,13 +10,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.GameState;
 import model.Location;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /**
  * The controller of GUI. It will call the updates methods in viewer.
+ *
  * @author Xianghao Wang
+ * @author Xin Lu
  */
 public class Activity {
     private GameObject gameObject;
@@ -28,11 +33,15 @@ public class Activity {
 
     /**
      * The constructor of the activity, which functions as the controller.
+     *
+     * @author Xin Lu
+     * @author Xianghao Wang
+     *
      * @param gameObject the game object that represents the whole game
      * @param scene the scene that the activity is going to be rendered on
      * @param stage the stage that the activity is going to be rendered on
      */
-    public Activity(GameObject gameObject, Scene scene, Stage stage) {
+    public Activity(GameObject gameObject, Scene scene, Stage stage, String template) {
         this.stage = stage;
         this.gameObject = gameObject;
         this.gameState = new GameState(gameObject);
@@ -43,6 +52,9 @@ public class Activity {
 
     /**
      * Start the game.
+     *
+     * @author Xin Lu
+     * @author Xianghao Wang
      */
     public void start() {
         viewer.init();
@@ -54,6 +66,10 @@ public class Activity {
     /**
      * Update the view of the activity. Based on the keyboard
      * input.
+     *
+     * @author Xin Lu
+     * @author Xianghao Wang
+     *
      * @param keyEvent the keyboard event
      */
     public void handleKeyboard(KeyEvent keyEvent) {
@@ -69,6 +85,10 @@ public class Activity {
 
     /**
      * Update the view of the activity. Based on the mouse
+     *
+     * @author Xin Lu
+     * @author Xianghao Wang
+     *
      * @param buttonId the id of the button
      * @param mouseEvent the mouse event
      */
@@ -127,6 +147,9 @@ public class Activity {
 
     /**
      * Update the view of whole game.
+     *
+     * @author Xin Lu
+     * @author Xianghao Wang
      */
     public void updateView() {
         viewer.updateMoney(gameState.getMoney());
@@ -143,6 +166,13 @@ public class Activity {
         }
     }
 
+    /**
+     * Get all items in a list
+     *
+     * @author Xianghao Wang
+     *
+     * @return the all items in a list
+     * */
     public List<ItemGUI> getItemList() {
         List<ItemGUI> ret = new ArrayList<>();
         for (GameState.Item item : gameState.listItems()) {

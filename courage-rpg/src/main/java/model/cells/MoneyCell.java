@@ -6,7 +6,7 @@ import model.Location;
 
 import java.util.List;
 
-public class KeyCell extends ActionCell {
+public class MoneyCell extends ActionCell {
     @Override
     public Cell build(List<String> arguments) {
         return this;
@@ -18,13 +18,13 @@ public class KeyCell extends ActionCell {
     }
 
     /**
-     * Give player a key
+     * Give player some money
      *
      * @author Xianghao Wang
      * */
     @Override
     public void act(GameState state) {
-        state.addItem(GameState.Item.KEY);
+        state.money += 150;
         Location loc = state.getCurrentLocation();
         state.getMap(loc.level)[loc.row][loc.col] = new EmptyCell();
     }

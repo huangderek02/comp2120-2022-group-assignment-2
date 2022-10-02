@@ -22,6 +22,14 @@ public class EnemyCell extends ActionCell {
         return List.of(String.valueOf(hp));
     }
 
+
+    /**
+     * Fight with enemy by comparing HP;
+     * If lower than enemy, prevent entering;
+     * otherwise, replace enemy with emtpy
+     *
+     * @author Xianghao Wang
+     * */
     @Override
     public void act(GameState state) {
         if (state.hp > hp) {

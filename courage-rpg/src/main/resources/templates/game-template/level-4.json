@@ -51,12 +51,12 @@
     "add ${empty} 4&7",
     "add ${empty} 5&0",
     "add ${npc}&4&${m1} 3&2",
-    "add ${npc}&2&${m2} 5&9",
+    "add ${victory} 5&9",
     "add ${merchant} 0&10",
     "add ${portal-down}&3&${birth-7} 4&3"
   ],
   "literals": {
-    "m1": "Good^morning",
+    "m1": "[NPC]^Kill^all^enemies!^Save^our^princess!\n[Princess]^(Crying...)^Help^me!",
     "m2": "Princes"
   }
 }

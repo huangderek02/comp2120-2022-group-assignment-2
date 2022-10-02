@@ -31,7 +31,8 @@
     "water": "textures/water.png",
     "key": "textures/key.png",
     "money": "textures/money.png",
-    "merchant": "textures/merchant.jpg"
+    "merchant": "textures/merchant.jpg",
+    "princess": "textures/princess.png"
   },
   "literals": {
     "empty": "model.cells.EmptyCell",
@@ -44,6 +45,8 @@
     "door": "model.cells.DoorCell",
     "npc": "model.cells.NPCCell",
     "merchant": "model.cells.MerchantCell",
+    "victory": "model.cells.VictoryCell",
+    "money": "model.cells.MoneyCell",
     "birth-0": "6&9",
     "birth-1": "5&3",
     "birth-2": "4&2",

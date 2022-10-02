@@ -18,6 +18,13 @@ public class DoorCell extends ActionCell {
         return List.of();
     }
 
+
+    /**
+     * If the player has a key, then replace the door with empty cell;
+     * otherwise, prevent entering
+     *
+     * @author Xianghao Wang
+     * */
     @Override
     public void act(GameState state) {
         if (state.useItem(GameState.Item.KEY)) {

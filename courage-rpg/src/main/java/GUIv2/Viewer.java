@@ -20,7 +20,9 @@ import java.util.List;
 /**
  * The viewer of the GUI. It will render the game on the screen.
  * Also contains update viewer images methods.
+ *
  * @author Xin Lu
+ * @author Xianghao Wang
  */
 public class Viewer {
     private Group rootView;
@@ -53,6 +55,10 @@ public class Viewer {
 
     /**
      * Construct a viewer based on the root view, game object and the controller.
+     *
+     * @author Xianghao Wang
+     * @author Xin Lu
+     *
      * @param rootViiew the root view of the viewer
      * @param gameObject the game object that represents the whole game
      * @param userInputDelegator the controller of the viewer
@@ -65,6 +71,9 @@ public class Viewer {
 
     /**
      * Initialize the viewer.
+     *
+     * @author Xin Lu
+     * @author Xianghao Wang
      */
     public void init() {
         // Make background
@@ -83,6 +92,8 @@ public class Viewer {
 
     /**
      * Initialize the buttons.
+     *
+     * @author Xin Lu
      */
     public void makeButton() {
         ImageView save = new ImageView(new File(Layout.URI_BASE + "buttons/save.png").toURI().toString());
@@ -112,6 +123,8 @@ public class Viewer {
 
     /**
      * Initialize the static UI texts.
+     *
+     * @author Xin Lu
      */
     public void makeText() {
         // text images
@@ -152,6 +165,8 @@ public class Viewer {
 
     /**
      * Initialize the HP bar.
+     *
+     * @author Xin Lu
      */
     public void makeHPBar() {
         HPImage.setLayoutX(130);
@@ -163,6 +178,8 @@ public class Viewer {
 
     /**
      * Initialize the dialog box.
+     *
+     * @author Xin Lu
      */
     public void makeDialog() {
         dialogText.setLayoutX(732);
@@ -183,6 +200,8 @@ public class Viewer {
 
     /**
      * Initialize the icons.
+     *
+     * @author Xin Lu
      */
     public void makeIcon() {
         ImageView money = new ImageView(new File(Layout.URI_BASE + "textures/money.png").toURI().toString());
@@ -193,6 +212,8 @@ public class Viewer {
 
     /**
      * Update the user money.
+     *
+     * @author Xin Lu
      */
     public void updateMoney(int money) {
         moneyText.setText(money + "");
@@ -200,6 +221,10 @@ public class Viewer {
 
     /**
      * Update the HP bar based on the input hp value.
+     *
+     * @author Xin Lu
+     * @author Xianghao Wang
+     *
      * @param hp the current hp value
      */
     public void updateHP(int hp) {
@@ -221,6 +246,10 @@ public class Viewer {
 
     /**
      * Update the current board.
+     *
+     * @author Xin Lu
+     * @author Xianghao Wang
+     *
      * @param map the 2d matrix of cells that represent the new board
      */
     public void updateBoard(ActionCell[][] map) {
@@ -229,6 +258,10 @@ public class Viewer {
 
     /**
      * Update the hero to new position.
+     *
+     * @author Xin Lu
+     * @author Xianghao Wang
+     *
      * @param row the new x position
      * @param col the new y position
      */
@@ -240,6 +273,10 @@ public class Viewer {
 
     /**
      * Update the repository with the given item.
+     *
+     * @author Xin Lu
+     * @author Xianghao Wang
+     *
      * @param item The item to be added to the repository.
      */
     public void addItem(ItemGUI item) {
@@ -257,6 +294,9 @@ public class Viewer {
 
     /**
      * Add a new line to the current dialog.
+     *
+     * @author Xin Lu
+     *
      * @param text The text to add to the dialog.
      */
     public void appendDialog(String text) {
@@ -265,6 +305,9 @@ public class Viewer {
 
     /**
      * Update the inventory with the given list of items.
+     *
+     * @author Xianghao Wang
+     *
      * @param items The list of items to be added to the inventory.
      */
     public void updateItems(List<ItemGUI> items) {

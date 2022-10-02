@@ -11,7 +11,9 @@ import java.util.List;
  * 11 x 7 2d cell matrix. Used to render the GUI board.
  * A board corresponds to a map, i.e. a 2d array of cells in
  * the game engine.
+ *
  * @author Xin Lu
+ * @author Xianghao Wang
  */
 public class Board extends Group {
     Group board = new Group();
@@ -20,6 +22,15 @@ public class Board extends Group {
         this.getChildren().add(board);
     }
 
+    /**
+     * Update the whole board
+     *
+     * @author Xiangaho Wang
+     * @author Xin Lu
+     *
+     * @param map is the map for updating the board
+     * @param gameObject is the game object
+     * */
     public void updateBoard(ActionCell[][] map, GameObject gameObject) {
         board.getChildren().clear();
         List<Tile> tiles = convertTiles(map, gameObject);
@@ -28,6 +39,10 @@ public class Board extends Group {
 
     /**
      * Convert game engine object Cell to GUI object Tile.
+     *
+     * @author Xianghao Wang
+     * @author Xin Lu
+     *
      * @param cell the given cell
      * @param row the row index of the cell
      * @param col the column index of the cell
@@ -56,6 +71,10 @@ public class Board extends Group {
             ret = new Tile(col, row, gameObject.getImage(name), gameObject.getImage("ground"));
         } else if (cell instanceof MerchantCell merchantCell) {
             ret = new Tile(col, row, gameObject.getImage("merchant"), gameObject.getImage("ground"));
+        } else if (cell instanceof VictoryCell) {
+            ret = new Tile(col, row, gameObject.getImage("princess"), gameObject.getImage("ground"));
+        } else if (cell instanceof MoneyCell) {
+            ret = new Tile(col, row, gameObject.getImage("money"), gameObject.getImage("ground"));
         }
 
         return ret;
@@ -63,6 +82,10 @@ public class Board extends Group {
 
     /**
      * Convert a list of game engine object Cells to a list of GUI object Tiles.
+     *
+     * @author Xianghao Wang
+     * @author Xin Lu
+     *
      * @param board the given 2d cell matrix
      * @param gameObject the game engine object
      * @return a list of tiles corresponding to the given cell matrix

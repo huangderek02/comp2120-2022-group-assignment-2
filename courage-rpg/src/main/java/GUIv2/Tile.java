@@ -8,6 +8,7 @@ import javafx.scene.layout.StackPane;
  * Represents a tile in the GUI board, which corresponds to a cell
  * in the game engine. Cells should be converted to tiles before
  * being used in the GUI.
+ *
  * @author Xin Lu
  */
 public class Tile extends StackPane {
@@ -25,6 +26,9 @@ public class Tile extends StackPane {
     /**
      * For single background tile only. Construct a
      * tile with a background image.
+     *
+     * @author Xin Lu
+     *
      * @param x the x coordinate of the tile
      * @param y the y coordinate of the tile
      * @param image the background image
@@ -45,6 +49,9 @@ public class Tile extends StackPane {
     /**
      * For multiple layers tile. Construct a tile with
      * a background image and a tile item/character image.
+     *
+     * @author Xin Lu
+     *
      * @param x the x coordinate of the tile
      * @param y the y coordinate of the tile
      * @param tileImage the tile item/character image
@@ -71,12 +78,12 @@ public class Tile extends StackPane {
         setLayoutY(board_y);
     }
 
-    public void setBackground(TileType background) {
-        this.background = background;
-    }
 
     /**
      * Calculate the x absolute coordinate in pixels on the board
+     *
+     * @author Xin Lu
+     *
      * @param x_coordinate the x coordinate in the board
      * @return x_coordinate absolute coordinate in pixels on the board
      */
@@ -86,6 +93,9 @@ public class Tile extends StackPane {
 
     /**
      * Calculate the y absolute coordinate in pixels on the board
+     *
+     * @author Xin Lu
+     *
      * @param y_coordinate the y coordinate in the board
      * @return y_coordinate absolute coordinate in pixels on the board
      */

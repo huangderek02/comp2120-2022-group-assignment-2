@@ -2,6 +2,7 @@ package model.cells;
 
 import engineV2.Cell;
 import model.GameState;
+import model.Location;
 
 import java.util.List;
 import java.util.Random;
@@ -17,6 +18,12 @@ public class MerchantCell extends ActionCell {
         return List.of();
     }
 
+
+    /**
+     * Merchat gives randome buff and debuff for player
+     *
+     * @author Xianghao Wang
+     * */
     @Override
     public void act(GameState state) {
         Random random = new Random();
@@ -48,5 +55,7 @@ public class MerchantCell extends ActionCell {
             }
             state.offerDialog("You deserve it!");
         }
+        Location loc = state.getCurrentLocation();
+        state.getMap(loc.level)[loc.row][loc.col] = new EmptyCell();
     }
 }

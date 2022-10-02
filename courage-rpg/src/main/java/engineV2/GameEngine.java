@@ -303,6 +303,14 @@ public class GameEngine {
         return cell.build(arguments);
     }
 
+    /**
+     * Save the game to the given folder
+     *
+     * @author Xianghao Wang
+     *
+     * @param savedDir is the folder to store the game
+     * @param gameObject is the game object to be stored
+     * */
     public static void saveGameObject(String savedDir, GameObject gameObject) throws IOException, URISyntaxException {
         File baseFolder = new File(GameEngine.class.getResource("/").toURI());
         File savesFolder = new File(baseFolder, "saves");

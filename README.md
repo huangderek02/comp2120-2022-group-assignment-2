@@ -41,7 +41,7 @@ For more information on our product, please refer to https://avanidhaliwal.atlas
 
 # A short demo of the game
 
-link to video
+Link to demo video: https://drive.google.com/file/d/1HFyZZe2p8uxww-dGqIjW3GE1_MdYsAWi/view?usp=sharing
 
 # How to get help
 

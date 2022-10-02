@@ -1,0 +1,20 @@
+{
+  "cells": [
+    "-=**-",
+    "****-",
+    "-a**b",
+    "-*-**",
+    "bbb+*"
+  ],
+  "properties": {
+    "title": "level 1",
+    "birth-point": "(2,2)"
+  },
+  "rendering": {
+    "a": "assets/2.jpg"
+  },
+  "symbols": {
+    "a": "sampleCells.EmptyCell&1&23&B&AC",
+    "b": "sampleCells.WallCell"
+  }
+}

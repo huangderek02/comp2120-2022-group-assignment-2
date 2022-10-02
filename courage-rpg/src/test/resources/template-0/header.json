@@ -1,0 +1,21 @@
+{
+  "scenes": [
+    "template-0/level-0.json",
+    "template-0/level-1.json"
+  ],
+
+  "properties": {
+    "title": "Courage",
+    "camera": "0:(1,1)"
+  },
+  "rendering": {
+    "-": "assets/1.jpg",
+    "*": "assets/2.jpg"
+  },
+  "symbols": {
+    "*": "sampleCells.EmptyCell",
+    "-": "sampleCells.WallCell&123&9&1",
+    "+": "sampleCells.SampleCell&ABC&def",
+    "=": "sampleCells.NewCell&!&?&.&,&()&~"
+  }
+}

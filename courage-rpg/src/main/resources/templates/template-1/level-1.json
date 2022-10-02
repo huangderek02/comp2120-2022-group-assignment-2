@@ -9,7 +9,7 @@
     "fillRow ${wall} 6",
     "fillCol ${wall} 0",
     "fillCol ${wall} 10",
-    "add ${portal-down}&1&${birth-0} 4&5"
+    "add ${portal-down}&0&${birth-0} 4&5"
   ],
   "literals": {
 

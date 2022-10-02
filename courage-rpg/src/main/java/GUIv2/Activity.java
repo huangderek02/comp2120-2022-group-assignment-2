@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import model.GameState;
+import model.Location;
 
 
 public class Activity {
@@ -23,12 +24,19 @@ public class Activity {
     public void start() {
         viewer.init();
         updateView();
-        this.scene.setOnKeyTyped(this::handleKeyboard);
+        this.scene.setOnKeyPressed(this::handleKeyboard);
         System.out.println(this.scene.getFocusOwner());
     }
 
     public void handleKeyboard(KeyEvent keyEvent) {
-        System.out.println(keyEvent);
+        System.out.println("key triggerd" + " " + keyEvent.getCode());
+        switch (keyEvent.getCode()) {
+            case W -> gameState.handleMoveUp();
+            case S -> gameState.handleMoveDown();
+            case A -> gameState.handleMoveLeft();
+            case D -> gameState.handleMoveRight();
+        }
+        updateView();
     }
 
     public void handleMouse(String buttonId, MouseEvent mouseEvent) {
@@ -39,6 +47,8 @@ public class Activity {
         viewer.updateMoney(gameState.getMoney());
         viewer.updateHP(gameState.getHP());
         viewer.updateBoard(gameState.getMap(gameState.getCurrentLocation().level));
+        Location location = gameState.getCurrentLocation();
+        viewer.updateHero(location.row, location.col);
     }
 
 

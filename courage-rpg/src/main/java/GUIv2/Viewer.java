@@ -32,6 +32,7 @@ public class Viewer {
     private final Text moneyText = new Text("0");
     private final ImageView HPImage = new ImageView(new File(Layout.URI_BASE + "ui/hpbar_1.png").toURI().toString());
     private final TextArea dialogText = new TextArea();
+    private Tile hero;
 
     public Font pixelFont = null;
     {
@@ -150,7 +151,7 @@ public class Viewer {
         dialogText.setStyle("-fx-text-fill: #ffffff; -fx-font-size: 20px;");
         dialogText.getStylesheets().add(getClass().getResource("/dialog.css").toExternalForm());
         dialogText.setEditable(false);
-        dialogText.setOnKeyTyped(keyEvent -> userInputDelegator.handleKeyboard(keyEvent));
+        dialogText.setOnKeyPressed(keyEvent -> userInputDelegator.handleKeyboard(keyEvent));
         rootView.getChildren().add(dialogText);
     }
 
@@ -182,5 +183,11 @@ public class Viewer {
 
     public void updateBoard(ActionCell[][] map) {
         this.board.updateBoard(map);
+    }
+
+    public void updateHero(int row, int col) {
+        rootView.getChildren().remove(hero);
+        this.hero = new Tile(col, row, TileType.HERO);
+        rootView.getChildren().add(hero);
     }
 }

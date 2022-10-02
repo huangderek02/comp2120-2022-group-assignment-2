@@ -16,10 +16,18 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This is the game engine V2;
+ * It supports more flexible customizing maps and storing dynamic states
+ *
+ * @author Xianghao Wang
+ * */
 public class GameEngine {
     /**
      * Get resource's path by giving its name
+     *
      * @author Xianghao Wang
+     *
      * @param fileName is the resource name
      * @return a Path representing the resource
      * */
@@ -33,7 +41,9 @@ public class GameEngine {
 
     /**
      * Get JSON object by giving the path
+     *
      * @author Xianghao Wang
+     *
      * @param path is the JSON file's path
      * @return the JSON object
      * */
@@ -42,6 +52,15 @@ public class GameEngine {
         return JSONObject.parseObject(content);
     }
 
+
+    /**
+     * Load the game object from a game file
+     *
+     * @author Xianghao Wang
+     *
+     * @param headerName is the header of the game file
+     * @return a game object
+     * */
     public static GameObject loadGameObject(String headerName) throws URISyntaxException, IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         JSONObject headerJSON = getJSONObjection(getResourcePath(headerName).toString());
 
@@ -61,6 +80,15 @@ public class GameEngine {
         return new GameObject(imageDomain, states, maps);
     }
 
+
+    /**
+     * This load literals from JSON object
+     *
+     * @author Xianghao Wang
+     *
+     * @param json is the JSON object
+     * @return the literal maps - literal alias : literal content
+     * */
     public static Map<String, String> loadLiterals(JSONObject json) {
         Map<String, String> literals = new HashMap<>();
         for (String literalKey : json.keySet()) {
@@ -69,6 +97,14 @@ public class GameEngine {
         return literals;
     }
 
+    /**
+     * This load all of defined images
+     *
+     * @author Xianghao Wang
+     *
+     * @param json is the JSON object
+     * @return the image maps - image name : image
+     * */
     public static Map<String, Image> loadImageDomain(JSONObject json) throws URISyntaxException {
         Map<String, Image> images = new HashMap<>();
         for (String imageAlias : json.keySet()) {
@@ -80,6 +116,14 @@ public class GameEngine {
         return images;
     }
 
+    /**
+     * This load states from JSON object
+     *
+     * @author Xianghao Wang
+     *
+     * @param json is the JSON objecct
+     * @return the states map - stata name : state
+     * */
     public static Map<String, String> loadStates(JSONObject json) {
         Map<String, String> states = new HashMap<>();
         for (String stateKey : json.keySet()) {
@@ -88,12 +132,30 @@ public class GameEngine {
         return states;
     }
 
+    /**
+     * This load dimension from JSON object
+     *
+     * @author Xianghao Wang
+     *
+     * @param json is the JSON object
+     * @return the dimension (rows, cols)
+     * */
     public static Pair<Integer, Integer> loadDimension(JSONObject json) {
         int rows = Integer.parseInt(json.getString("rows"));
         int cols = Integer.parseInt(json.getString("cols"));
         return new Pair<>(rows, cols);
+
     }
 
+    /**
+     * This compiles a scene from its JSON object
+     *
+     * @author Xianghao Wang
+     *
+     * @param json is the scene JSON object
+     * @param literals defines some literals can replace ${literal} in the commands
+     * @return the compiled map
+     * */
     public static Cell[][] compileScene(JSONObject json, Map<String, String> literals) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Pair<Integer, Integer> dimension = loadDimension(json.getJSONObject("dimension"));
         Cell[][] map = new Cell[dimension.getKey()][dimension.getValue()];
@@ -106,6 +168,14 @@ public class GameEngine {
         return map;
     }
 
+    /**
+     * Pre-compile a command with defined literals by replacing ${literal-key} with literal-value
+     *
+     * @author Xianghao Wang
+     *
+     * @param cmd is to be pre-compiled
+     * @param literals contains some defined literals
+     * */
     public static String precompile(String cmd, Map<String, String> literals) {
         StringBuilder cmdBuilder = new StringBuilder();
 
@@ -119,6 +189,15 @@ public class GameEngine {
         return cmdBuilder.toString();
     }
 
+
+    /**
+     * This compiles a command
+     *
+     * @author Xianghao Wang
+     *
+     * @param cmd is the command
+     * @param map stores the result of compiling
+     * */
     public static void compile(String cmd, Cell[][] map) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         String[] tokens = cmd.split(" ");
         String op = tokens[0];
@@ -148,6 +227,15 @@ public class GameEngine {
         }
     }
 
+    /**
+     * This uses scene literals to override the default game literals
+     *
+     * @author Xianghao Wang
+     *
+     * @param sceneLiterals contains the scene literals
+     * @param gameLiterals contains the game literals
+     * @return the new literals after overriding game literals with the scene literals
+     * */
     public static Map<String, String> overrideLiterals(Map<String, String> sceneLiterals, Map<String, String> gameLiterals) {
         Map<String, String> literals = new HashMap<>(gameLiterals);
         literals.putAll(sceneLiterals);
@@ -156,7 +244,9 @@ public class GameEngine {
 
     /**
      * This will parse the argument for a symbol
-     * @author Xianghao Wangg
+     *
+     * @author Xianghao Wang
+     *
      * @param str is the raw argument string
      * @return a pair involving the class object and corresponding argument list
      * */
@@ -172,11 +262,30 @@ public class GameEngine {
         return new Pair<>(classObj, arguments);
     }
 
+    /**
+     * This parses a location string row&col to (row, col)
+     *
+     * @author Xianghao Wang
+     *
+     * @param str is the string to be parsed
+     * @return the parsed row and column
+     * */
     public static Pair<Integer, Integer> parseLocation(String str) {
         String[] tokens = str.split("&");
         return new Pair<>(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]));
     }
 
+
+    /**
+     * This creates a cell instance with its class object and a list of arguments
+     *
+     * @author Xianghao Wang
+     *
+     * @param cellClass is the class object
+     * @param arguments is a list of arguments
+     *
+     * @return a built cell
+     * */
     public static Cell createCell(Class cellClass, List<String> arguments) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         Cell cell = (Cell) cellClass.getConstructor().newInstance();
         return cell.build(arguments);

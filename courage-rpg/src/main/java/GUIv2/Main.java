@@ -8,6 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * Entry point of the GUI.
+ * @author Xin Lu
+ */
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {

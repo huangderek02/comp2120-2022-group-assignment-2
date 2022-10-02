@@ -10,16 +10,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.GameState;
 import model.Location;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * The controller of GUI. It will call the updates methods in viewer.
+ * @author Xianghao Wang
+ */
 public class Activity {
     private GameObject gameObject;
     private GameState gameState;
@@ -28,7 +26,13 @@ public class Activity {
     private Stage stage;
     private String template;
 
-    public Activity(GameObject gameObject, Scene scene, Stage stage, String template) {
+    /**
+     * The constructor of the activity, which functions as the controller.
+     * @param gameObject the game object that represents the whole game
+     * @param scene the scene that the activity is going to be rendered on
+     * @param stage the stage that the activity is going to be rendered on
+     */
+    public Activity(GameObject gameObject, Scene scene, Stage stage) {
         this.stage = stage;
         this.gameObject = gameObject;
         this.gameState = new GameState(gameObject);
@@ -37,13 +41,21 @@ public class Activity {
         this.template = template;
     }
 
-    public void start() throws IOException, URISyntaxException {
+    /**
+     * Start the game.
+     */
+    public void start() {
         viewer.init();
         updateView();
         this.scene.setOnKeyPressed(this::handleKeyboard);
         System.out.println(this.scene.getFocusOwner());
     }
 
+    /**
+     * Update the view of the activity. Based on the keyboard
+     * input.
+     * @param keyEvent the keyboard event
+     */
     public void handleKeyboard(KeyEvent keyEvent) {
         System.out.println("key triggerd" + " " + keyEvent.getCode());
         switch (keyEvent.getCode()) {
@@ -55,6 +67,11 @@ public class Activity {
         updateView();
     }
 
+    /**
+     * Update the view of the activity. Based on the mouse
+     * @param buttonId the id of the button
+     * @param mouseEvent the mouse event
+     */
     public void handleMouse(String buttonId, MouseEvent mouseEvent) {
         if (buttonId.equals("exit")) {
             System.exit(0);
@@ -108,6 +125,9 @@ public class Activity {
         updateView();
     }
 
+    /**
+     * Update the view of whole game.
+     */
     public void updateView() {
         viewer.updateMoney(gameState.getMoney());
         viewer.updateHP(gameState.getHP());
@@ -117,9 +137,9 @@ public class Activity {
         viewer.updateItems(getItemList());
         stage.setTitle(gameObject.getState("title") + " - level " + (location.level + 1));
 
-        String s = null;
-        while ((s = gameState.pollDialog()) != null) {
-            viewer.appendDialog(s);
+        String s2;
+        while ((s2 = gameState.pollDialog()) != null) {
+            viewer.appendDialog(s2);
         }
     }
 

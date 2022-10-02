@@ -1,5 +1,9 @@
 package GUIv2;
 
+/**
+ * The layout constant of the GUI.
+ * @author Xin Lu
+ */
 public class Layout {
     // Game window is of size 1080p x 720p
     public static final int VIEWER_WIDTH = 1078;

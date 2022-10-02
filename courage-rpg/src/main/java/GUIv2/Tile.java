@@ -1,15 +1,8 @@
 package GUIv2;
 
-import GUIv2.TileType;
-import GUIv2.Viewer;
-import engineV2.Cell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import model.cells.*;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents a tile in the GUI board, which corresponds to a cell
@@ -30,7 +23,11 @@ public class Tile extends StackPane {
     }
 
     /**
-     * For single background tile only
+     * For single background tile only. Construct a
+     * tile with a background image.
+     * @param x the x coordinate of the tile
+     * @param y the y coordinate of the tile
+     * @param image the background image
      */
     public Tile(int x, int y, Image image) {
         this.board_x = getPixel_x(x);
@@ -46,7 +43,12 @@ public class Tile extends StackPane {
     }
 
     /**
-     * For multiple layers tile
+     * For multiple layers tile. Construct a tile with
+     * a background image and a tile item/character image.
+     * @param x the x coordinate of the tile
+     * @param y the y coordinate of the tile
+     * @param tileImage the tile item/character image
+     * @param backgroundImage the background image
      */
     public Tile(int x, int y, Image tileImage, Image backgroundImage) {
         this.board_x = getPixel_x(x);
@@ -75,7 +77,8 @@ public class Tile extends StackPane {
 
     /**
      * Calculate the x absolute coordinate in pixels on the board
-     * @return x absolute coordinate in pixels on the board
+     * @param x_coordinate the x coordinate in the board
+     * @return x_coordinate absolute coordinate in pixels on the board
      */
     static public int getPixel_x(int x_coordinate) {
         return (int) (GUI.Viewer.BOARD_X_OFFSET + Math.ceil(x_coordinate * GUI.Viewer.TILE_SIZE));
@@ -83,7 +86,8 @@ public class Tile extends StackPane {
 
     /**
      * Calculate the y absolute coordinate in pixels on the board
-     * @return y absolute coordinate in pixels on the board
+     * @param y_coordinate the y coordinate in the board
+     * @return y_coordinate absolute coordinate in pixels on the board
      */
     static public int getPixel_y(int y_coordinate) {
         return (int) (GUI.Viewer.BOARD_Y_OFFSET + Math.ceil(y_coordinate * Layout.TILE_SIZE));

@@ -4,7 +4,6 @@ import model.cells.EnemyCell;
 import engineV2.GameObject;
 import javafx.scene.Group;
 import model.cells.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +26,14 @@ public class Board extends Group {
         for (Tile tile : tiles) board.getChildren().add(tile);
     }
 
+    /**
+     * Convert game engine object Cell to GUI object Tile.
+     * @param cell the given cell
+     * @param row the row index of the cell
+     * @param col the column index of the cell
+     * @param gameObject the game engine object
+     * @return a tile corresponding to the given cell
+     */
     public static Tile cellToTile(ActionCell cell, int row, int col, GameObject gameObject) {
         Tile ret = null;
         if (cell instanceof WallCell) {
@@ -54,6 +61,12 @@ public class Board extends Group {
         return ret;
     }
 
+    /**
+     * Convert a list of game engine object Cells to a list of GUI object Tiles.
+     * @param board the given 2d cell matrix
+     * @param gameObject the game engine object
+     * @return a list of tiles corresponding to the given cell matrix
+     */
     static List<Tile> convertTiles(ActionCell[][] board, GameObject gameObject) {
         List<Tile> tiles = new ArrayList<>();
         for (int row = 0; row < GUI.Viewer.BOARD_Y; row ++) {

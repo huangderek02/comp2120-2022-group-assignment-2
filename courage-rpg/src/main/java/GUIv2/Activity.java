@@ -35,7 +35,6 @@ public class Activity {
     }
 
     public void handleKeyboard(KeyEvent keyEvent) {
-        System.out.println("key triggerd" + " " + keyEvent.getCode());
         switch (keyEvent.getCode()) {
             case W -> gameState.handleMoveUp();
             case S -> gameState.handleMoveDown();
@@ -49,6 +48,7 @@ public class Activity {
         if (buttonId.equals("water")) {
             gameState.useItem(GameState.Item.HP_RECOVERY);
             gameState.hp += 10;
+            gameState.offerDialog("10 HP recoverd");
             if (gameState.hp > 100) gameState.hp = 100;
         }
         updateView();
@@ -61,6 +61,13 @@ public class Activity {
         Location location = gameState.getCurrentLocation();
         viewer.updateHero(location.row, location.col);
         viewer.updateItems(getItemList());
+
+        // dialogs
+        String s;
+        while ((s = gameState.pollDialog()) != null) {
+            viewer.appendDialog(s);
+        }
+
         stage.setTitle(gameObject.getState("title") + " - level " + (location.level + 1));
     }
 

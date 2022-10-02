@@ -1,5 +1,6 @@
 package GUIv2;
 
+import engineV2.GameEngine;
 import engineV2.GameObject;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
@@ -8,6 +9,9 @@ import javafx.stage.Stage;
 import model.GameState;
 import model.Location;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +22,8 @@ public class Activity {
     private Viewer viewer;
     private Scene scene;
     private Stage stage;
+
+    String GAME_TEMPLATE = "templates/template-1/header.json";
 
     public Activity(GameObject gameObject, Scene scene, Stage stage) {
         this.stage = stage;
@@ -46,6 +52,13 @@ public class Activity {
     }
 
     public void handleMouse(String buttonId, MouseEvent mouseEvent) {
+        if (buttonId.equals("new")) {
+            try {
+                loadGame(GAME_TEMPLATE);
+            } catch (Exception e) {
+                throw new RuntimeException();
+            }
+        }
         if (buttonId.equals("water")) {
             gameState.useItem(GameState.Item.HP_RECOVERY);
             gameState.hp += 10;
@@ -70,5 +83,11 @@ public class Activity {
                 ret.add(ItemGUI.convert(item));
         }
         return ret;
+    }
+
+    public void loadGame(String gameHeaderPath) throws URISyntaxException, IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        this.gameObject = GameEngine.loadGameObject(gameHeaderPath);
+        this.gameState = new GameState(gameObject);
+        this.updateView();
     }
 }

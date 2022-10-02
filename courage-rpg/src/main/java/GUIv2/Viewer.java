@@ -214,6 +214,15 @@ public class Viewer {
         }
     }
 
+    /**
+     * Add a new line to the current dialog.
+     * @param text The text to add to the dialog.
+     */
+    public void appendDialog(String text) {
+        dialogText.appendText("\n" + text);
+    }
+
+
     public void updateItems(List<ItemGUI> items) {
         itemsView.getChildren().clear();
         itemIndex = 0;

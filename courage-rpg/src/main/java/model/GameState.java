@@ -21,8 +21,8 @@ public class GameState {
     final private GameObject gameObject;
     Location previousLoc = null;
     Location currentLoc = null;
-    private int hp;
-    private int money;
+    public int hp;
+    public int money;
 
 
     /**

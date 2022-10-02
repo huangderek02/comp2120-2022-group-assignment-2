@@ -46,7 +46,12 @@ public class Activity {
     }
 
     public void handleMouse(String buttonId, MouseEvent mouseEvent) {
-        System.out.println(buttonId);
+        if (buttonId.equals("water")) {
+            gameState.useItem(GameState.Item.HP_RECOVERY);
+            gameState.hp += 10;
+            if (gameState.hp > 100) gameState.hp = 100;
+        }
+        updateView();
     }
 
     public void updateView() {

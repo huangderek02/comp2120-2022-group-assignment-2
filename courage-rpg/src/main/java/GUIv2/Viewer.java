@@ -174,7 +174,9 @@ public class Viewer {
 
     public void updateHP(int hp) {
         // hp
-        if (hp < 80 && hp >= 60) {
+        if (hp == 100) {
+            HPImage.setImage(new Image(new File(Layout.URI_BASE + "ui/hpbar_1.png").toURI().toString()));
+        } else if (hp < 80 && hp >= 60) {
             HPImage.setImage(new Image(new File(Layout.URI_BASE + "ui/hpbar_2.png").toURI().toString()));
         } else if (hp > 40 && hp < 60) {
             HPImage.setImage(new Image(new File(Layout.URI_BASE + "ui/hpbar_3.png").toURI().toString()));
@@ -205,6 +207,9 @@ public class Viewer {
             itemImage.setLayoutX(Item.getItemX(itemIndex));
             itemImage.setLayoutY(Item.getItemY(itemIndex));
             itemsView.getChildren().add(itemImage);
+
+            itemImage.setOnMouseClicked(mouseEvent -> userInputDelegator.handleMouse(item.toString(), mouseEvent));
+
             itemIndex++;
         }
     }

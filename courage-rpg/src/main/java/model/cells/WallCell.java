@@ -13,7 +13,7 @@ public class WallCell extends ActionCell {
 
     @Override
     public List<String> export() {
-        return null;
+        return List.of();
     }
 
 

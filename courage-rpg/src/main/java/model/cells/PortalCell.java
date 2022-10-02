@@ -25,7 +25,7 @@ public class PortalCell extends ActionCell {
 
     @Override
     public List<String> export() {
-        return null;
+        return List.of(isUp ? "up" : "down", String.valueOf(destination.level), String.valueOf(destination.row), String.valueOf(destination.col));
     }
 
     @Override

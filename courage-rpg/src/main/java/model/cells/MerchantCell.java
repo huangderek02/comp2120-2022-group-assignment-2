@@ -14,7 +14,7 @@ public class MerchantCell extends ActionCell {
 
     @Override
     public List<String> export() {
-        return null;
+        return List.of();
     }
 
     @Override

@@ -14,7 +14,7 @@ public class KeyCell extends ActionCell {
 
     @Override
     public List<String> export() {
-        return null;
+        return List.of();
     }
 
     @Override

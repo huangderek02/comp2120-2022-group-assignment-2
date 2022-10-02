@@ -20,7 +20,7 @@ public class NPCCell extends ActionCell {
 
     @Override
     public List<String> export() {
-        return null;
+        return List.of(String.valueOf(id), String.join("^", message.split(" ")));
     }
 
     @Override

@@ -50,6 +50,7 @@ public class GameState {
        loadMaps();
        loadRepository();
        loadLocation();
+       loadNumericalStates();
     }
 
     /**
@@ -356,6 +357,10 @@ public class GameState {
      * */
     public ActionCell[][] getMap(int level) {
         return this.maps.get(this.currentLoc.level);
+    }
+
+    public int getMapCount() {
+        return this.maps.size();
     }
 
     /**

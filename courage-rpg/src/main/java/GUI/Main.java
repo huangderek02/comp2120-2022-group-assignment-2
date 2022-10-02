@@ -40,7 +40,5 @@ public class Main extends Application {
         }
         viewer = new Viewer();
         controller = new Controller(viewer, gameState);
-        controller.init();
-        controller.handleKeyBoard();
     }
 }

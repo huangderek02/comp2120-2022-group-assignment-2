@@ -73,13 +73,15 @@ public class Viewer {
     /**
      * Entry pointer for the game.
      */
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage, Controller keyboardHandleDelegator) {
         // Set the window
         primaryStage.setResizable(false);
         primaryStage.setTitle("Courage");
 
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        scene.setOnKeyTyped(keyboardHandleDelegator::handleKeyboard);
     }
 
     /**

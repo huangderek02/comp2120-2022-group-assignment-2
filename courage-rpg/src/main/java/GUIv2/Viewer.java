@@ -182,12 +182,12 @@ public class Viewer {
     }
 
     public void updateBoard(ActionCell[][] map) {
-        this.board.updateBoard(map);
+        this.board.updateBoard(map, gameObject);
     }
 
     public void updateHero(int row, int col) {
         rootView.getChildren().remove(hero);
-        this.hero = new Tile(col, row, TileType.HERO);
+        this.hero = new Tile(col, row, gameObject.getImage("hero"));
         rootView.getChildren().add(hero);
     }
 }

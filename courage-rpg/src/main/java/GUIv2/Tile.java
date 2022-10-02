@@ -3,6 +3,7 @@ package GUIv2;
 import GUIv2.TileType;
 import GUIv2.Viewer;
 import engineV2.Cell;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import model.cells.*;
@@ -23,56 +24,6 @@ public class Tile extends StackPane {
     private TileType tileType;
     private TileType background = null;
 
-    /**
-     * Create a list of tiles by the given cell matrix.
-     * @param board the given cell matrix
-     * @return a list of tiles
-     */
-    static List<Tile> convertTiles(Cell[][] board) {
-
-        List<Tile> tiles = new ArrayList<>();
-        for (int row = 0; row < GUI.Viewer.BOARD_Y; row ++) {
-            for (int col = 0; col < GUI.Viewer.BOARD_X; col ++) {
-                if (board[row][col] instanceof WallCell) {
-                    Tile tile = new Tile(col, row, TileType.BRICK_1);
-                    tiles.add(tile);
-                } else if (board[row][col] instanceof EmptyCell) {
-                    Tile tile = new Tile(col, row, TileType.GROUND_1);
-                    tiles.add(tile);
-                } else if (board[row][col] instanceof HeroCell) {
-                    Tile tile = new Tile(col, row, TileType.HERO, TileType.GROUND_1);
-                    tiles.add(tile);
-                } else if (board[row][col] instanceof EnemySpiderCell) {
-                    Tile tile = new Tile(col, row, TileType.ENEMY_1, TileType.GROUND_1);
-                    tiles.add(tile);
-                } else if (board[row][col] instanceof DoorCell) {
-                    Tile tile = new Tile(col, row, TileType.SPECIAL_1, TileType.GROUND_1);
-                    tiles.add(tile);
-                } else if (board[row][col] instanceof PortalCell) {
-                    Tile tile = new Tile(col, row, TileType.STAIR_UP, TileType.GROUND_1);
-                    tiles.add(tile);
-                }
-            }
-        }
-        return tiles;
-    }
-
-    /**
-     * Generate a random type of cell at the given location. (0-10, 0-6)
-     * @param x the x coordinate of the cell, from 0 to 10
-     * @param y the y coordinate of the cell, from 0 to 6
-     * @return a random type of cell at the given location
-     */
-    static Tile getRandomTile(int x, int y) {
-        Tile rtn;
-        TileType tileType = TileType.getRandomTileType();
-        if (TileType.isTexture(tileType)) {
-            rtn = new Tile(x, y, tileType);
-        } else {
-            rtn = new Tile(x, y, tileType, TileType.getRandomBackground());
-        }
-        return rtn;
-    }
 
     public TileType getType() {
         return tileType;
@@ -81,12 +32,12 @@ public class Tile extends StackPane {
     /**
      * For single background tile only
      */
-    public Tile(int x, int y, TileType tileType) {
+    public Tile(int x, int y, Image image) {
         this.board_x = getPixel_x(x);
         this.board_y = getPixel_y(y);
         this.tileType = tileType;
 
-        ImageView cellBackground = new ImageView(new File(GUI.Viewer.URI_BASE + "textures/" + tileType).toURI().toString());
+        ImageView cellBackground = new ImageView(image);
         getChildren().add(cellBackground);
         cellBackground.setFitWidth(GUI.Viewer.TILE_SIZE);
         cellBackground.setFitHeight(GUI.Viewer.TILE_SIZE);
@@ -97,18 +48,17 @@ public class Tile extends StackPane {
     /**
      * For multiple layers tile
      */
-    public Tile(int x, int y, TileType tileType, TileType background) {
+    public Tile(int x, int y, Image tileImage, Image backgroundImage) {
         this.board_x = getPixel_x(x);
         this.board_y = getPixel_y(y);
-        this.background = background;
-        ImageView stuffBackground = new ImageView(new File(GUI.Viewer.URI_BASE + "textures/" + background.toString()).toURI().toString());
+        ImageView stuffBackground = new ImageView(backgroundImage);
         stuffBackground.setFitWidth(GUI.Viewer.TILE_SIZE);
         stuffBackground.setFitHeight(GUI.Viewer.TILE_SIZE);
         getChildren().add(stuffBackground);
 
-        ImageView cellBackground = new ImageView(new File(GUI.Viewer.URI_BASE + "textures/" + tileType.toString()).toURI().toString());
+        ImageView cellBackground = new ImageView(tileImage);
         getChildren().add(cellBackground);
-        ImageView cellForeground = new ImageView(new File(GUI.Viewer.URI_BASE + "textures/" + tileType).toURI().toString());
+        ImageView cellForeground = new ImageView(tileImage);
         getChildren().add(cellForeground);
 
         cellForeground.setFitWidth(GUI.Viewer.TILE_SIZE);

@@ -15,8 +15,8 @@ member_declaration:
     name: Derek Huang
     uid: u7300484
   - 
-    name: 
-    uid:
+    name: Xianghao Wang
+    uid: u7321615
   - 
     name: 
     uid:

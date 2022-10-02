@@ -1,7 +1,10 @@
 {
   "scenes": [
     "templates/game-template/level-0.json",
-    "templates/template-1/level-1.json"
+    "templates/game-template/level-1.json",
+    "templates/game-template/level-2.json",
+    "templates/game-template/level-3.json",
+    "templates/game-template/level-4.json"
   ],
   "image-domain": {
     "grass": "textures/grass_1.jpg",
@@ -41,8 +44,14 @@
     "door": "model.cells.DoorCell",
     "npc": "model.cells.NPCCell",
     "merchant": "model.cells.MerchantCell",
-    "birth-0": "5&5",
-    "birth-1": "6&5"
+    "birth-0": "6&9",
+    "birth-1": "5&3",
+    "birth-2": "4&2",
+    "birth-3": "2&7",
+    "birth-4": "6&6",
+    "birth-5": "2&9",
+    "birth-6": "4&2",
+    "birth-7": "2&2"
   },
   "states": {
     "title": "Courage",

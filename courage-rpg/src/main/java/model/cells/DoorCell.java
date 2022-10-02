@@ -1,19 +1,30 @@
 package model.cells;
 
-import engine.Cell;
+import engineV2.Cell;
 import model.GameState;
+import model.Location;
 
 import java.util.List;
 
 public class DoorCell extends ActionCell {
+
     @Override
     public Cell build(List<String> arguments) {
-        return new DoorCell();
+        return this;
+    }
+
+    @Override
+    public List<String> export() {
+        return List.of();
     }
 
     @Override
     public void act(GameState state) {
-        state.getMap(state.getCurrentLocation().level)
-                [state.getCurrentLocation().row][state.getCurrentLocation().col] = state.createCell(EmptyCell.class);
+        if (state.useItem(GameState.Item.KEY)) {
+            Location loc = state.getCurrentLocation();
+            state.getMap(loc.level)[loc.row][loc.col] = new EmptyCell();
+        } else {
+            state.moveBack();
+        }
     }
 }

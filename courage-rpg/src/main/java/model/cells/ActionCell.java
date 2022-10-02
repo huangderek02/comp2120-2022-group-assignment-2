@@ -1,6 +1,6 @@
 package model.cells;
 
-import engine.Cell;
+import engineV2.Cell;
 import model.GameState;
 
 /**

@@ -1,11 +1,13 @@
 package engineV2;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import javafx.scene.image.Image;
 import javafx.util.Pair;
+import model.cells.ActionCell;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -17,19 +19,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * This is the game engine called engineV2;
- * It supports more flexible customizations of maps and storing of dynamic states
+ * This is the game engine V2;
+ * It supports more flexible customizing maps and storing dynamic states
  *
  * @author Xianghao Wang
  * */
 public class GameEngine {
     /**
-     * Get resource's path by passing its name
+     * Get resource's path by giving its name
      *
      * @author Xianghao Wang
      *
-     * @param fileName is the resource's name
-     * @return a Path corresponding to the resource
+     * @param fileName is the resource name
+     * @return a Path representing the resource
      * */
     public static Path getResourcePath(String fileName) throws URISyntaxException {
         URL resourceURL = engine.GameEngine.class.getClassLoader().getResource(fileName);
@@ -40,7 +42,7 @@ public class GameEngine {
     }
 
     /**
-     * Get a JSON object by giving the path
+     * Get JSON object by giving the path
      *
      * @author Xianghao Wang
      *
@@ -58,7 +60,7 @@ public class GameEngine {
      *
      * @author Xianghao Wang
      *
-     * @param headerName is the header name of the game file
+     * @param headerName is the header of the game file
      * @return a game object
      * */
     public static GameObject loadGameObject(String headerName) throws URISyntaxException, IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
@@ -74,22 +76,30 @@ public class GameEngine {
             String sceneName = sceneNameObj.toString();
             JSONObject sceneJSON = getJSONObjection(getResourcePath(sceneName).toString());
             Map<String, String> sceneLiterals = loadLiterals(sceneJSON.getJSONObject("literals"));
-            maps.add(compileScene(sceneJSON.getJSONObject("build-script"), overrideLiterals(sceneLiterals, literals)));
+            maps.add(compileScene(sceneJSON, overrideLiterals(sceneLiterals, literals)));
         }
 
-        return new GameObject(imageDomain, states, maps);
+        GameObject gameObject = new GameObject(imageDomain, states, maps);
+
+        // Store raw image domain
+        for (String imageName : headerJSON.getJSONObject("image-domain").keySet()) {
+            gameObject.rawImageDomain.put(imageName, headerJSON.getJSONObject("image-domain").getString(imageName));
+        }
+
+        return gameObject;
     }
 
 
     /**
-     * This loads literals from JSON object
+     * This load literals from JSON object
      *
      * @author Xianghao Wang
      *
      * @param json is the JSON object
-     * @return the literal map - literal alias : literal content
+     * @return the literal maps - literal alias : literal content
      * */
     public static Map<String, String> loadLiterals(JSONObject json) {
+        if (json == null) return new HashMap<>();
         Map<String, String> literals = new HashMap<>();
         for (String literalKey : json.keySet()) {
             literals.put(literalKey, json.getString(literalKey));
@@ -98,14 +108,15 @@ public class GameEngine {
     }
 
     /**
-     * This loads all of the defined images
+     * This load all of defined images
      *
      * @author Xianghao Wang
      *
      * @param json is the JSON object
-     * @return the image map - image name : image
+     * @return the image maps - image name : image
      * */
     public static Map<String, Image> loadImageDomain(JSONObject json) throws URISyntaxException {
+        if (json == null) return new HashMap<>();
         Map<String, Image> images = new HashMap<>();
         for (String imageAlias : json.keySet()) {
             String imageName = json.getString(imageAlias);
@@ -117,14 +128,15 @@ public class GameEngine {
     }
 
     /**
-     * This loads the states from JSON object
+     * This load states from JSON object
      *
      * @author Xianghao Wang
      *
      * @param json is the JSON objecct
-     * @return the states map - state name : state
+     * @return the states map - stata name : state
      * */
     public static Map<String, String> loadStates(JSONObject json) {
+        if (json == null) return new HashMap<>();
         Map<String, String> states = new HashMap<>();
         for (String stateKey : json.keySet()) {
             states.put(stateKey, json.getString(stateKey));
@@ -133,7 +145,7 @@ public class GameEngine {
     }
 
     /**
-     * This loads the dimensions of the corresponding JSON object
+     * This load dimension from JSON object
      *
      * @author Xianghao Wang
      *
@@ -152,8 +164,8 @@ public class GameEngine {
      *
      * @author Xianghao Wang
      *
-     * @param json is the scene's JSON object
-     * @param literals defines some literals and can replace ${literal} in the commands
+     * @param json is the scene JSON object
+     * @param literals defines some literals can replace ${literal} in the commands
      * @return the compiled map
      * */
     public static Cell[][] compileScene(JSONObject json, Map<String, String> literals) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
@@ -174,7 +186,7 @@ public class GameEngine {
      * @author Xianghao Wang
      *
      * @param cmd is to be pre-compiled
-     * @param literals contain some defined literals
+     * @param literals contains some defined literals
      * */
     public static String precompile(String cmd, Map<String, String> literals) {
         StringBuilder cmdBuilder = new StringBuilder();
@@ -196,7 +208,7 @@ public class GameEngine {
      * @author Xianghao Wang
      *
      * @param cmd is the command
-     * @param map stores the result of compilation
+     * @param map stores the result of compiling
      * */
     public static void compile(String cmd, Cell[][] map) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         String[] tokens = cmd.split(" ");
@@ -220,7 +232,7 @@ public class GameEngine {
         } else if (op.equals("fill")) {
             Pair<Class, List<String>> cellMaking = parseArgument(tokens[1]);
             for (int row = 0; row < map.length; row ++) {
-                for (int col = 0; col < map[col].length; col ++) {
+                for (int col = 0; col < map[row].length; col ++) {
                     map[row][col] = createCell(cellMaking.getKey(), cellMaking.getValue());
                 }
             }
@@ -234,7 +246,7 @@ public class GameEngine {
      *
      * @param sceneLiterals contains the scene literals
      * @param gameLiterals contains the game literals
-     * @return the new literals after overriding the game literals with the scene literals
+     * @return the new literals after overriding game literals with the scene literals
      * */
     public static Map<String, String> overrideLiterals(Map<String, String> sceneLiterals, Map<String, String> gameLiterals) {
         Map<String, String> literals = new HashMap<>(gameLiterals);
@@ -289,5 +301,81 @@ public class GameEngine {
     public static Cell createCell(Class cellClass, List<String> arguments) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         Cell cell = (Cell) cellClass.getConstructor().newInstance();
         return cell.build(arguments);
+    }
+
+    public static void saveGameObject(String savedDir, GameObject gameObject) throws IOException, URISyntaxException {
+        File baseFolder = new File(GameEngine.class.getResource("/").toURI());
+        File savesFolder = new File(baseFolder, "saves");
+        File savedFolder = new File(savesFolder, savedDir);
+        Files.createDirectories(savedFolder.toPath());
+
+        JSONObject jsonObject = new JSONObject();
+
+        // Save header firstly
+        JSONObject imageDomainObj = new JSONObject();
+        for (String imageName : gameObject.rawImageDomain.keySet()) {
+            imageDomainObj.put(imageName, gameObject.rawImageDomain.get(imageName));
+        }
+        jsonObject.put("image-domain", imageDomainObj);
+
+        // Save scenes
+        List<String> sceneNames = new ArrayList<>();
+        for (int i = 0; i < gameObject.getMapCount(); i ++) {
+            String sceneName = "level" + i + ".json";
+            sceneNames.add("saves/" + savedDir + "/" + sceneName);
+        }
+        System.out.println(sceneNames);
+        jsonObject.put("scenes", new JSONArray(sceneNames));
+
+        // Save states
+        JSONObject statesObj = new JSONObject();
+        for (String key : gameObject.states.keySet()) {
+            statesObj.put(key, gameObject.getState(key));
+        }
+        jsonObject.put("states", statesObj);
+        System.out.println(jsonObject.toJSONString());
+
+        // Save each scene
+        List<JSONObject> scenesObj = new ArrayList<>();
+        for (int i = 0; i < gameObject.getMapCount(); i ++) {
+            JSONObject dimensionObj = new JSONObject();
+            dimensionObj.put("rows", gameObject.getMap(i).length);
+            dimensionObj.put("cols", gameObject.getMap(i)[0].length);
+            scenesObj.add(new JSONObject());
+            scenesObj.get(i).put("dimension", dimensionObj);
+
+            List<String> buildScripts = new ArrayList<>();
+            for (int row = 0; row < gameObject.getMap(i).length; row ++) {
+                for (int col = 0; col < gameObject.getMap(i)[row].length; col ++) {
+                    ActionCell cell = (ActionCell) gameObject.getMap(i)[row][col];
+                    String args = "&" + (
+                            cell.export().size() == 0 ? "" :
+                                    String.join("&", cell.export())
+                            );
+                    buildScripts.add(
+                            "add " + cell.getClass().getName() + args + " " + row + "&" + col
+                    );
+                }
+            }
+            scenesObj.get(i).put("build-script", new JSONArray(buildScripts));
+        }
+
+
+        // Save header
+        File headerFile = new File(savedFolder, "header.json");
+        Writer headerWriter = new OutputStreamWriter(new FileOutputStream(headerFile));
+        headerWriter.write(jsonObject.toJSONString());
+        headerWriter.flush();
+        headerWriter.close();
+
+        // Save each scene
+        for (int i = 0; i < gameObject.getMapCount(); i ++) {
+            String name = "level" + i + ".json";
+            File file = new File(savedFolder, name);
+            Writer writer = new OutputStreamWriter(new FileOutputStream(file));
+            writer.write(scenesObj.get(i).toJSONString());
+            writer.flush();
+            writer.close();
+        }
     }
 }

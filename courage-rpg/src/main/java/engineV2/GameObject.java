@@ -2,18 +2,21 @@ package engineV2;
 
 import javafx.scene.image.Image;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * This is the game object for the game engine called engineV2
+ * This is the game object for game engine V2
  *
  * @author Xianghao Wang
  * */
 public class GameObject {
-    final private Map<String, Image> imageDomain;
-    final private Map<String, String> states;
-    final private List<Cell[][]> maps;
+    final public Map<String, Image> imageDomain;
+    final public Map<String, String> states;
+    final public List<Cell[][]> maps;
+
+    final public Map<String, String> rawImageDomain;
 
     /**
      * Construct a game object
@@ -28,6 +31,7 @@ public class GameObject {
         this.imageDomain = imageDomain;
         this.states = states;
         this.maps = maps;
+        this.rawImageDomain = new HashMap<>();
     }
 
     /**
@@ -59,7 +63,7 @@ public class GameObject {
      *
      * @author Xianghao Wang
      *
-     * @param idx is the index of the map
+     * @param idx is the index of a map
      * @return the game map
      * */
     public Cell[][] getMap(int idx) {

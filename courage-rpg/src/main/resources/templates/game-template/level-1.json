@@ -1,0 +1,51 @@
+{
+  "dimension": {
+    "rows": 7,
+    "cols": 11
+  },
+  "build-script": [
+    "fill ${empty}",
+    "fillRow ${wall} 1",
+    "fillRow ${wall} 2",
+    "fillRow ${wall} 4",
+    "fillRow ${wall} 5",
+    "fillRow ${wall} 6",
+    "fillCol ${wall} 0",
+    "fillCol ${wall} 1",
+    "fillCol ${wall} 6",
+    "fillCol ${wall} 8",
+    "fillCol ${wall} 9",
+    "fillCol ${wall} 10",
+    "add ${key} 5&1",
+    "add ${key} 1&4",
+    "add ${key} 1&4",
+    "add ${key} 5&9",
+    "add ${door} 4&8",
+    "add ${door} 4&4",
+    "add ${water} 3&5",
+    "add ${empty} 3&8",
+    "add ${water} 3&7",
+    "add ${water} 1&5",
+    "add ${empty} 1&2",
+    "add ${water} 1&1",
+    "add ${water} 4&1",
+    "add ${water} 5&5",
+    "add ${water} 5&8",
+    "add ${water} 5&7",
+    "add ${enemy}&20 0&4",
+    "add ${enemy}&15 1&7",
+    "add ${enemy}&15 3&1",
+    "add ${enemy}&9 3&2",
+    "add ${enemy}&30 3&4",
+    "add ${npc}&3&${m1} 5&4",
+    "add ${empty} 5&3",
+    "add ${empty} 2&2",
+    "add ${empty} 0&6",
+    "add ${empty} 2&7",
+    "add ${portal-up}&2&${birth-2} 2&8",
+    "add ${portal-down}&0&${birth-0} 6&3"
+  ],
+  "literals": {
+    "m1": "Good^morning!"
+  }
+}

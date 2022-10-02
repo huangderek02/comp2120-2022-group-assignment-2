@@ -16,6 +16,9 @@ public enum ItemGUI {
 
     /**
      * Convert a game state item to a GUI item.
+     *
+     * @author Xin Lu
+     *
      * @param item the game state item
      * @return the GUI item
      */
@@ -36,6 +39,9 @@ public enum ItemGUI {
 
     /**
      * Get the pixel x coordinate of the item.
+     *
+     * @author Xin Lu
+     *
      * @param index the index of the item
      * @return the pixel x coordinate of the item
      */
@@ -45,6 +51,9 @@ public enum ItemGUI {
 
     /**
      * Get the pixel y coordinate of the item.
+     *
+     * @author Xin Lu
+     *
      * @param index the index of the item
      * @return the pixel y coordinate of the item
      */

@@ -10,7 +10,9 @@ import javafx.stage.Stage;
 
 /**
  * Entry point of the GUI.
+ *
  * @author Xin Lu
+ * @author Xianghao Wang
  */
 public class Main extends Application {
     @Override

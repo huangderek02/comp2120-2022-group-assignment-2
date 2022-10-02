@@ -48,6 +48,6 @@
     "add ${portal-down}&1&${birth-3} 4&3"
   ],
   "literals": {
-    "m1": "Good^morning"
+    "m1": "[NPC]Your^health^looks^not^so^good!^Take^some^position^from^the^map!"
   }
 }

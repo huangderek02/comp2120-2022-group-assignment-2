@@ -17,6 +17,11 @@ public class WallCell extends ActionCell {
     }
 
 
+    /**
+     * Prevent entering
+     *
+     * @author Xianghao Wang
+     * */
     @Override
     public void act(GameState state) {
         state.moveBack();

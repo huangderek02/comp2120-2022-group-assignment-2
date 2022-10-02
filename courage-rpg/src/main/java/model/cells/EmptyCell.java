@@ -16,6 +16,11 @@ public class EmptyCell extends ActionCell {
         return List.of();
     }
 
+    /**
+     * Do nothing
+     *
+     * @author Xianghao Wang
+     * */
     @Override
     public void act(GameState state) {
 

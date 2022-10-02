@@ -28,6 +28,11 @@ public class PortalCell extends ActionCell {
         return List.of(isUp ? "up" : "down", String.valueOf(destination.level), String.valueOf(destination.row), String.valueOf(destination.col));
     }
 
+    /**
+     * Take player to the destination
+     *
+     * @author Xianghao Wang
+     * */
     @Override
     public void act(GameState state) {
         state.moveTo(this.destination);

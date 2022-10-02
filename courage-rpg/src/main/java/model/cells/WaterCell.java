@@ -19,6 +19,11 @@ public class WaterCell extends ActionCell {
         return List.of();
     }
 
+    /**
+     * Give player an HP recovery water
+     *
+     * @author Xianghao Wang
+     * */
     @Override
     public void act(GameState state) {
         state.addItem(GameState.Item.HP_RECOVERY);

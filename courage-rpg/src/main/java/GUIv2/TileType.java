@@ -18,38 +18,6 @@ public enum TileType {
 
         private final String fileName;
 
-        public static boolean isTexture(TileType tileType) {
-                return tileType == GRASS || tileType == GROUND_1 || tileType == GROUND_2 || tileType == GROUND_3 || tileType == GROUND_4 || tileType == GROUND_5 || tileType == GROUND_6 || tileType == BRICK_1 || tileType == BRICK_2 || tileType == BRICK_3 || tileType == METAL_1 || tileType == METAL_2 || tileType == METAL_3 || tileType == SPECIAL_1 || tileType == SPECIAL_2;
-        }
-
-        public static boolean isCharacter(TileType tileType) {
-                return tileType == HERO || tileType == NPC_2 || tileType == NPC_3 || tileType == NPC_4 || tileType == NPC_5 || tileType == ENEMY_1 || tileType == ENEMY_2 || tileType == ENEMY_3 || tileType == ENEMY_4 || tileType == ENEMY_5 || tileType == ENEMY_6 || tileType == ENEMY_7 || tileType == ENEMY_8 || tileType == ENEMY_9 || tileType == ENEMY_10;
-        }
-
-        public static boolean isItem(TileType tileType) {
-                return tileType == WATER || tileType == KEY || tileType == MONEY;
-        }
-
-        public static  boolean isMonster(TileType tileType) {
-                return tileType == ENEMY_1 || tileType == ENEMY_2 || tileType == ENEMY_3 || tileType == ENEMY_4 || tileType == ENEMY_5 || tileType == ENEMY_6 || tileType == ENEMY_7 || tileType == ENEMY_8 || tileType == ENEMY_9 || tileType == ENEMY_10;
-        }
-
-        public static TileType getRandomBackground() {
-                int random = (int) (Math.random() * 6);
-                return switch (random) {
-                        case 1 -> GROUND_2;
-                        case 2 -> GROUND_3;
-                        case 3 -> GROUND_4;
-                        case 4 -> GROUND_5;
-                        case 5 -> GROUND_6;
-                        default -> GROUND_1;
-                };
-        }
-
-        public static TileType getRandomTileType() {
-                return values()[(int) (Math.random() * values().length)];
-        }
-
         TileType(String fileName) {
                 this.fileName = fileName;
         }

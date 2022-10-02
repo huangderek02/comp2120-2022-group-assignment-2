@@ -23,6 +23,13 @@ public class NPCCell extends ActionCell {
         return List.of(String.valueOf(id), String.join("^", message.split(" ")));
     }
 
+
+    /**
+     * Discuss with NPC
+     *
+     * @author Xianghao Wang
+     * @author Derek Huang
+     * */
     @Override
     public void act(GameState state) {
         Location loc = state.getCurrentLocation();
@@ -30,7 +37,7 @@ public class NPCCell extends ActionCell {
         state.offerDialog(parseMessage(this.message));
     }
 
-    public String parseMessage(String raw) {
+    private String parseMessage(String raw) {
         return String.join(" ", raw.split("\\^"));
     }
 }

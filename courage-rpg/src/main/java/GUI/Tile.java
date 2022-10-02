@@ -51,26 +51,6 @@ public class Tile extends StackPane {
         return tiles;
     }
 
-    /**
-     * Generate a random type of cell at the given location. (0-10, 0-6)
-     * @param x the x coordinate of the cell, from 0 to 10
-     * @param y the y coordinate of the cell, from 0 to 6
-     * @return a random type of cell at the given location
-     */
-    static Tile getRandomTile(int x, int y) {
-        Tile rtn;
-        TileType tileType = TileType.getRandomTileType();
-        if (TileType.isTexture(tileType)) {
-            rtn = new Tile(x, y, tileType);
-        } else {
-            rtn = new Tile(x, y, tileType, TileType.getRandomBackground());
-        }
-        return rtn;
-    }
-
-    public TileType getType() {
-        return tileType;
-    }
 
     /**
      * For single background tile only

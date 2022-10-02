@@ -27,7 +27,8 @@
     "enemy10": "textures/enemy_10.png",
     "water": "textures/water.png",
     "key": "textures/key.png",
-    "money": "textures/money.png"
+    "money": "textures/money.png",
+    "merchant": "textures/merchant.jpg"
   },
   "literals": {
     "empty": "model.cells.EmptyCell",
@@ -39,6 +40,7 @@
     "key": "model.cells.KeyCell",
     "door": "model.cells.DoorCell",
     "npc": "model.cells.NPCCell",
+    "merchant": "model.cells.MerchantCell",
     "birth-0": "5&5",
     "birth-1": "6&5"
   },

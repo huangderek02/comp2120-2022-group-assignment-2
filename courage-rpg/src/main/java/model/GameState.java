@@ -189,6 +189,62 @@ public class GameState {
         cell.act(this);
     }
 
+    public void handleMoveUp() {
+        Location newLocation = new Location(currentLoc.level, currentLoc.row - 1, currentLoc.col);
+        if (!checkBoundary(newLocation)) return;
+
+        // Change location
+        moveTo(newLocation);
+
+        // Trigger cell's action
+        getCell(newLocation).act(this);
+    }
+
+    public void handleMoveDown() {
+        Location newLocation = new Location(currentLoc.level, currentLoc.row + 1, currentLoc.col);
+        if (!checkBoundary(newLocation)) return;
+
+        // Change location
+        moveTo(newLocation);
+
+        // Trigger cell's action
+        getCell(newLocation).act(this);
+    }
+
+    public void handleMoveLeft() {
+        Location newLocation = new Location(currentLoc.level, currentLoc.row, currentLoc.col - 1);
+        if (!checkBoundary(newLocation)) return;
+
+        // Change location
+        moveTo(newLocation);
+
+        // Trigger cell's action
+        getCell(newLocation).act(this);
+    }
+
+    public void handleMoveRight() {
+        Location newLocation = new Location(currentLoc.level, currentLoc.row, currentLoc.col + 1);
+        if (!checkBoundary(newLocation)) return;
+
+        // Change location
+        moveTo(newLocation);
+
+        // Trigger cell's action
+        getCell(newLocation).act(this);
+    }
+
+    /**
+     * Get the cell at the given location
+     *
+     * @author Xianghao Wang
+     *
+     * @param location is the given location
+     * @return is the cell at the location
+     * */
+    public ActionCell getCell(Location location) {
+        return this.getMap(location.level)[location.row][location.col];
+    }
+
     /**
      * Check whether a location is out of map
      *

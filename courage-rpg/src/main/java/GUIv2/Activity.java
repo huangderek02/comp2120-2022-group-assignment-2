@@ -1,15 +1,23 @@
 package GUIv2;
 
+import engineV2.GameEngine;
 import engineV2.GameObject;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.GameState;
 import model.Location;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 public class Activity {
@@ -18,16 +26,18 @@ public class Activity {
     private Viewer viewer;
     private Scene scene;
     private Stage stage;
+    private String template;
 
-    public Activity(GameObject gameObject, Scene scene, Stage stage) {
+    public Activity(GameObject gameObject, Scene scene, Stage stage, String template) {
         this.stage = stage;
         this.gameObject = gameObject;
         this.gameState = new GameState(gameObject);
         this.scene = scene;
         this.viewer = new Viewer(scene.getRoot(), gameObject, this);
+        this.template = template;
     }
 
-    public void start() {
+    public void start() throws IOException, URISyntaxException {
         viewer.init();
         updateView();
         this.scene.setOnKeyPressed(this::handleKeyboard);
@@ -46,6 +56,50 @@ public class Activity {
     }
 
     public void handleMouse(String buttonId, MouseEvent mouseEvent) {
+        if (buttonId.equals("exit")) {
+            System.exit(0);
+        }
+
+        if (buttonId.equals("new")) {
+            try {
+                this.gameObject = GameEngine.loadGameObject(template);
+                this.gameState = new GameState(gameObject);
+                this.updateView();
+            } catch (Exception e) {
+                throw new RuntimeException();
+            }
+        }
+
+        if (buttonId.equals("save")) {
+            String savedDir = Integer.toHexString((int) System.currentTimeMillis());
+            try {
+                GameEngine.saveGameObject(savedDir, this.gameState.saveGameObject());
+                gameState.offerDialog("[System] Saved to " + savedDir);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        if (buttonId.equals("load")) {
+//            this.gameObject = GameEngine.loadGameObject("saves/" + )
+            TextInputDialog dialog = new TextInputDialog("");
+            dialog.setTitle("Save Game");
+            dialog.setContentText("Input your save ID: ");
+
+            Optional<String> result = dialog.showAndWait();
+            if (result.isPresent()) {
+                try {
+                    this.gameObject = GameEngine.loadGameObject("saves/" + result.get() + "/header.json");
+                    this.gameState = new GameState(gameObject);
+                    this.updateView();
+                } catch (Exception e) {
+                    this.gameState.offerDialog("Load failed: no " + result.get());
+                }
+            }
+        }
+
         if (buttonId.equals("water")) {
             gameState.useItem(GameState.Item.HP_RECOVERY);
             gameState.hp += 10;

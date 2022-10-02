@@ -45,7 +45,7 @@ Link to demo video: https://drive.google.com/file/d/1HFyZZe2p8uxww-dGqIjW3GE1_Md
 
 # How to get help
 
-For runnning the game in IntelliJ and setting up the IntelliJ for JavaFx game, please refer to [Installation and Setup](https://avanidhaliwal.atlassian.net/l/cp/dFTAXZgH).
+For runnning the game in IntelliJ and setting up the IntelliJ for JavaFx game, please refer to Confluence file [Installation and Setup](https://avanidhaliwal.atlassian.net/l/cp/dFTAXZgH).
 
 # The screenshots of the game
 

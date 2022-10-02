@@ -9,15 +9,15 @@ declaration: >-
 # sign *your* group names and uids here (delete and add entries as necessary). By signing you also AGREE you have read the Submission Checklist - https://comp.anu.edu.au/courses/comp2120/assignments/group-assignment2/#submission-checklist
 member_declaration:
   -
+    name: Avani Dhaliwal
+    uid: u7399886
+  - 
     name: 
     uid:
-  -
+  - 
     name: 
     uid:
-  -
-    name: 
-    uid:
-  -
+  - 
     name: 
     uid:
 

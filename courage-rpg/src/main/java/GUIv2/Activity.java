@@ -11,6 +11,7 @@ import model.Location;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +23,18 @@ public class Activity {
     private Viewer viewer;
     private Scene scene;
     private Stage stage;
+    private String template;
 
-    public Activity(GameObject gameObject, Scene scene, Stage stage) {
+    public Activity(GameObject gameObject, Scene scene, Stage stage, String template) {
         this.stage = stage;
         this.gameObject = gameObject;
         this.gameState = new GameState(gameObject);
         this.scene = scene;
         this.viewer = new Viewer(scene.getRoot(), gameObject, this);
+        this.template = template;
     }
 
     public void start() throws IOException, URISyntaxException {
-//        GameEngine.saveGameObject("save1", gameState.saveGameObject());
         viewer.init();
         updateView();
         this.scene.setOnKeyPressed(this::handleKeyboard);
@@ -51,6 +53,20 @@ public class Activity {
     }
 
     public void handleMouse(String buttonId, MouseEvent mouseEvent) {
+        if (buttonId.equals("exit")) {
+            System.exit(0);
+        }
+
+        if (buttonId.equals("new")) {
+            try {
+                this.gameObject = GameEngine.loadGameObject(template);
+                this.gameState = new GameState(gameObject);
+                this.updateView();
+            } catch (Exception e) {
+                throw new RuntimeException();
+            }
+        }
+
         if (buttonId.equals("water")) {
             gameState.useItem(GameState.Item.HP_RECOVERY);
             gameState.hp += 10;

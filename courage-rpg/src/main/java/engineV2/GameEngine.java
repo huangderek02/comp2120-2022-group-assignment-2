@@ -109,7 +109,7 @@ public class GameEngine {
     public static String precompile(String cmd, Map<String, String> literals) {
         StringBuilder cmdBuilder = new StringBuilder();
 
-        Pattern pattern = Pattern.compile("\\$\\{(\\w+)\\}");
+        Pattern pattern = Pattern.compile("\\$\\{([-\\w]+)\\}");
         Matcher matcher = pattern.matcher(cmd);
         while (matcher.find()) {
             matcher.appendReplacement(cmdBuilder, literals.get(matcher.group(1)));

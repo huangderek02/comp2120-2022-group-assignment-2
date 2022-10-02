@@ -12,8 +12,8 @@ member_declaration:
     name: Avani Dhaliwal
     uid: u7399886
   - 
-    name: 
-    uid:
+    name: Derek Huang
+    uid: u7300484
   - 
     name: 
     uid:

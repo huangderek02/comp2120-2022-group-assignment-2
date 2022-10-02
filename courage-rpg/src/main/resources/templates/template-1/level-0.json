@@ -6,12 +6,12 @@
   "build-script": [
     "fill ${empty}",
     "fillRow ${wall} 0",
-    "fillRow ${wall} 10",
+    "fillRow ${wall} 6",
     "fillCol ${wall} 0",
-    "fillCol ${wall} 6",
-    "add ${portal-up}&${birth-1} 4&5"
+    "fillCol ${wall} 10",
+    "add ${portal-up}&1&${birth-1} 4&5"
   ],
-  "literals": [
+  "literals": {
 
-  ]
+  }
 }

@@ -1,6 +1,6 @@
 package model.cells;
 
-import engine.Cell;
+import engineV2.Cell;
 import model.GameState;
 import model.Location;
 
@@ -13,11 +13,16 @@ public class PortalCell extends ActionCell {
     public Cell build(List<String> arguments) {
         PortalCell cell = new PortalCell();
         cell.destination = new Location(
-                Integer.parseInt(arguments.get(0)),
                 Integer.parseInt(arguments.get(1)),
-                Integer.parseInt(arguments.get(2))
+                Integer.parseInt(arguments.get(2)),
+                Integer.parseInt(arguments.get(3))
         );
         return cell;
+    }
+
+    @Override
+    public List<String> export() {
+        return null;
     }
 
     @Override

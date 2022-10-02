@@ -1,6 +1,6 @@
 package GUI;
 
-import engine.Cell;
+import engineV2.Cell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import model.cells.*;

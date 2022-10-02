@@ -1,6 +1,7 @@
 package model.cells;
 
-import engine.Cell;
+
+import engineV2.Cell;
 import model.GameState;
 
 import java.util.List;
@@ -9,6 +10,11 @@ public class CloseDoorCell  extends ActionCell {
     @Override
     public Cell build(List<String> arguments) {
         return new CloseDoorCell();
+    }
+
+    @Override
+    public List<String> export() {
+        return null;
     }
 
     @Override

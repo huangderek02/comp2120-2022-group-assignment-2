@@ -3,7 +3,7 @@
     "templates/template-1/level-0.json"
   ],
   "image-domain": {
-    "wall": "wall.png"
+    "wall": "textures/brick_1.jpg"
   },
   "literals": {
     "empty": "model.cells.EmptyCell",

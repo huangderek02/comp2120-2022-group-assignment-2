@@ -96,7 +96,7 @@ public class GameState {
         if (str == null) return;
         String[] tokens = str.split("&");
         for (String token : tokens) {
-            String[] pieces = token.split("*");
+            String[] pieces = token.split("\\*");
             String itemName = pieces[0];
             String number = pieces[1];
             Item item = switch (itemName) {

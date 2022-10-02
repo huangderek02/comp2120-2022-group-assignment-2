@@ -74,7 +74,7 @@ public class GameEngine {
             String sceneName = sceneNameObj.toString();
             JSONObject sceneJSON = getJSONObjection(getResourcePath(sceneName).toString());
             Map<String, String> sceneLiterals = loadLiterals(sceneJSON.getJSONObject("literals"));
-            maps.add(compileScene(sceneJSON.getJSONObject("build-script"), overrideLiterals(sceneLiterals, literals)));
+            maps.add(compileScene(sceneJSON, overrideLiterals(sceneLiterals, literals)));
         }
 
         return new GameObject(imageDomain, states, maps);
@@ -220,7 +220,7 @@ public class GameEngine {
         } else if (op.equals("fill")) {
             Pair<Class, List<String>> cellMaking = parseArgument(tokens[1]);
             for (int row = 0; row < map.length; row ++) {
-                for (int col = 0; col < map[col].length; col ++) {
+                for (int col = 0; col < map[row].length; col ++) {
                     map[row][col] = createCell(cellMaking.getKey(), cellMaking.getValue());
                 }
             }

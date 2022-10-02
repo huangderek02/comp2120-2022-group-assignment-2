@@ -4,6 +4,11 @@ import engineV2.Cell;
 
 import java.util.List;
 
+/**
+ * Sample cases for Testing
+ * A case with two argument, row and column
+ * @author Rita Zhou
+ */
 public class Cell2 extends Cell {
     public int x;
     public int y;

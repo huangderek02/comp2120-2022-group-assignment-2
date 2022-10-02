@@ -1,0 +1,17 @@
+{
+  "dimension": {
+    "rows": 7,
+    "cols": 11
+  },
+  "build-script": [
+    "fill ${empty}",
+    "fillRow ${wall} 0",
+    "fillRow ${wall} 10",
+    "fillCol ${wall} 0",
+    "fillCol ${wall} 6",
+    "add ${portal_up}&${birth_1} 4&5"
+  ],
+  "literals": [
+
+  ]
+}

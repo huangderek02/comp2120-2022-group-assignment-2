@@ -41,6 +41,7 @@ public class GameEngineTest extends ApplicationTest {
 
 
     /**
+     * Test parseArgument
      * @author Rita Zhou
      */
     @Test (timeout = 1000)
@@ -105,6 +106,7 @@ public class GameEngineTest extends ApplicationTest {
     }
 
     /**
+     * Test the property for the GameObject
      * @author Rita Zhou
      */
     @Test (timeout=1000)
@@ -118,6 +120,7 @@ public class GameEngineTest extends ApplicationTest {
     }
 
     /**
+     * Test the property for the SceneObject
      * @author Rita Zhou
      */
     @Test (timeout = 1000)
@@ -140,6 +143,7 @@ public class GameEngineTest extends ApplicationTest {
     }
 
     /**
+     * Test the arguments for the GameObject
      * @author Rita Zhou
      */
     @Test (timeout = 1000)
@@ -155,6 +159,7 @@ public class GameEngineTest extends ApplicationTest {
     }
 
     /**
+     * Test the argument in SceneObject
      * @author Rita Zhou
      */
     @Test (timeout = 1000)
@@ -189,6 +194,7 @@ public class GameEngineTest extends ApplicationTest {
     }
 
     /**
+     * Test getCellClassObj
      * @author Rita Zhou
      */
     @Test (timeout = 1000)
@@ -213,6 +219,10 @@ public class GameEngineTest extends ApplicationTest {
         assertEquals(NewCell.class, sceneObject2.getCellClassObj(2, 1));
     }
 
+    /**
+     * Test cases
+     * @author Rita Zhou
+     */
     public static class SampleCell extends Cell {
         @Override
         public Cell build(List<String> arguments) {

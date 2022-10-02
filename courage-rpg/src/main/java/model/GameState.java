@@ -189,6 +189,11 @@ public class GameState {
         cell.act(this);
     }
 
+    /**
+     * Handle the up movement
+     *
+     * @author Xianghao Wang
+     * */
     public void handleMoveUp() {
         Location newLocation = new Location(currentLoc.level, currentLoc.row - 1, currentLoc.col);
         if (!checkBoundary(newLocation)) return;
@@ -200,6 +205,11 @@ public class GameState {
         getCell(newLocation).act(this);
     }
 
+    /**
+     * Handle the down movement
+     *
+     * @author Xianghao Wang
+     * */
     public void handleMoveDown() {
         Location newLocation = new Location(currentLoc.level, currentLoc.row + 1, currentLoc.col);
         if (!checkBoundary(newLocation)) return;
@@ -211,6 +221,11 @@ public class GameState {
         getCell(newLocation).act(this);
     }
 
+    /**
+     * Handle the left movement
+     *
+     * @author Xianghao Wang
+     * */
     public void handleMoveLeft() {
         Location newLocation = new Location(currentLoc.level, currentLoc.row, currentLoc.col - 1);
         if (!checkBoundary(newLocation)) return;
@@ -222,6 +237,11 @@ public class GameState {
         getCell(newLocation).act(this);
     }
 
+    /**
+     * Handle the right movement
+     *
+     * @author Xianghao Wang
+     * */
     public void handleMoveRight() {
         Location newLocation = new Location(currentLoc.level, currentLoc.row, currentLoc.col + 1);
         if (!checkBoundary(newLocation)) return;

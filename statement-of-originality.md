@@ -18,6 +18,9 @@ member_declaration:
     name: Xianghao Wang
     uid: u7321615
   - 
+    name: Rita Zhou
+    uid: u7326123
+
     name: 
     uid:
 
